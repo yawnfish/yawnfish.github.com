@@ -175,6 +175,9 @@ $(document).ready(function(){
 	}
 
 	initGame();
+	$("input").click( function() {
+		initGame();
+	})
 
 	$("td").click( function(){
 		if( inputEnable == false )
@@ -198,6 +201,8 @@ $(document).ready(function(){
 		var i = Math.floor(id / width);
 		var j = Math.floor(id % width);
 
+		if( map[i][j] == blankNumber ) 
+			return;
 		if( clicked[i][j] == 1 )
 			return;
 
@@ -1249,6 +1254,7 @@ function decrease()
 </head>
 
 <body>
+<input id="mapid" type="button" value="Generate">
 <div id="info">
 Time : <span id="remainTime">0</span><br>
 Score : <span id="score">0</span>

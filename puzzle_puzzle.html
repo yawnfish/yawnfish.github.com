@@ -49,14 +49,14 @@
 
 var gameMode = 2;
 var gameTime = 60;
-var appleWatchMode = true;//3x3
+var appleWatchMode = true;//3x3 // puzzle
 var width = 7;
 var height = 7;
 var kindOfNumber = 4;//4;
 var minOfComplete = 3;
 var gameTimeResetEveryClick = false;
 var clickOnce = true;
-var regenBlock = false;
+var regenBlock = true;
 var dropBlock = true;
 var onetimeGrow = false;
 var rotation = true;
@@ -151,13 +151,14 @@ $(document).ready(function(){
 
 	if( appleWatchMode == true ) {
 		gameMode = 2;
-		gameTime = 60;
+		gameTime = 0;
 		width = 3;
 		height = 3;
 		kindOfNumber = 4;//4;
 		minOfComplete = 3;
-		gameTimeResetEveryClick = true;
+		gameTimeResetEveryClick = false;
 		clickOnce = true;
+		regenBlock = false;
 		dropBlock = true;
 		onetimeGrow = false;
 		//var disableChained = true;
@@ -174,9 +175,23 @@ $(document).ready(function(){
 		$("#game").append("</tr>");
 	}
 
-	initGame();
-	$("input").click( function() {
-		initGame();
+	var id = initGame(0)
+	$("#mapid").attr("value", id);
+	
+	$("#generate").click( function() {
+		var id = $("#mapid").val();
+
+		if( id == undefined || id.length == 0) {
+			id = 0;
+		}
+		
+		id = id | 0;
+
+		clearInterval(animateTid);
+		clearInterval(remainTimeTid);
+
+		id = initGame(id);
+		$("#mapid").attr("value", id);
 	})
 
 	$("td").click( function(){
@@ -898,7 +913,7 @@ function updateInfo()
 
 function displayGameTime()
 {
-	//remainTime--;
+	remainTime++;
 	$("#remainTime").html(remainTime);
 
 	if( remainTime < 0 && combo == 0 )//&& finalFlag == true)
@@ -958,6 +973,48 @@ function displayGameTime()
 /*
 	타일 한칸 아래로 떨어트림
 */
+function dropTileWithRegen()
+{
+	if( dropBlock == false ) {
+		for( i = 0; i < height; i++)
+		{
+			for( j = 0; j < width; j++)
+			{
+				if( map[i][j] == blankNumber )
+				{
+					var tile = createOneTile(j, i);
+					map[i][j] = tile;
+					clicked[i][j] = 0;
+				}
+			}
+		}
+		return;
+	}
+
+	var i,j;
+	for( i = height - 1; i >= 0; i--) {
+		for( j = 0; j < width; j++ ) {
+			if( map[i][j] == blankNumber ) {
+				var upper = blankNumber;
+				var upperClicked = 0;
+				if( i == 0 ) {
+					upper = createOneTile(j,i);
+					upperClicked = 0;
+				}
+				else {
+					upper = map[i-1][j];
+					upperClicked = clicked[i-1][j];
+					map[i-1][j] = blankNumber;
+					clicked[i-1][j] = 0;
+				}
+				
+				map[i][j] = upper;
+				clicked[i][j] = upperClicked;
+			}
+		}
+	}
+}
+
 function dropTile()
 {
 	if( dropBlock == false ) {
@@ -1168,11 +1225,41 @@ function gameOver()
 	else
 		alert("Combo : " + maxComboOnGame);
 
-	alert("Ready?");
-	initGame();
+	//alert("Ready?");
+	//initGame();
 }
 
-function initGame()
+function calcMapID() {
+    var id = 0;
+    var i = 0;
+    for( var y = 0; y < height; y++) {
+        for( var x = 0; x < width; x++ ) {
+            id = id + map[y][x] * Math.pow( kindOfNumber, i );
+            i++;
+        }
+    }
+    return id;
+}
+
+function createNewBoardWithID(id) {
+    var i = width * height - 1;
+    for( var y = height - 1; y >= 0; y-- ) {
+        for( var x = width - 1; x >= 0; x-- ) {
+            var value = id / Math.pow( kindOfNumber, i );
+			value = Math.floor(value)
+            map[y][x] = value;
+			hintMap[y][x] = 0;
+			clear[y][x] = 0;
+			clicked[y][x] = 0;
+            
+            id = id - value * Math.pow( kindOfNumber, i );
+            i--;
+        }
+    }
+}
+
+
+function initGame(id)
 {
 	var i,j;
 	score = 0;
@@ -1190,8 +1277,6 @@ function initGame()
 			itemChanceMax = itemChance[i];
 	}
 
-
-
 	for( i = 0; i < height; i++)
 	{
 		map[i] = new Array(width);
@@ -1200,27 +1285,29 @@ function initGame()
 		clicked[i] = new Array(width);
 	}
 
-	for( i = 0; i < height; i++)
-	{
-		for( j = 0; j < width; j++)
-		{
-			map[i][j] = Math.floor((Math.random()*kindOfNumber));
-			hintMap[i][j] = 0;
-			clear[i][j] = 0;
-			clicked[i][j] = 0;
+	if( id == 0 ) {
+		for( i = 0; i < height; i++) {
+			for( j = 0; j < width; j++) {
+				map[i][j] = Math.floor((Math.random()*kindOfNumber));
+				hintMap[i][j] = 0;
+				clear[i][j] = 0;
+				clicked[i][j] = 0;
+			}
 		}
-	}
 
-	checkComplete();
-	clearCompleteTile();
-
-	while(isFilled()==false) {
-		while(isFilled()==false) {
-			dropTile();
-			updateTile();
-		}
 		checkComplete();
 		clearCompleteTile();
+
+		while(isFilled()==false) {
+			while(isFilled()==false) {
+				dropTileWithRegen();
+				updateTile();
+			}
+			checkComplete();
+			clearCompleteTile();
+		}
+	} else {
+		createNewBoardWithID(id);
 	}
 
 	inputEnable = true;
@@ -1235,6 +1322,9 @@ function initGame()
 	updateTile();
 
 	remainTimeTid = setInterval("displayGameTime()", 1000 );
+	
+	id = calcMapID();
+	return id;
 }
 
 function decrease()
@@ -1254,7 +1344,8 @@ function decrease()
 </head>
 
 <body>
-<input id="mapid" type="button" value="Generate">
+<input id="mapid" type="text" value="0">
+<input id="generate" type="button" value="Generate">
 <div id="info">
 Time : <span id="remainTime">0</span><br>
 Score : <span id="score">0</span>

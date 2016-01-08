@@ -567,7 +567,7 @@ function animate()
 //		itemApplied = false;
 
 		updateTile();
-		if( isFilled() == true )
+		if( isAllLanded() == true )
 		{
 			inputEnable = true;
 			clearInterval(animateTid);
@@ -1111,6 +1111,21 @@ function createOneTile(x,y)
 	// 일반적인 경우
 	return Math.floor(Math.random()*kindOfNumber);
 }
+
+function isAllLanded() -> Bool {
+	var i,j;
+	for(i=0;i<height;i++){
+		for(j=0;j<width;j++){
+			if( map[i][j]!=blankNumber) {
+				if( map[i+1][j] == blankNumber) {
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
 
 function isFilled()
 {

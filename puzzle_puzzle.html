@@ -151,7 +151,7 @@ $(document).ready(function(){
 
 	if( appleWatchMode == true ) {
 		gameMode = 2;
-		gameTime = 2;
+		gameTime = 60;
 		width = 3;
 		height = 3;
 		kindOfNumber = 4;//4;
@@ -893,7 +893,7 @@ function updateInfo()
 
 function displayGameTime()
 {
-	remainTime--;
+	//remainTime--;
 	$("#remainTime").html(remainTime);
 
 	if( remainTime < 0 && combo == 0 )//&& finalFlag == true)

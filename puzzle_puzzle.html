@@ -178,6 +178,14 @@ $(document).ready(function(){
 	var id = initGame(0)
 	$("#mapid").attr("value", id);
 	
+	$("#random").click( function() {
+		clearInterval(animateTid);
+		clearInterval(remainTimeTid);
+
+		id = initGame(0);
+		$("#mapid").attr("value", id);
+	}
+	
 	$("#generate").click( function() {
 		var id = $("#mapid").val();
 
@@ -1346,6 +1354,7 @@ function decrease()
 <body>
 <input id="mapid" type="text" value="0">
 <input id="generate" type="button" value="Generate">
+<input id="random" type="button" value="Random">
 <div id="info">
 Time : <span id="remainTime">0</span><br>
 Score : <span id="score">0</span>

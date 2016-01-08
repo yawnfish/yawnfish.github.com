@@ -1114,9 +1114,9 @@ function createOneTile(x,y)
 
 function isAllLanded() {
 	var i,j;
-	for(i=0;i<height;i++){
-		for(j=0;j<width;j++){
-			if( map[i][j]!=blankNumber) {
+	for( i=0; i<height-1; i++){
+		for( j=0; j<width; j++){
+			if( map[i][j] != blankNumber) {
 				if( map[i+1][j] == blankNumber) {
 					return false;
 				}

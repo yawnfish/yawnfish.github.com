@@ -175,31 +175,38 @@ $(document).ready(function(){
 		$("#game").append("</tr>");
 	}
 
-	var id = initGame(0)
+	var id = initGame(0, 0)
 	$("#mapid").attr("value", id);
+	$("#clickmap").attr("value", 0);
 	
 	$("#random").click( function() {
 		clearInterval(animateTid);
 		clearInterval(remainTimeTid);
 
-		id = initGame(0);
+		id = initGame(0, 0);
 		$("#mapid").attr("value", id);
+		$("#clickmap").attr("value", 0);
 	})
 	
 	$("#generate").click( function() {
 		var id = $("#mapid").val();
+		var click = $("#clickmap").val();
 
 		if( id == undefined || id.length == 0) {
 			id = 0;
 		}
-		
 		id = id | 0;
+
+		if( click == undefined || click.length == 0) {
+			click = 0;
+		}
+		click = Number(click);
 
 		clearInterval(animateTid);
 		clearInterval(remainTimeTid);
 
-		id = initGame(id);
-		$("#mapid").attr("value", id);
+		id = initGame(id, click);
+		//$("#mapid").attr("value", id);
 	})
 
 	$("td").click( function(){
@@ -1249,25 +1256,35 @@ function calcMapID() {
     return id;
 }
 
-function createNewBoardWithID(id) {
+function createNewBoardWithID(id, click) {
     var i = width * height - 1;
+	
     for( var y = height - 1; y >= 0; y-- ) {
         for( var x = width - 1; x >= 0; x-- ) {
             var value = id / Math.pow( kindOfNumber, i );
-			value = Math.floor(value)
+			value = Math.floor(value);
             map[y][x] = value;
 			hintMap[y][x] = 0;
 			clear[y][x] = 0;
-			clicked[y][x] = 0;
-            
+			
             id = id - value * Math.pow( kindOfNumber, i );
             i--;
         }
     }
+
+	for( var y = 0; y < height; y++ ) {
+		for( var x = 0; x < width; x++ ) {
+			var disable = click / Math.pow( 10, width * height - (x + y * width) - 1);
+			disable = Math.floor(disable);
+			clicked[y][x] = disable;
+
+			click = click - disable * Math.pow( 10, width * height - (x + y * width) - 1);
+		}
+	}
 }
 
 
-function initGame(id)
+function initGame(id, click )
 {
 	var i,j;
 	score = 0;
@@ -1315,7 +1332,7 @@ function initGame(id)
 			clearCompleteTile();
 		}
 	} else {
-		createNewBoardWithID(id);
+		createNewBoardWithID(id, click);
 	}
 
 	inputEnable = true;
@@ -1352,9 +1369,12 @@ function decrease()
 </head>
 
 <body>
-<input id="mapid" type="text" value="0">
+<div>
+ID : <input id="mapid" type="text" value="0">
+<input id="clickmap" type="text" value="0"><br>
 <input id="generate" type="button" value="Generate">
 <input id="random" type="button" value="Random">
+</div>
 <div id="info">
 Time : <span id="remainTime">0</span><br>
 Score : <span id="score">0</span>

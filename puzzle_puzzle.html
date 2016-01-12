@@ -49,6 +49,7 @@
 
 var gameMode = 2;
 var gameTime = 60;
+var puzzleMode = true;
 var appleWatchMode = true;//3x3 // puzzle
 var width = 7;
 var height = 7;
@@ -233,7 +234,7 @@ $(document).ready(function(){
 
 		if( map[i][j] == blankNumber ) 
 			return;
-		if( clicked[i][j] == 1 )
+		if( clicked[i][j] != 0 )
 			return;
 
 		if( rotation == false )
@@ -244,6 +245,16 @@ $(document).ready(function(){
 			remainTime = gameTime;
 
 		itemApplied = false;
+		
+		if( puzzleMode) {
+			for( var x = 0; x < width; x++ ) {
+				for( var y = 0; y < height; y++ ) {
+					if( clicked[y][x] != 0 ) {
+						clicked[y][x]--;
+					}
+				}
+			}
+		}
 
 		if( map[i][j] >= itemCode[0] ) {
 			applyItem(j, i);
@@ -305,7 +316,7 @@ function markHint(x,y,number,count)
 
 	if( map[x][y] == number )
 	{
-		if( clicked[x][y] == 1 )	// clicked 는 clear하지 않으므로 1 이외의 값은 undefined 이다.
+		if( clicked[x][y] != 0 )	// clicked 는 clear하지 않으므로 1 이외의 값은 undefined 이다.
 			hintMap[x][y] = 2;
 		else {
 			count++;
@@ -491,8 +502,10 @@ function increaseOneTile(i,j)
 	if( map[i][j] >= kindOfNumber )
 		return;
 	map[i][j] = ( map[i][j] + 1 ) % kindOfNumber;
-	if( clickOnce == true )
-		clicked[i][j] = 1;
+	if( clickOnce == true ) {
+		if( clicked[i][j] == 0)
+			clicked[i][j] = 999;
+	}
 }
 
 function increaseWholeTile(number)
@@ -503,8 +516,10 @@ function increaseWholeTile(number)
 				if( map[i][j] == number )
 				{
 					map[i][j] = ( parseInt(number) + 1 ) % kindOfNumber;
-		if( clickOnce == true )
-			clicked[i][j] = 1;
+					if( clickOnce == true ) {
+						if( clicked[i][j] == 0)
+							clicked[i][j] = 999;
+					}
 
 				}
 			}
@@ -520,12 +535,14 @@ function increaseChainedTile(i,j,number)
 
 	if( map[i][j] == number )
 	{
-		if( onetimeGrow == true && clicked[i][j] == 1 )
+		if( onetimeGrow == true && clicked[i][j] != 0 )
 			return;
 		map[i][j] = (map[i][j] + 1)%kindOfNumber;
 
-		if( clickOnce == true )
-			clicked[i][j] = 1;
+		if( clickOnce == true ) {
+			if( clicked[i][j] == 0)
+				clicked[i][j] = 999;
+		}
 	}
 	else
 		return;
@@ -885,7 +902,7 @@ function updateTile()
 		for( i = 0; i < height; i++) {
 			for( j = 0; j < width; j++) {
 				var id = i * width + j;
-				if( clicked[i][j] == 1 ) {
+				if( clicked[i][j] != 0 ) {
 					 //$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+clickedColor).html(tileText[map[i][j]]);
 					 $("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+clickedColor).html(tileClickedText[map[i][j]]);
 				}
@@ -964,7 +981,9 @@ function displayGameTime()
 					}
 					if( pick == num )
 					{
-						clicked[y][i%width] = 1;
+						if( clicked[y][i%width] == 0 ) {
+							clicked[y][i%width] = 999;
+						}
 						if( gameTimeResetEveryClick == true )
 							remainTime = gameTime;
 

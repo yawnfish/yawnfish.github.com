@@ -107,8 +107,8 @@ var GameConfigureForWatchSwap = {
 };
 var GameConfigure = GameConfigureFor67;
 
-var buttonWidth = 60;//60;
-var buttonHeight = 60;//buttonWidth;
+var buttonWidth = 100;//60;
+var buttonHeight = 100;//buttonWidth;
 
 var remainTime = GameConfigure.gameTime;
 var remainTimeTid;
@@ -133,13 +133,16 @@ var hintMap = new Array(GameConfigure.height);
 var clear = new Array(GameConfigure.height);
 var clicked = new Array(GameConfigure.height);
 
-var tilePath = "chicken/";
-var tileText = ["<img src='"+tilePath+"0_0.png'/>", "<img src='"+tilePath+"1_0.png'/>", "<img src='"+tilePath+"2_0.png'/>", "<img src='"+tilePath+"3_0.png'/>"];
-var tileClickedText = ["<img src='"+tilePath+"0_1.png'/>", "<img src='"+tilePath+"1_1.png'/>", "<img src='"+tilePath+"2_1.png'/>", "<img src='"+tilePath+"3_1.png'/>"];
+var tilePath = "chicken/Chiho/";
+var tileText = ["<img src='"+tilePath+"0_normal@2x.png'/>", "<img src='"+tilePath+"1_normal@2x.png'/>", "<img src='"+tilePath+"2_normal@2x.png'/>", "<img src='"+tilePath+"3_normal@2x.png'/>"];
+var tileClickedText = ["<img src='"+tilePath+"0_disabled@2x.png'/>", "<img src='"+tilePath+"1_disabled@2x.png'/>", "<img src='"+tilePath+"2_disabled@2x.png'/>", "<img src='"+tilePath+"3_disabled@2x.png'/>"];
 //var tileText = ["<h1>1</h1>", "<h1>2</h1>", "<h1>3</h1>", "<h1>4</h1", "<h1>5</h1>"];
 //var tileClickedText = ["<h1>1</h1>", "<h1>2</h1>", "<h1>3</h1>", "<h1>4</h1", "<h1>5</h1>"];
 
-var color = ["LightCyan", "Yellow", "Orange", "Pink", "#c00000","#d00000","#e00000","#f00000","white"];
+//var tileText = ["´Þ°¿", "º´¾Æ¸®", "´ß", "Ä¡Å²"];
+//var color = ["Red", "Orange", "Green", "Aqua", "Blue","Chartreuse","Violet","Cyan","White"];
+var color = ["#93E7EF", "#FCE659", "#F7AC71", "#FAB8D4", "#c00000","#d00000","#e00000","#f00000","white"];
+
 //var color = ["LightCyan", "LightCyan", "LightCyan", "LightCyan", "#c00000","#d00000","#e00000","#f00000","white"];
 var blankNumber = GameConfigure.kindOfNumber;
 var blankColor = "White";

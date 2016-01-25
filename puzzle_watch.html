@@ -90,6 +90,8 @@ var clicked = new Array(height);
 var tilePath = "chicken/Chiho/";
 var tileText = ["<img src='"+tilePath+"0_normal@2x.png'/>", "<img src='"+tilePath+"1_normal@2x.png'/>", "<img src='"+tilePath+"2_normal@2x.png'/>", "<img src='"+tilePath+"3_normal@2x.png'/>"];
 var tileClickedText = ["<img src='"+tilePath+"0_disabled@2x.png'/>", "<img src='"+tilePath+"1_disabled@2x.png'/>", "<img src='"+tilePath+"2_disabled@2x.png'/>", "<img src='"+tilePath+"3_disabled@2x.png'/>"];
+var blankImage = "<img src='"+tilePath+"blank@2x.png'/>";
+
 //var tileText = ["<h1>1</h1>", "<h1>2</h1>", "<h1>3</h1>", "<h1>4</h1", "<h1>5</h1>"];
 //var tileClickedText = ["<h1>1</h1>", "<h1>2</h1>", "<h1>3</h1>", "<h1>4</h1", "<h1>5</h1>"];
 
@@ -855,7 +857,7 @@ function updateTile()
 				}
 				else {
 					if( map[i][j] == blankNumber )	// ∫Ûƒ≠
-						$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+color[map[i][j]]).html("<h1></h1>");
+						$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+color[map[i][j]]).html(blankImage);
 					else if( map[i][j] >= itemCode[0] ) {	// æ∆¿Ã≈€
 						var itemIndex = map[i][j]-itemCode[0];
 						$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+itemColor[itemIndex]).html(itemText[itemIndex]);

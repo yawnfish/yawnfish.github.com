@@ -964,12 +964,12 @@ function updateTile()
 			}
 			else {
 				if( map[y][x] == blankNumber )	// ��ĭ
-					//$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+color[map[y][x]]).html(blankImage);
-					$("#"+id).attr("value", map[y][x]).html(blankImage);
+					$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+color[map[y][x]]).html(blankImage);
+					//$("#"+id).attr("value", map[y][x]).html(blankImage);
 				else if( map[y][x] >= itemCode[0] ) {	// ������
 					var itemIndex = map[y][x]-itemCode[0];
-					//$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+itemColor[itemIndex]).html(itemText[itemIndex]);
-					$("#"+id).attr("value", map[y][x]).html(itemText[itemIndex]);
+					$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+itemColor[itemIndex]).html(itemText[itemIndex]);
+					//$("#"+id).attr("value", map[y][x]).html(itemText[itemIndex]);
 				}
 				else {	// �Ϲ� Ÿ��
 					if( hintMap[y][x] == 1 )

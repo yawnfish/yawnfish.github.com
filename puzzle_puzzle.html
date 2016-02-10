@@ -899,34 +899,35 @@ function clearCompleteTile()
 
 function updateTile()
 {
-	var i,j;
-		for( i = 0; i < height; i++) {
-			for( j = 0; j < width; j++) {
-				var id = i * width + j;
-				if( clicked[i][j] != 0 ) {
-					 //$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+clickedColor).html(tileText[map[i][j]]);
-					 $("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+clickedColor).html(tileClickedText[map[i][j]]);
+	for( var y = 0; y < GameConfigure.height; y++) {
+		for( var x = 0; x < GameConfigure.width; x++) {
+			var id = y * GameConfigure.width + x;
+			if( clicked[y][x] == 1 ) {
+				 //$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+clickedColor).html(tileText[map[y][x]]);
+				 //$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+clickedColor).html(tileClickedText[map[y][x]]);
+				 $("#"+id).attr("value", map[y][x]).html(tileClickedText[map[y][x]]);
+			}
+			else {
+				if( map[y][x] == blankNumber )	// ��ĭ
+					$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+color[map[y][x]]).html(blankImage);
+					//$("#"+id).attr("value", map[y][x]).html(blankImage);
+				else if( map[y][x] >= itemCode[0] ) {	// ������
+					var itemIndex = map[y][x]-itemCode[0];
+					$("#"+id).attr("value", map[y][x]).attr("style", "background-color:"+itemColor[itemIndex]).html(itemText[itemIndex]);
+					//$("#"+id).attr("value", map[y][x]).html(itemText[itemIndex]);
 				}
-				else {
-					if( map[i][j] == blankNumber )	// ��ĭ
-					//	$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+color[map[i][j]]).html("<h1></h1>");
-						$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+color[map[i][j]]).html(blankImage);
-					else if( map[i][j] >= itemCode[0] ) {	// ������
-						var itemIndex = map[i][j]-itemCode[0];
-						$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+itemColor[itemIndex]).html(itemText[itemIndex]);
-					}
-					else {	// �Ϲ� Ÿ��
-						if( hintMap[i][j] == 1 )
-							$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+hintColor).html(tileText[map[i][j]]);
-						else
-							$("#"+id).attr("value", map[i][j]).attr("style", "background-color:"+color[map[i][j]]).html(tileText[map[i][j]]);
-					}
+				else {	// �Ϲ� Ÿ��
+					if( hintMap[y][x] == 1 )
+						$("#"+id).attr("value", map[y][x]).attr("style", "border-spacing:0 background-color:"+hintColor).html(tileText[map[y][x]]);
+					else
+						$("#"+id).attr("value", map[y][x]).attr("style", "border-spacing:0").html(tileText[map[y][x]]);
+				}
 
-				}
 			}
 		}
+	}
 
-		updateInfo();
+	updateInfo();
 }
 
 function updateInfo()

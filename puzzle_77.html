@@ -203,7 +203,7 @@ $(document).ready(function(){
 		$("#game").append("<tr id='tr"+y+"'>");
 		for( var x = 0; x < GameConfigure.width; x++) {
 			var id = Math.floor(y * GameConfigure.width + x);
-			$("#tr"+y).append("<td align=center id='"+id+"' width="+buttonWidth+" height="+buttonHeight+"></td>");
+			$("#tr"+y).append("<td align=center id='"+id+"' width='"+buttonWidth+"px' height='"+buttonHeight+"px'></td>");
 			//$("#tr"+y).bind("click", function(){ alert('��ư Ŭ����'); });
 		}
 		$("#game").append("</tr>");
@@ -234,7 +234,7 @@ $(document).ready(function(){
 		var x = Math.floor(id % GameConfigure.width);	//x
 
 		if( clicked[y][x] == 1 ) {
-			clicked[y][x] = 0;
+			//clicked[y][x] = 0;
 			clickSeq = 0;
 			updateTile();
 			return;
@@ -1369,7 +1369,7 @@ Combo : <span id="combo">0</span>
 Fever: <span id="fever">0</span>
 </div>
 <div id="gameDiv">
-<table id="game" border=0 cellspacing=0 cellpadding=0 style="border-spacing:0px">
+<table id="game" border=0 cellspacing=0 cellpadding=0 style="border-spacing:0px; border-collapse:collapse">
 </table>
 </div>
 <div id="history">

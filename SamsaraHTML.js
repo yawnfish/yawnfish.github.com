@@ -11144,7 +11144,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return this.requestHandler.getVersionCode();
   };
   AppController.prototype.isDesktop = function () {
-    return false;
+    return true;
   };
   AppController.prototype.printLog_7z05hs$ = function (str, file, line, funtion) {
     if (file === void 0)
@@ -12949,7 +12949,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     PlayerRecordManager$Companion_getInstance().shared().SetPlayerAchievement_79oy9z$(AndroidPlayerAchievement_init(''));
     PlayerRecordManager$Companion_getInstance().shared().loadAchievement();
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 3);
+    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
     ItemManager$Companion_getInstance().shared().initializeItemTable();
     ItemManager$Companion_getInstance().shared().loadAllPlayerItem();
     StoreManager$Companion_getInstance().shared().load();
@@ -13037,7 +13037,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   function SystemConfigure$Companion() {
     SystemConfigure$Companion_instance = this;
     this.configList = LinkedHashMap_init();
-    this.performance = 1.0;
+    this.performance = 0.1;
   }
   SystemConfigure$Companion.prototype.debugConfig = function () {
     this.addConfigure_puj7f4$('Show FPS', 'true');
@@ -13104,7 +13104,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.addConfigure_puj7f4$('Login GameCenter', 'true');
     this.addConfigure_puj7f4$('Logging', 'false');
     this.addConfigure_puj7f4$('Logging To Screen', 'false');
-    this.performance = 2.0;
+    this.performance = 0.1;
   };
   SystemConfigure$Companion.prototype.demoConfig = function () {
     this.addConfigure_puj7f4$('Demo', 'true');
@@ -13324,7 +13324,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return DOUBLE$result;
   };
   SystemConfigure$Companion.prototype.GetPerformance = function () {
-    return this.performance;
+    return 0.1;
   };
   SystemConfigure$Companion.prototype.isWatchOS = function () {
     return false;
@@ -14415,7 +14415,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
       }
       this.prevPlayedTime = HAL$Companion_getInstance().shared().GetCurrentTime();
-      println('Play: ' + this.name + ',' + this.playIndex.toString());
       if (audio.play() === false) {
         return false;
       }
@@ -17482,7 +17481,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       this.createTimeBar();
     }
     this.createFeverGage();
-    this.createBackgroundEffect();
+    if (this.quality >= 2) {
+      this.createBackgroundEffect();
+    }
   };
   function Game$initGame$lambda(this$Game) {
     return function (code) {
@@ -17578,9 +17579,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     this.initAdditional();
     this.particleManager = ParticleManager_init(this.view);
-    var performance = 1;
+    var performance = SystemConfigure$Companion_getInstance().GetPerformance();
     var tmp$_1 = this.particleManager;
-    var value = 250 * performance | 0;
+    var value = 200 * performance;
     var INT$result;
     INT$break: do {
       if (value == null) {
@@ -20987,6 +20988,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     };
   }
   Game_0.prototype.createScore_l4u1g4$ = function (position, score) {
+    if (this.quality < 2) {
+      return;
+    }
     var scoreString = '';
     if ((score / 1000 | 0) > 0) {
       var value = score / 100 | 0;
@@ -22511,7 +22515,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         return false;
       }
       var fireNumber = 1;
-      if (this$Game.quality < 3) {
+      if (this$Game.quality < 2) {
         fireNumber = 6;
       }
       closure$accum.v = closure$accum.v + 1 | 0;
@@ -22649,7 +22653,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           star.movement.y = -1500.0 * this$Game.view.sizeScale.yRatio;
         }
       }
-      if (this$Game.quality < 3) {
+      if (this$Game.quality < 2) {
         return true;
       }
       if (Random_getInstance().arc4random_uniform_za3lpa$(2) === 0) {
@@ -31772,7 +31776,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var num = 6;
     var color = Color$Companion_getInstance().white_mx4ult$();
     var image;
-    if (this.game.quality === 2) {
+    if (this.game.quality < 2) {
       num = 3;
     }
     var info = Kotlin.isType(tmp$ = this.game.gameValue.blockInfo, BlockItem) ? tmp$ : throwCCE();
@@ -33802,7 +33806,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var y = this.GetRealScreenY();
     var num_0 = num;
     var color = Color$Companion_getInstance().white_mx4ult$();
-    if (this.game.quality === 2) {
+    if (this.game.quality >= 2) {
       num_0 = 2;
     }
     var mStart = Position_init(this.game.gameConfigure.tileWidth / 4, this.game.gameConfigure.tileWidth / 4, -20.0);
@@ -39054,6 +39058,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.createSprite_591x4d$(160.0, 240.0, SceneLayer$spaceDeep_getInstance().value, 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, false);
     SoundManager$Companion_getInstance().shared().BGMFadeIn_o5txl1$(ensureNotNull(this.screen), 'MainBGM', 100.0, 0.3);
     this.game.quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 2);
+    println('Game Quality : ' + this.game.quality.toString());
     switch (this.game.quality) {
       case 0:
         HAL$Companion_getInstance().shared().changeFPS_za3lpa$(10);
@@ -40368,8 +40373,39 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     sub.SetAlpha_8ca0d4$(0.0);
     (tmp$_0 = this.screen) != null ? (tmp$_0.actionFadeIn_hkbjms$(sub, void 0, 1.0, 2.0, 3.0), Unit) : null;
     this.particleManager = ParticleManager_init(this);
-    var performance = 1;
-    (tmp$_1 = this.particleManager) != null ? (tmp$_1.SetMaxParticle_za3lpa$(200 * performance | 0), Unit) : null;
+    var performance = SystemConfigure$Companion_getInstance().GetPerformance();
+    if ((tmp$_1 = this.particleManager) != null) {
+      var value = 200 * performance;
+      var INT$result;
+      INT$break: do {
+        if (value == null) {
+          INT$result = 0;
+          break INT$break;
+        }
+        if (Kotlin.isNumber(value)) {
+          INT$result = numberToInt(value);
+          break INT$break;
+        }
+        if (typeof value === 'string') {
+          try {
+            var number = toInt_0(value);
+            INT$result = number;
+            break INT$break;
+          }
+           catch (e) {
+            if (Kotlin.isType(e, Exception)) {
+              INT$result = 0;
+              break INT$break;
+            }
+             else
+              throw e;
+          }
+        }
+        INT$result = 0;
+      }
+       while (false);
+      tmp$_1.SetMaxParticle_za3lpa$(INT$result);
+    }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -150.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     camera.projection = 1;
     (tmp$_2 = this.particleManager) != null ? (tmp$_2.SetCamera_s6wt6e$(camera), Unit) : null;
@@ -40409,8 +40445,39 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     sub.SetAlpha_8ca0d4$(0.0);
     (tmp$_2 = this.screen) != null ? (tmp$_2.actionFadeIn_hkbjms$(sub, void 0, 1.0, 2.0, 3.5), Unit) : null;
     this.particleManager = ParticleManager_init(this);
-    var performance = 1;
-    (tmp$_3 = this.particleManager) != null ? (tmp$_3.SetMaxParticle_za3lpa$(200 * performance | 0), Unit) : null;
+    var performance = SystemConfigure$Companion_getInstance().GetPerformance();
+    if ((tmp$_3 = this.particleManager) != null) {
+      var value = 200 * performance;
+      var INT$result;
+      INT$break: do {
+        if (value == null) {
+          INT$result = 0;
+          break INT$break;
+        }
+        if (Kotlin.isNumber(value)) {
+          INT$result = numberToInt(value);
+          break INT$break;
+        }
+        if (typeof value === 'string') {
+          try {
+            var number = toInt_0(value);
+            INT$result = number;
+            break INT$break;
+          }
+           catch (e) {
+            if (Kotlin.isType(e, Exception)) {
+              INT$result = 0;
+              break INT$break;
+            }
+             else
+              throw e;
+          }
+        }
+        INT$result = 0;
+      }
+       while (false);
+      tmp$_3.SetMaxParticle_za3lpa$(INT$result);
+    }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -150.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     camera.projection = 1;
     (tmp$_4 = this.particleManager) != null ? (tmp$_4.SetCamera_s6wt6e$(camera), Unit) : null;

@@ -44121,7 +44121,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     interfaces: [IActivityRequestHandler]
   };
   function main(args) {
-    Game(GameConfig(void 0, 640, 960, $module$Phaser.AUTO, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
+    Game(GameConfig(void 0, 320, 480, $module$Phaser.AUTO, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
   }
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});

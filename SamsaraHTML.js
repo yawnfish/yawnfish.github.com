@@ -53,9 +53,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var toString = Kotlin.toString;
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
+  var numberToDouble = Kotlin.numberToDouble;
   var State = $module$Phaser.State;
   var sortWith = Kotlin.kotlin.collections.sortWith_nqfjgj$;
-  var numberToDouble = Kotlin.numberToDouble;
   var blendModes$NORMAL = $module$PIXI.blendModes.NORMAL;
   var blendModes$ADD = $module$PIXI.blendModes.ADD;
   var TextStyle = $module$phaserKt.Phaser.TextStyle_5jhq38$;
@@ -11624,40 +11624,48 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_77() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/AppStoreBadge');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_78() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/google-play-badge');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_79() {
     var gameSprite = listOf_0(['Resource/UI/timer_gage', 'Resource/UI/timer_gage_glass', 'Resource/UI/fever_gage', 'Resource/UI/fever_gage_glass', 'Resource/UI/Particle', 'Resource/UI/ParticleBar', 'Resource/UI/LightningBar']);
     TextureManager$Companion_getInstance().shared().makeAtlas_kwv3np$('gameSprite', gameSprite);
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_78() {
+  function AppController$loadDefaultResource$lambda_80() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Match');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_79() {
+  function AppController$loadDefaultResource$lambda_81() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Block');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_80() {
+  function AppController$loadDefaultResource$lambda_82() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Effect');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_81() {
+  function AppController$loadDefaultResource$lambda_83() {
     var tmp$, tmp$_0;
     var letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123=_-,.!()[]%+?=>/'";
     letter += formatted_1(4567.89);
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.createFont_basrv3$('Number/', letter, 20, 1.0), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_82() {
+  function AppController$loadDefaultResource$lambda_84() {
     var tmp$, tmp$_0;
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.createFont_basrv3$('BigScore/', '0123456789:,.CombosK+s', 40, 1.0, 'Roboto-Black.ttf'), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_83() {
+  function AppController$loadDefaultResource$lambda_85() {
     var tmp$, tmp$_0;
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.addFontAlias_puj7f4$('BigScore/', 'Gage/'), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_84(closure$sizeScale, closure$width, closure$height, this$AppController) {
+  function AppController$loadDefaultResource$lambda_86(closure$sizeScale, closure$width, closure$height, this$AppController) {
     return function () {
       var tmp$;
       var letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123=_-,.!()[]%+?=>/'";
@@ -11696,7 +11704,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   }
   AppController.prototype.loadDefaultResource_dleff0$ = function (width, height) {
     var sizeScale = new Scale(320.0, 480.0, void 0, void 0, width, height);
-    var callback = listOf_0([AppController$loadDefaultResource$lambda, AppController$loadDefaultResource$lambda_0, AppController$loadDefaultResource$lambda_1, AppController$loadDefaultResource$lambda_2, AppController$loadDefaultResource$lambda_3, AppController$loadDefaultResource$lambda_4, AppController$loadDefaultResource$lambda_5, AppController$loadDefaultResource$lambda_6, AppController$loadDefaultResource$lambda_7, AppController$loadDefaultResource$lambda_8, AppController$loadDefaultResource$lambda_9, AppController$loadDefaultResource$lambda_10, AppController$loadDefaultResource$lambda_11, AppController$loadDefaultResource$lambda_12, AppController$loadDefaultResource$lambda_13, AppController$loadDefaultResource$lambda_14, AppController$loadDefaultResource$lambda_15, AppController$loadDefaultResource$lambda_16, AppController$loadDefaultResource$lambda_17, AppController$loadDefaultResource$lambda_18, AppController$loadDefaultResource$lambda_19, AppController$loadDefaultResource$lambda_20, AppController$loadDefaultResource$lambda_21, AppController$loadDefaultResource$lambda_22, AppController$loadDefaultResource$lambda_23, AppController$loadDefaultResource$lambda_24, AppController$loadDefaultResource$lambda_25, AppController$loadDefaultResource$lambda_26, AppController$loadDefaultResource$lambda_27, AppController$loadDefaultResource$lambda_28, AppController$loadDefaultResource$lambda_29, AppController$loadDefaultResource$lambda_30, AppController$loadDefaultResource$lambda_31, AppController$loadDefaultResource$lambda_32, AppController$loadDefaultResource$lambda_33, AppController$loadDefaultResource$lambda_34, AppController$loadDefaultResource$lambda_35, AppController$loadDefaultResource$lambda_36, AppController$loadDefaultResource$lambda_37, AppController$loadDefaultResource$lambda_38, AppController$loadDefaultResource$lambda_39, AppController$loadDefaultResource$lambda_40, AppController$loadDefaultResource$lambda_41, AppController$loadDefaultResource$lambda_42, AppController$loadDefaultResource$lambda_43, AppController$loadDefaultResource$lambda_44, AppController$loadDefaultResource$lambda_45, AppController$loadDefaultResource$lambda_46, AppController$loadDefaultResource$lambda_47, AppController$loadDefaultResource$lambda_48, AppController$loadDefaultResource$lambda_49, AppController$loadDefaultResource$lambda_50, AppController$loadDefaultResource$lambda_51, AppController$loadDefaultResource$lambda_52, AppController$loadDefaultResource$lambda_53, AppController$loadDefaultResource$lambda_54, AppController$loadDefaultResource$lambda_55, AppController$loadDefaultResource$lambda_56, AppController$loadDefaultResource$lambda_57, AppController$loadDefaultResource$lambda_58, AppController$loadDefaultResource$lambda_59, AppController$loadDefaultResource$lambda_60, AppController$loadDefaultResource$lambda_61, AppController$loadDefaultResource$lambda_62, AppController$loadDefaultResource$lambda_63, AppController$loadDefaultResource$lambda_64, AppController$loadDefaultResource$lambda_65, AppController$loadDefaultResource$lambda_66, AppController$loadDefaultResource$lambda_67, AppController$loadDefaultResource$lambda_68, AppController$loadDefaultResource$lambda_69, AppController$loadDefaultResource$lambda_70, AppController$loadDefaultResource$lambda_71, AppController$loadDefaultResource$lambda_72, AppController$loadDefaultResource$lambda_73, AppController$loadDefaultResource$lambda_74, AppController$loadDefaultResource$lambda_75, AppController$loadDefaultResource$lambda_76, AppController$loadDefaultResource$lambda_77, AppController$loadDefaultResource$lambda_78, AppController$loadDefaultResource$lambda_79, AppController$loadDefaultResource$lambda_80, AppController$loadDefaultResource$lambda_81, AppController$loadDefaultResource$lambda_82, AppController$loadDefaultResource$lambda_83, AppController$loadDefaultResource$lambda_84(sizeScale, width, height, this)]);
+    var callback = listOf_0([AppController$loadDefaultResource$lambda, AppController$loadDefaultResource$lambda_0, AppController$loadDefaultResource$lambda_1, AppController$loadDefaultResource$lambda_2, AppController$loadDefaultResource$lambda_3, AppController$loadDefaultResource$lambda_4, AppController$loadDefaultResource$lambda_5, AppController$loadDefaultResource$lambda_6, AppController$loadDefaultResource$lambda_7, AppController$loadDefaultResource$lambda_8, AppController$loadDefaultResource$lambda_9, AppController$loadDefaultResource$lambda_10, AppController$loadDefaultResource$lambda_11, AppController$loadDefaultResource$lambda_12, AppController$loadDefaultResource$lambda_13, AppController$loadDefaultResource$lambda_14, AppController$loadDefaultResource$lambda_15, AppController$loadDefaultResource$lambda_16, AppController$loadDefaultResource$lambda_17, AppController$loadDefaultResource$lambda_18, AppController$loadDefaultResource$lambda_19, AppController$loadDefaultResource$lambda_20, AppController$loadDefaultResource$lambda_21, AppController$loadDefaultResource$lambda_22, AppController$loadDefaultResource$lambda_23, AppController$loadDefaultResource$lambda_24, AppController$loadDefaultResource$lambda_25, AppController$loadDefaultResource$lambda_26, AppController$loadDefaultResource$lambda_27, AppController$loadDefaultResource$lambda_28, AppController$loadDefaultResource$lambda_29, AppController$loadDefaultResource$lambda_30, AppController$loadDefaultResource$lambda_31, AppController$loadDefaultResource$lambda_32, AppController$loadDefaultResource$lambda_33, AppController$loadDefaultResource$lambda_34, AppController$loadDefaultResource$lambda_35, AppController$loadDefaultResource$lambda_36, AppController$loadDefaultResource$lambda_37, AppController$loadDefaultResource$lambda_38, AppController$loadDefaultResource$lambda_39, AppController$loadDefaultResource$lambda_40, AppController$loadDefaultResource$lambda_41, AppController$loadDefaultResource$lambda_42, AppController$loadDefaultResource$lambda_43, AppController$loadDefaultResource$lambda_44, AppController$loadDefaultResource$lambda_45, AppController$loadDefaultResource$lambda_46, AppController$loadDefaultResource$lambda_47, AppController$loadDefaultResource$lambda_48, AppController$loadDefaultResource$lambda_49, AppController$loadDefaultResource$lambda_50, AppController$loadDefaultResource$lambda_51, AppController$loadDefaultResource$lambda_52, AppController$loadDefaultResource$lambda_53, AppController$loadDefaultResource$lambda_54, AppController$loadDefaultResource$lambda_55, AppController$loadDefaultResource$lambda_56, AppController$loadDefaultResource$lambda_57, AppController$loadDefaultResource$lambda_58, AppController$loadDefaultResource$lambda_59, AppController$loadDefaultResource$lambda_60, AppController$loadDefaultResource$lambda_61, AppController$loadDefaultResource$lambda_62, AppController$loadDefaultResource$lambda_63, AppController$loadDefaultResource$lambda_64, AppController$loadDefaultResource$lambda_65, AppController$loadDefaultResource$lambda_66, AppController$loadDefaultResource$lambda_67, AppController$loadDefaultResource$lambda_68, AppController$loadDefaultResource$lambda_69, AppController$loadDefaultResource$lambda_70, AppController$loadDefaultResource$lambda_71, AppController$loadDefaultResource$lambda_72, AppController$loadDefaultResource$lambda_73, AppController$loadDefaultResource$lambda_74, AppController$loadDefaultResource$lambda_75, AppController$loadDefaultResource$lambda_76, AppController$loadDefaultResource$lambda_77, AppController$loadDefaultResource$lambda_78, AppController$loadDefaultResource$lambda_79, AppController$loadDefaultResource$lambda_80, AppController$loadDefaultResource$lambda_81, AppController$loadDefaultResource$lambda_82, AppController$loadDefaultResource$lambda_83, AppController$loadDefaultResource$lambda_84, AppController$loadDefaultResource$lambda_85, AppController$loadDefaultResource$lambda_86(sizeScale, width, height, this)]);
     return callback;
   };
   var Exception = Kotlin.kotlin.Exception;
@@ -12985,13 +12993,13 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.input.mouse.capture = true;
     this.game.input.onDown.add(Samsara$create$lambda_1);
     this.game.input.onUp.add(Samsara$create$lambda_2);
+    this.game.time.advancedTiming = true;
   };
   Samsara.prototype.update = function () {
   };
   Samsara.prototype.render = function () {
-    var tmp$;
-    var elapsed = typeof (tmp$ = this.game.time.elapsedMS) === 'number' ? tmp$ : throwCCE();
-    elapsed = elapsed / 1000;
+    var elapsed = numberToDouble(this.game.time.elapsedMS);
+    elapsed = elapsed / 1000.0;
     if (elapsed <= 0 || elapsed > 1.0) {
       elapsed = 0.04;
     }
@@ -13324,7 +13332,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return DOUBLE$result;
   };
   SystemConfigure$Companion.prototype.GetPerformance = function () {
-    return 0.1;
+    return 1.0;
   };
   SystemConfigure$Companion.prototype.isWatchOS = function () {
     return false;
@@ -37407,12 +37415,14 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   function GameOverView$showPromotionMenu$lambda(message) {
     if (message.event === Event$button_RELEASE_getInstance()) {
+      window.open('https://itunes.apple.com/app/samsara-stones-of-eternity/id1196258279', '_blank');
       return false;
     }
     return true;
   }
   function GameOverView$showPromotionMenu$lambda_0(message) {
     if (message.event === Event$button_RELEASE_getInstance()) {
+      window.open('https://play.google.com/store/apps/details?id=com.blindcatstudio.samsara', '_blank');
       return false;
     }
     return true;
@@ -40280,12 +40290,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     star.SetTextVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
     star.SetTextHorizontalAlign_jdpdm8$(HorizontalAlign$right_getInstance());
     star.addText_r4v59z$('[image Resource/UI/IconStar ' + width.toString() + '] ' + formatted(StoreManager$Companion_getInstance().shared().GetStarAmount()));
-    if (AppController$Companion_getInstance().shared().isDesktop() === true) {
-      var copyright = this.createLabel_17tgk7$(160.0, 400.0, void 0, '2017 BlindCat Studio ALL RIGHTS RESERVED.');
-      copyright.SetSize_dleff0$(240.0 * this.sizeScale.xRatio, 10.0 * this.sizeScale.yRatio);
-      copyright.SetVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
-      copyright.SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
-    }
     this.showBottomMenu();
     this.particleManagerForFairy = ParticleManager_init(this);
     this.createBackgroundEffect_v32r7z$(ensureNotNull(this.particleManagerForFairy), Rect_init(0.0, 160.0, 320.0, 320.0));

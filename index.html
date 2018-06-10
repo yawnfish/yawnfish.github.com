@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<div id="topBarDiv" style="height: 16%"></div>
-    <div id="gameDiv"  style="height: 85%"></div>
+	<!--<div id="topBarDiv" style="height: 16%"></div>-->
+    <div id="container" style="height: 100%; text-align: center;">
+        <div id="gameDiv" style="height: 100%; display: inline-block;"></div>
+    </div>
+    <p hidden id="width">320</p>
+    <p hidden id="height">480</p>
     <script src="phaser.min.js"></script>
     <script src="lib/kotlin.js"></script>
     <script src="lib/phaserKt.js"></script>

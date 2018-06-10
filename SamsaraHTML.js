@@ -51,6 +51,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
+  var ScaleManager$Companion = $module$Phaser.ScaleManager;
   var toString = Kotlin.toString;
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
   var numberToDouble = Kotlin.numberToDouble;
@@ -12891,6 +12892,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.requestHandler = null;
   }
   Samsara.prototype.preload = function () {
+    this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
   };
   function Samsara$create$lambda(progress, cacheKey, success, totalLoaded, totalFiles) {
     println('File Complete: ' + cacheKey + ' > ' + toString(progress) + '% - ' + toString(totalLoaded) + ' out of ' + toString(totalFiles));
@@ -12996,14 +12998,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.time.advancedTiming = true;
   };
   Samsara.prototype.update = function () {
-  };
-  Samsara.prototype.render = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
     elapsed = elapsed / 1000.0;
-    if (elapsed <= 0 || elapsed > 1.0) {
-      elapsed = 0.04;
-    }
     HAL$Companion_getInstance().shared().update_mx4ult$(elapsed);
+  };
+  Samsara.prototype.render = function () {
   };
   Samsara.prototype.dispose = function () {
     SoundManager$Companion_getInstance().shutdown();
@@ -44192,7 +44191,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     interfaces: [IActivityRequestHandler]
   };
   function main(args) {
-    Game(GameConfig(void 0, 320, 480, $module$Phaser.AUTO, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
+    var tmp$, tmp$_0;
+    var width = Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE();
+    var height = Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE();
+    println('Width:' + width.innerText);
+    println('Height:' + height.innerText);
+    Game(GameConfig(void 0, toDouble(width.innerText), toDouble(height.innerText), $module$Phaser.AUTO, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
   }
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});

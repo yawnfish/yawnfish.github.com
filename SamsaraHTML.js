@@ -319,6 +319,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.guestScreen_0 = null;
     this.shutdown_0 = false;
     this.currentTime_0 = 0.0;
+    this.nodeUpdateCounter = 0;
   }
   function HAL$Holder() {
     HAL$Holder_instance = this;
@@ -526,6 +527,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       (tmp$_1 = (tmp$_0 = this.guestScreen_0) != null ? tmp$_0.GetScreen() : null) != null ? (tmp$_1.onTouchEvent_a3vp0k$(touch.x, touch.y, touch.event, elapsed, touch.code), Unit) : null;
     }
     queue.clear();
+    this.nodeUpdateCounter = 0;
     (tmp$_2 = this.guestScreen_0) != null ? (tmp$_2.render_mx4ult$(elapsed), Unit) : null;
   };
   HAL.prototype.printLog_61zpoe$ = function (str) {
@@ -5189,7 +5191,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     callback$default ? callback$default(alpha, applyChild) : this.SetAlpha_8ca0d4$$default(alpha, applyChild);
   };
   Node.prototype.update_mx4ult$ = function (elapsed) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+    tmp$ = HAL$Companion_getInstance().shared();
+    tmp$.nodeUpdateCounter = tmp$.nodeUpdateCounter + 1 | 0;
     if (elapsed > 0) {
       this.age += elapsed * this.timeScale;
       if (this.timeToLive >= 0) {
@@ -5257,16 +5261,16 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     this.name.length;
     var childList = toList(this.childList);
-    tmp$ = childList.iterator();
-    while (tmp$.hasNext()) {
-      var child = tmp$.next();
+    tmp$_0 = childList.iterator();
+    while (tmp$_0.hasNext()) {
+      var child = tmp$_0.next();
       child.update_mx4ult$(elapsed * this.timeScale);
     }
-    if ((tmp$_0 = this.xMotion) != null) {
-      var tmp$_3;
-      var info = tmp$_0;
+    if ((tmp$_1 = this.xMotion) != null) {
+      var tmp$_4;
+      var info = tmp$_1;
       if (info.time !== -1.0 && info.startTime + info.time < this.age) {
-        (tmp$_3 = info.callback) != null ? tmp$_3() : null;
+        (tmp$_4 = info.callback) != null ? tmp$_4() : null;
         this.xMotion = null;
       }
        else {
@@ -5279,11 +5283,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
       }
     }
-    if ((tmp$_1 = this.yMotion) != null) {
-      var tmp$_4;
-      var info_0 = tmp$_1;
+    if ((tmp$_2 = this.yMotion) != null) {
+      var tmp$_5;
+      var info_0 = tmp$_2;
       if (info_0.time !== -1.0 && info_0.startTime + info_0.time < this.age) {
-        (tmp$_4 = info_0.callback) != null ? tmp$_4() : null;
+        (tmp$_5 = info_0.callback) != null ? tmp$_5() : null;
         this.yMotion = null;
       }
        else {
@@ -5296,11 +5300,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
       }
     }
-    if ((tmp$_2 = this.zMotion) != null) {
-      var tmp$_5;
-      var info_1 = tmp$_2;
+    if ((tmp$_3 = this.zMotion) != null) {
+      var tmp$_6;
+      var info_1 = tmp$_3;
       if (info_1.time !== -1.0 && info_1.startTime + info_1.time < this.age) {
-        (tmp$_5 = info_1.callback) != null ? tmp$_5() : null;
+        (tmp$_6 = info_1.callback) != null ? tmp$_6() : null;
         this.zMotion = null;
       }
        else {
@@ -12995,12 +12999,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.input.mouse.capture = true;
     this.game.input.onDown.add(Samsara$create$lambda_1);
     this.game.input.onUp.add(Samsara$create$lambda_2);
-    this.game.time.advancedTiming = true;
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
     elapsed = elapsed / 1000.0;
     HAL$Companion_getInstance().shared().update_mx4ult$(elapsed);
+    this.game.debug.text(HAL$Companion_getInstance().shared().nodeUpdateCounter.toString(), 32, 32);
   };
   Samsara.prototype.render = function () {
   };
@@ -19091,6 +19095,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (type === void 0)
       type = 0;
     var tmp$, tmp$_0, tmp$_1;
+    if (this.quality < 2) {
+      return;
+    }
     (tmp$ = this.view.screen) != null ? (tmp$.actionDelay_ab0iom$(0.0, void 0, Game$showNirvanaEffect$lambda), Unit) : null;
     var delayGap = this.gameConfigure.nirvanaDelayGap;
     var tmp$_2 = delayGap;
@@ -21378,6 +21385,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (delay === void 0)
       delay = 0.5;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    if (this.quality < 2) {
+      return;
+    }
     var array = Array_0(this.gameConfigure.width);
     var tmp$_9;
     tmp$_9 = array.length - 1 | 0;
@@ -21735,6 +21745,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (delay === void 0)
       delay = 0.5;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
+    if (this.quality < 2) {
+      return;
+    }
     var array = Array_0(this.gameConfigure.width);
     var tmp$_9;
     tmp$_9 = array.length - 1 | 0;
@@ -32676,12 +32689,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     $this = $this || Object.create(ItemEntity.prototype);
     TileEntity_init(game, value, screenX, screenY, $this);
     ItemEntity.call($this);
-    var tmp$;
     $this.subValue = subValue;
     $this.SetImage();
-    var yMotion = Wave_init(1.0);
-    yMotion.SetScale_mx4ult$(game.gameConfigure.tileHeight * 0.05);
-    (tmp$ = $this.sprite) != null ? (tmp$.SetYMotion_vn0wwp$(yMotion, true), Unit) : null;
     return $this;
   }
   function ReactivateItemEntity(game, value, subValue, screenX, screenY) {
@@ -33376,12 +33385,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     $this = $this || Object.create(ObstacleEntity.prototype);
     TileEntity_init(game, value, screenX, screenY, $this);
     ObstacleEntity.call($this);
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var tmp$, tmp$_0, tmp$_1;
     var info = Kotlin.isType(tmp$ = game.gameValue.blockInfo, BlockItem) ? tmp$ : throwCCE();
     var image = 'Ghost_' + info.colorMap.get_za3lpa$(value % 1000);
-    var tmp$_3 = $this.GetBoardX();
-    var tmp$_4 = $this.GetBoardY();
-    var tmp$_5 = $this.spriteZ;
+    var tmp$_2 = $this.GetBoardX();
+    var tmp$_3 = $this.GetBoardY();
+    var tmp$_4 = $this.spriteZ;
     var value_0 = game.gameConfigure.tileWidth * 0.7;
     var FLOAT$result;
     FLOAT$break: do {
@@ -33411,7 +33420,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       FLOAT$result = 0.0;
     }
      while (false);
-    var tmp$_6 = FLOAT$result;
+    var tmp$_5 = FLOAT$result;
     var value_1 = game.gameConfigure.tileHeight * 0.7;
     var FLOAT$result_0;
     FLOAT$break: do {
@@ -33441,24 +33450,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       FLOAT$result_0 = 0.0;
     }
      while (false);
-    $this.sprite = Sprite_init(tmp$_3, tmp$_4, tmp$_5, image, tmp$_6, FLOAT$result_0);
+    $this.sprite = Sprite_init(tmp$_2, tmp$_3, tmp$_4, image, tmp$_5, FLOAT$result_0);
     (tmp$_0 = $this.sprite) != null ? (tmp$_0.SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance()), Unit) : null;
     (tmp$_1 = $this.sprite) != null ? (tmp$_1.SetVerticalAlign_qn2em6$(VerticalAlign$center_getInstance()), Unit) : null;
     game.view.GetMask().addChild_g5h3xp$(ensureNotNull($this.sprite));
-    (tmp$_2 = game.view.screen) != null ? (tmp$_2.actionFadeLoop_xukj3e$('blink', 0.6, 0.6, 1.0, $this.sprite, ObstacleEntity_init$lambda($this)), Unit) : null;
     return $this;
-  }
-  function ObstacleEntity_init$lambda(this$ObstacleEntity) {
-    return function (value, quit) {
-      var tmp$, tmp$_0;
-      if (quit === true) {
-        (tmp$ = this$ObstacleEntity.sprite) != null ? (tmp$.SetAlpha_8ca0d4$(1.0), Unit) : null;
-      }
-       else {
-        (tmp$_0 = this$ObstacleEntity.sprite) != null ? (tmp$_0.SetAlpha_8ca0d4$(value), Unit) : null;
-      }
-      return true;
-    };
   }
   function TileEntity() {
     this.attribute = TileEntity$Attribute$normal_getInstance();

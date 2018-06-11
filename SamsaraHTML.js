@@ -3105,7 +3105,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.originalAlpha_oxgaai$_0 = 1.0;
     this.subAlpha_fnduof$_0 = 1.0;
     this.currentAlpha_o3wgi0$_0 = 1.0;
-    this.willBeDestroyed = Object3D$willBeDestroyed$lambda;
+    this.willBeDestroyed = null;
     this.localVariables = LinkedHashMap_init();
   }
   Object3D.prototype.initialize = function () {
@@ -3148,10 +3148,15 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.originalAlpha_oxgaai$_0 = 1.0;
     this.subAlpha_fnduof$_0 = 1.0;
     this.currentAlpha_o3wgi0$_0 = 1.0;
+    this.willBeDestroyed = null;
     this.localVariables.clear();
   };
   Object3D.prototype.destroy = function () {
+    this.xMotion = null;
+    this.yMotion = null;
+    this.zMotion = null;
     this.willBeDestroyed = null;
+    this.localVariables.clear();
   };
   Object3D.prototype.addLocalVariables_bm4g0d$ = function (key, obj) {
     this.localVariables.put_xwzc9p$(key, obj);
@@ -3514,9 +3519,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     return false;
   };
-  function Object3D$willBeDestroyed$lambda(obj, camera, elapsed) {
-    return false;
-  }
   Object3D.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Object3D',
@@ -4746,7 +4748,17 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return this.timeToLive;
   };
   Node.prototype.SetInactive = function () {
+    var tmp$;
     this.active = false;
+    tmp$ = reversed_0(get_indices(this.updateCallback)).iterator();
+    while (tmp$.hasNext()) {
+      var i = tmp$.next();
+      this.updateCallback.removeAt_za3lpa$(i);
+    }
+    this.updateCallback.clear();
+    if (this.messageHandler != null) {
+      this.messageHandler = null;
+    }
     this.xMotion = null;
     this.yMotion = null;
     this.zMotion = null;
@@ -4828,9 +4840,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   Node.prototype.freeObject = function () {
     var tmp$;
-    tmp$ = this.objectList.size - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      this.objectList.set_wxm5ur$(i, null);
+    tmp$ = reversed_0(get_indices(this.objectList)).iterator();
+    while (tmp$.hasNext()) {
+      var i = tmp$.next();
+      this.objectList.removeAt_za3lpa$(i);
     }
     this.objectList.clear();
   };
@@ -6364,7 +6377,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
   };
   ParticleManager.prototype.updateObject_38oe80$ = function (objList, elapsed) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var halfelapsed2 = 0.5 * elapsed * elapsed;
     var i = objList.size - 1 | 0;
     while (i >= 0) {
@@ -6375,15 +6388,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           (tmp$ = obj.willBeDestroyed) != null ? tmp$(obj, ensureNotNull(this.camera), 0.0) : null;
           var particle = Kotlin.isType(tmp$_0 = obj, Particle) ? tmp$_0 : null;
           if (particle != null) {
-            if (particle.poolable === true) {
-              particle.initialize();
-              (tmp$_1 = particle.sprite) != null ? (tmp$_1.SetAlpha_8ca0d4$(0.0), Unit) : null;
-              (tmp$_2 = particle.sprite) != null ? (tmp$_2.SetInactive(), Unit) : null;
-              this.particlePool.add_11rb$(particle);
-            }
-             else {
-              particle.destroy();
-            }
+            particle.destroy();
           }
            else {
             obj.destroy();
@@ -6393,18 +6398,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           continue;
         }
       }
-      if (((tmp$_3 = obj.willBeDestroyed) != null ? tmp$_3(obj, ensureNotNull(this.camera), elapsed) : null) === true) {
-        var particle_0 = Kotlin.isType(tmp$_4 = obj, Particle) ? tmp$_4 : null;
+      if (obj.willBeDestroyed != null && ((tmp$_1 = obj.willBeDestroyed) != null ? tmp$_1(obj, ensureNotNull(this.camera), elapsed) : null) === true) {
+        var particle_0 = Kotlin.isType(tmp$_2 = obj, Particle) ? tmp$_2 : null;
         if (particle_0 != null) {
-          if (particle_0.poolable === true) {
-            particle_0.initialize();
-            (tmp$_5 = particle_0.sprite) != null ? (tmp$_5.SetAlpha_8ca0d4$(0.0), Unit) : null;
-            (tmp$_6 = particle_0.sprite) != null ? (tmp$_6.SetInactive(), Unit) : null;
-            this.particlePool.add_11rb$(particle_0);
-          }
-           else {
-            particle_0.destroy();
-          }
+          particle_0.destroy();
         }
          else {
           obj.destroy();
@@ -6438,9 +6435,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
       }
       if (obj.accel.x === 0.0 && obj.movement.x !== 0.0) {
-        var tmp$_7 = obj.movement.x;
+        var tmp$_3 = obj.movement.x;
         var x = obj.movement.x;
-        var direction = tmp$_7 / Math_0.abs(x);
+        var direction = tmp$_3 / Math_0.abs(x);
         var x_0 = obj.movement.x;
         var move = Math_0.abs(x_0) - obj.drag.x * elapsed;
         if (move < 0) {
@@ -6449,9 +6446,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         obj.movement.x = direction * move;
       }
       if (obj.accel.y === 0.0 && obj.movement.y !== 0.0) {
-        var tmp$_8 = obj.movement.y;
+        var tmp$_4 = obj.movement.y;
         var x_1 = obj.movement.y;
-        var direction_0 = tmp$_8 / Math_0.abs(x_1);
+        var direction_0 = tmp$_4 / Math_0.abs(x_1);
         var x_2 = obj.movement.y;
         var move_0 = Math_0.abs(x_2) - obj.drag.y * elapsed;
         if (move_0 < 0) {
@@ -6460,9 +6457,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         obj.movement.y = direction_0 * move_0;
       }
       if (obj.accel.z === 0.0 && obj.movement.z !== 0.0) {
-        var tmp$_9 = obj.movement.z;
+        var tmp$_5 = obj.movement.z;
         var x_3 = obj.movement.z;
-        var direction_1 = tmp$_9 / Math_0.abs(x_3);
+        var direction_1 = tmp$_5 / Math_0.abs(x_3);
         var x_4 = obj.movement.z;
         var move_1 = Math_0.abs(x_4) - obj.drag.z * elapsed;
         if (move_1 < 0) {
@@ -6627,16 +6624,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   ParticleManager.prototype.GetParticle_dqye30$ = function (ignoreMax, poolable) {
     if (ignoreMax === void 0)
       ignoreMax = false;
-    var tmp$;
-    if (poolable === true) {
-      if (this.particlePool.size > 0) {
-        var p = this.particlePool.removeAt_za3lpa$(0);
-        (tmp$ = p.sprite) != null ? (tmp$.SetActive(), Unit) : null;
-        p.movementMax = kotlin_js_internal_FloatCompanionObject.POSITIVE_INFINITY;
-        this.addObject_293dsg$(p, poolable);
-        return p;
-      }
-    }
     if (ignoreMax === true || this.GetTotalParticleCount() < this.maxParticle) {
       var obj = new Particle();
       if (this.GetTotalParticleCount() >= this.maxParticle) {
@@ -6956,13 +6943,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     return null;
   };
-  function ParticleManager$createExplosion$lambda(closure$particle) {
-    return function (obj, camera, elapsed) {
-      if (obj.age > obj.timeToLive - 1.0) {
-        closure$particle.SetOriginalAlpha_mx4ult$(1 - (obj.age - (obj.timeToLive - 1.0)));
-      }
-      return false;
-    };
+  function ParticleManager$createExplosion$lambda(obj, camera, elapsed) {
+    return false;
   }
   ParticleManager.prototype.createExplosion_3jyyep$ = function (pos, r, num, size, time, image, color, mStart, mEnd, fixScreenZ, screenZ) {
     if (color === void 0)
@@ -6999,7 +6981,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
         particle.rotation.z = (Random_getInstance().arc4random_uniform_za3lpa$(20) - 10) / 10.0;
         particle.keepDirection = true;
-        particle.SetCallback_lnidq9$(ParticleManager$createExplosion$lambda(particle));
+        particle.SetCallback_lnidq9$(ParticleManager$createExplosion$lambda);
       }
     }
   };
@@ -31113,6 +31095,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var sprite = this.game.view.findChildByName_3m52m6$('Fever Gauge Mask');
     if (sprite != null) {
       this.createHoming_7thp2o$(count, Position_init(sprite.GetPosition().x - sprite.GetSize().width * 0.5 + this.game.gameValue.feverGage * sprite.GetSize().width / 100.0, sprite.GetPosition().y - sprite.GetSize().height * 0.5));
+      this.createExplosion_za3lpa$(count);
     }
      else {
       this.createExplosion_za3lpa$(count);
@@ -31861,7 +31844,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (count === void 0)
       count = 1;
     var tmp$;
-    if (this.game.quality < 2) {
+    if (this.game.quality < 1) {
       return;
     }
     var x = this.GetRealScreenX();
@@ -31870,7 +31853,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var color = Color$Companion_getInstance().white_mx4ult$();
     var image;
     if (this.game.quality < 2) {
-      num = 3;
+      num = 1;
     }
     var info = Kotlin.isType(tmp$ = this.game.gameValue.blockInfo, BlockItem) ? tmp$ : throwCCE();
     image = 'Particle_' + info.colorMap.get_za3lpa$(this.value);
@@ -33847,7 +33830,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   TileEntity.prototype.createExplosion_za3lpa$ = function (count) {
     var tmp$;
-    if (this.game.quality < 2) {
+    if (this.game.quality < 1) {
       return;
     }
     var image = '';
@@ -33896,14 +33879,14 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.createExplosion_vl24u5$(count, 6, image, size);
   };
   TileEntity.prototype.createExplosion_vl24u5$ = function (count, num, image, size) {
-    if (this.game.quality < 2) {
+    if (this.game.quality < 1) {
       return;
     }
     var x = this.GetRealScreenX();
     var y = this.GetRealScreenY();
     var num_0 = num;
     var color = Color$Companion_getInstance().white_mx4ult$();
-    if (this.game.quality >= 2) {
+    if (this.game.quality < 2) {
       num_0 = 2;
     }
     var mStart = Position_init(this.game.gameConfigure.tileWidth / 4, this.game.gameConfigure.tileWidth / 4, -20.0);

@@ -4676,6 +4676,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   }
   HorizontalAlign.valueOf_61zpoe$ = HorizontalAlign$valueOf;
   function Node() {
+    this.active = true;
     this.name = '';
     this.x_nkfebn$_0 = 0.0;
     this.y_nkfeas$_0 = 0.0;
@@ -4743,6 +4744,15 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   Node.prototype.GetTimeToLive = function () {
     return this.timeToLive;
+  };
+  Node.prototype.SetInactive = function () {
+    this.active = false;
+    this.xMotion = null;
+    this.yMotion = null;
+    this.zMotion = null;
+  };
+  Node.prototype.SetActive = function () {
+    this.active = true;
   };
   Node.prototype.SetName_61zpoe$ = function (name) {
     this.name = name;
@@ -4833,6 +4843,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       this.updateCallback.removeAt_za3lpa$(i);
     }
     this.updateCallback.clear();
+    this.xMotion = null;
+    this.yMotion = null;
+    this.zMotion = null;
     tmp$_0 = reversed(this.childList).iterator();
     while (tmp$_0.hasNext()) {
       var ch = tmp$_0.next();
@@ -5264,7 +5277,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     tmp$_0 = childList.iterator();
     while (tmp$_0.hasNext()) {
       var child = tmp$_0.next();
-      child.update_mx4ult$(elapsed * this.timeScale);
+      if (child.active === true) {
+        child.update_mx4ult$(elapsed * this.timeScale);
+      }
     }
     if ((tmp$_1 = this.xMotion) != null) {
       var tmp$_4;
@@ -6349,7 +6364,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
   };
   ParticleManager.prototype.updateObject_38oe80$ = function (objList, elapsed) {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
     var halfelapsed2 = 0.5 * elapsed * elapsed;
     var i = objList.size - 1 | 0;
     while (i >= 0) {
@@ -6363,6 +6378,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
             if (particle.poolable === true) {
               particle.initialize();
               (tmp$_1 = particle.sprite) != null ? (tmp$_1.SetAlpha_8ca0d4$(0.0), Unit) : null;
+              (tmp$_2 = particle.sprite) != null ? (tmp$_2.SetInactive(), Unit) : null;
               this.particlePool.add_11rb$(particle);
             }
              else {
@@ -6377,12 +6393,13 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           continue;
         }
       }
-      if (((tmp$_2 = obj.willBeDestroyed) != null ? tmp$_2(obj, ensureNotNull(this.camera), elapsed) : null) === true) {
-        var particle_0 = Kotlin.isType(tmp$_3 = obj, Particle) ? tmp$_3 : null;
+      if (((tmp$_3 = obj.willBeDestroyed) != null ? tmp$_3(obj, ensureNotNull(this.camera), elapsed) : null) === true) {
+        var particle_0 = Kotlin.isType(tmp$_4 = obj, Particle) ? tmp$_4 : null;
         if (particle_0 != null) {
           if (particle_0.poolable === true) {
             particle_0.initialize();
-            (tmp$_4 = particle_0.sprite) != null ? (tmp$_4.SetAlpha_8ca0d4$(0.0), Unit) : null;
+            (tmp$_5 = particle_0.sprite) != null ? (tmp$_5.SetAlpha_8ca0d4$(0.0), Unit) : null;
+            (tmp$_6 = particle_0.sprite) != null ? (tmp$_6.SetInactive(), Unit) : null;
             this.particlePool.add_11rb$(particle_0);
           }
            else {
@@ -6421,9 +6438,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
       }
       if (obj.accel.x === 0.0 && obj.movement.x !== 0.0) {
-        var tmp$_5 = obj.movement.x;
+        var tmp$_7 = obj.movement.x;
         var x = obj.movement.x;
-        var direction = tmp$_5 / Math_0.abs(x);
+        var direction = tmp$_7 / Math_0.abs(x);
         var x_0 = obj.movement.x;
         var move = Math_0.abs(x_0) - obj.drag.x * elapsed;
         if (move < 0) {
@@ -6432,9 +6449,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         obj.movement.x = direction * move;
       }
       if (obj.accel.y === 0.0 && obj.movement.y !== 0.0) {
-        var tmp$_6 = obj.movement.y;
+        var tmp$_8 = obj.movement.y;
         var x_1 = obj.movement.y;
-        var direction_0 = tmp$_6 / Math_0.abs(x_1);
+        var direction_0 = tmp$_8 / Math_0.abs(x_1);
         var x_2 = obj.movement.y;
         var move_0 = Math_0.abs(x_2) - obj.drag.y * elapsed;
         if (move_0 < 0) {
@@ -6443,9 +6460,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         obj.movement.y = direction_0 * move_0;
       }
       if (obj.accel.z === 0.0 && obj.movement.z !== 0.0) {
-        var tmp$_7 = obj.movement.z;
+        var tmp$_9 = obj.movement.z;
         var x_3 = obj.movement.z;
-        var direction_1 = tmp$_7 / Math_0.abs(x_3);
+        var direction_1 = tmp$_9 / Math_0.abs(x_3);
         var x_4 = obj.movement.z;
         var move_1 = Math_0.abs(x_4) - obj.drag.z * elapsed;
         if (move_1 < 0) {
@@ -6610,9 +6627,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   ParticleManager.prototype.GetParticle_dqye30$ = function (ignoreMax, poolable) {
     if (ignoreMax === void 0)
       ignoreMax = false;
+    var tmp$;
     if (poolable === true) {
       if (this.particlePool.size > 0) {
         var p = this.particlePool.removeAt_za3lpa$(0);
+        (tmp$ = p.sprite) != null ? (tmp$.SetActive(), Unit) : null;
         p.movementMax = kotlin_js_internal_FloatCompanionObject.POSITIVE_INFINITY;
         this.addObject_293dsg$(p, poolable);
         return p;
@@ -12893,7 +12912,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.h_8be2vx$ = 0.0;
     this.newW_8be2vx$ = 0.0;
     this.newH_8be2vx$ = 0.0;
+    this.debug = null;
     this.requestHandler = null;
+    this.count = 0;
+    this.accum = 0.0;
+    this.fps = 0;
   }
   Samsara.prototype.preload = function () {
     this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
@@ -12929,7 +12952,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$ended_getInstance());
   }
   Samsara.prototype.create = function () {
-    var tmp$;
+    var tmp$, tmp$_0;
     this.w_8be2vx$ = this.game.width;
     this.h_8be2vx$ = this.game.height;
     var locale = DataUtil$Companion_getInstance().GetString_sv46oe$(DataKey$CURRENT_LOCALE_getInstance(), void 0, '');
@@ -12963,7 +12986,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     PlayerRecordManager$Companion_getInstance().shared().SetPlayerAchievement_79oy9z$(AndroidPlayerAchievement_init(''));
     PlayerRecordManager$Companion_getInstance().shared().loadAchievement();
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    var quality = toInt_0((Kotlin.isType(tmp$_0 = document.getElementById('quality'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
+    println(quality);
+    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, quality);
     ItemManager$Companion_getInstance().shared().initializeItemTable();
     ItemManager$Companion_getInstance().shared().loadAllPlayerItem();
     StoreManager$Companion_getInstance().shared().load();
@@ -12999,12 +13024,55 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.input.mouse.capture = true;
     this.game.input.onDown.add(Samsara$create$lambda_1);
     this.game.input.onUp.add(Samsara$create$lambda_2);
+    this.debug = this.game.add.text(this.w_8be2vx$ * 0.5, this.h_8be2vx$ * 0.95, '');
+    ensureNotNull(this.debug).anchor.x = 0.5;
+    ensureNotNull(this.debug).fill = '#ffffff';
+    ensureNotNull(this.debug).fontSize = this.h_8be2vx$ / 480.0 * 10;
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
     elapsed = elapsed / 1000.0;
+    this.count = this.count + 1 | 0;
+    this.accum += elapsed;
+    if (this.accum > 1) {
+      var value = 1 / (this.accum / this.count);
+      var INT$result;
+      INT$break: do {
+        if (value == null) {
+          INT$result = 0;
+          break INT$break;
+        }
+        if (Kotlin.isNumber(value)) {
+          INT$result = numberToInt(value);
+          break INT$break;
+        }
+        if (typeof value === 'string') {
+          try {
+            var number = toInt_0(value);
+            INT$result = number;
+            break INT$break;
+          }
+           catch (e) {
+            if (Kotlin.isType(e, Exception)) {
+              INT$result = 0;
+              break INT$break;
+            }
+             else
+              throw e;
+          }
+        }
+        INT$result = 0;
+      }
+       while (false);
+      this.fps = INT$result;
+      this.count = 0;
+      this.accum = 0.0;
+      var str = this.fps.toString() + ' FPS, Node : ' + HAL$Companion_getInstance().shared().nodeUpdateCounter.toString();
+      if (this.debug != null) {
+        ensureNotNull(this.debug).setText(str);
+      }
+    }
     HAL$Companion_getInstance().shared().update_mx4ult$(elapsed);
-    this.game.debug.text(HAL$Companion_getInstance().shared().nodeUpdateCounter.toString(), 32, 32);
   };
   Samsara.prototype.render = function () {
   };
@@ -17492,7 +17560,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       this.createTimeBar();
     }
     this.createFeverGage();
-    if (this.quality >= 2) {
+    if (this.quality >= 1) {
       this.createBackgroundEffect();
     }
   };
@@ -17591,7 +17659,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.initAdditional();
     this.particleManager = ParticleManager_init(this.view);
     var performance = SystemConfigure$Companion_getInstance().GetPerformance();
-    var tmp$_1 = this.particleManager;
     var value = 200 * performance;
     var INT$result;
     INT$break: do {
@@ -17621,7 +17688,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       INT$result = 0;
     }
      while (false);
-    tmp$_1.SetMaxParticle_za3lpa$(INT$result);
+    var max = INT$result;
+    this.particleManager.SetMaxParticle_za3lpa$(max);
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     camera.projection = 1;
     this.particleManager.SetCamera_s6wt6e$(camera);
@@ -19095,9 +19163,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (type === void 0)
       type = 0;
     var tmp$, tmp$_0, tmp$_1;
-    if (this.quality < 2) {
-      return;
-    }
     (tmp$ = this.view.screen) != null ? (tmp$.actionDelay_ab0iom$(0.0, void 0, Game$showNirvanaEffect$lambda), Unit) : null;
     var delayGap = this.gameConfigure.nirvanaDelayGap;
     var tmp$_2 = delayGap;
@@ -21002,7 +21067,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     };
   }
   Game_0.prototype.createScore_l4u1g4$ = function (position, score) {
-    if (this.quality < 2) {
+    if (this.quality < 1) {
       return;
     }
     var scoreString = '';
@@ -21385,7 +21450,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (delay === void 0)
       delay = 0.5;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
-    if (this.quality < 2) {
+    if (this.quality < 1) {
       return;
     }
     var array = Array_0(this.gameConfigure.width);
@@ -21745,7 +21810,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (delay === void 0)
       delay = 0.5;
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8;
-    if (this.quality < 2) {
+    if (this.quality < 1) {
       return;
     }
     var array = Array_0(this.gameConfigure.width);
@@ -22483,7 +22548,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     };
   }
   Game_0.prototype.createBackgroundEffect = function () {
-    this.view.createAction_xcdeti$('Background Effect', true, false, true, void 0, 0.15, void 0, Game$createBackgroundEffect$lambda(this));
+    var interval = 0.15;
+    if (this.quality < 2) {
+      interval = 0.3;
+    }
+    this.view.createAction_xcdeti$('Background Effect', true, false, true, void 0, interval, void 0, Game$createBackgroundEffect$lambda(this));
   };
   Game_0.prototype.removeBackgroundEffect = function () {
     var tmp$;
@@ -22534,12 +22603,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       if (info.timeToLive !== -1.0 && info.age + 1 > info.timeToLive) {
         return false;
       }
-      var fireNumber = 1;
+      var numberForFire = 1;
       if (this$Game.quality < 2) {
-        fireNumber = 6;
+        numberForFire = 6;
       }
       closure$accum.v = closure$accum.v + 1 | 0;
-      if (closure$accum.v === fireNumber) {
+      if (closure$accum.v === numberForFire) {
         closure$accum.v = 0;
         var color = Color$Companion_getInstance().white_mx4ult$();
         var colorPick = Random_getInstance().arc4random_uniform_za3lpa$(100);
@@ -22673,7 +22742,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           star.movement.y = -1500.0 * this$Game.view.sizeScale.yRatio;
         }
       }
-      if (this$Game.quality < 2) {
+      if (this$Game.quality < 1) {
         return true;
       }
       if (Random_getInstance().arc4random_uniform_za3lpa$(2) === 0) {
@@ -23181,8 +23250,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     };
   }
   Game_0.prototype.createFeverBackgroundEffect = function () {
+    var interval = 0.05;
+    if (this.quality < 2) {
+      interval = 0.1;
+    }
     var accum = {v: 0};
-    this.view.createAction_xcdeti$('Fever Background', void 0, void 0, void 0, void 0, 0.05, void 0, Game$createFeverBackgroundEffect$lambda(this, accum));
+    this.view.createAction_xcdeti$('Fever Background', void 0, void 0, void 0, void 0, interval, void 0, Game$createFeverBackgroundEffect$lambda(this, accum));
   };
   Game_0.prototype.removeFeverBackgroundEffect = function () {
     this.view.removeAction_sbe383$('Fever Background');
@@ -23210,7 +23283,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return function (info) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
       if (info.count === 1) {
-        if (this$Game.quality >= 2) {
+        if (this$Game.quality >= 1) {
           this$Game.removeBackgroundEffect();
           this$Game.createFeverBackgroundEffect();
         }
@@ -24493,7 +24566,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
             ensureNotNull(closure$gageBar_0.v).SetBlendFactor_mx4ult$(1.0);
             closure$currentLevel_0.v = 0;
             (tmp$_20 = closure$gageLabel_0.v) != null ? (tmp$_20.SetText_61zpoe$(''), Unit) : null;
-            if ($receiver.quality >= 2) {
+            if ($receiver.quality >= 1) {
               $receiver.removeFeverBackgroundEffect();
               $receiver.createBackgroundEffect();
             }
@@ -32689,8 +32762,14 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     $this = $this || Object.create(ItemEntity.prototype);
     TileEntity_init(game, value, screenX, screenY, $this);
     ItemEntity.call($this);
+    var tmp$;
     $this.subValue = subValue;
     $this.SetImage();
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) >= 2) {
+      var yMotion = Wave_init(1.0);
+      yMotion.SetScale_mx4ult$(game.gameConfigure.tileHeight * 0.05);
+      (tmp$ = $this.sprite) != null ? (tmp$.SetYMotion_vn0wwp$(yMotion, true), Unit) : null;
+    }
     return $this;
   }
   function ReactivateItemEntity(game, value, subValue, screenX, screenY) {
@@ -33385,12 +33464,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     $this = $this || Object.create(ObstacleEntity.prototype);
     TileEntity_init(game, value, screenX, screenY, $this);
     ObstacleEntity.call($this);
-    var tmp$, tmp$_0, tmp$_1;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     var info = Kotlin.isType(tmp$ = game.gameValue.blockInfo, BlockItem) ? tmp$ : throwCCE();
     var image = 'Ghost_' + info.colorMap.get_za3lpa$(value % 1000);
-    var tmp$_2 = $this.GetBoardX();
-    var tmp$_3 = $this.GetBoardY();
-    var tmp$_4 = $this.spriteZ;
+    var tmp$_3 = $this.GetBoardX();
+    var tmp$_4 = $this.GetBoardY();
+    var tmp$_5 = $this.spriteZ;
     var value_0 = game.gameConfigure.tileWidth * 0.7;
     var FLOAT$result;
     FLOAT$break: do {
@@ -33420,7 +33499,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       FLOAT$result = 0.0;
     }
      while (false);
-    var tmp$_5 = FLOAT$result;
+    var tmp$_6 = FLOAT$result;
     var value_1 = game.gameConfigure.tileHeight * 0.7;
     var FLOAT$result_0;
     FLOAT$break: do {
@@ -33450,11 +33529,26 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       FLOAT$result_0 = 0.0;
     }
      while (false);
-    $this.sprite = Sprite_init(tmp$_2, tmp$_3, tmp$_4, image, tmp$_5, FLOAT$result_0);
+    $this.sprite = Sprite_init(tmp$_3, tmp$_4, tmp$_5, image, tmp$_6, FLOAT$result_0);
     (tmp$_0 = $this.sprite) != null ? (tmp$_0.SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance()), Unit) : null;
     (tmp$_1 = $this.sprite) != null ? (tmp$_1.SetVerticalAlign_qn2em6$(VerticalAlign$center_getInstance()), Unit) : null;
     game.view.GetMask().addChild_g5h3xp$(ensureNotNull($this.sprite));
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) >= 2) {
+      (tmp$_2 = game.view.screen) != null ? (tmp$_2.actionFadeLoop_xukj3e$('blink', 0.6, 0.6, 1.0, $this.sprite, ObstacleEntity_init$lambda($this)), Unit) : null;
+    }
     return $this;
+  }
+  function ObstacleEntity_init$lambda(this$ObstacleEntity) {
+    return function (value, quit) {
+      var tmp$, tmp$_0;
+      if (quit === true) {
+        (tmp$ = this$ObstacleEntity.sprite) != null ? (tmp$.SetAlpha_8ca0d4$(1.0), Unit) : null;
+      }
+       else {
+        (tmp$_0 = this$ObstacleEntity.sprite) != null ? (tmp$_0.SetAlpha_8ca0d4$(value), Unit) : null;
+      }
+      return true;
+    };
   }
   function TileEntity() {
     this.attribute = TileEntity$Attribute$normal_getInstance();
@@ -36728,6 +36822,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+      return;
+    }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     particleManager.SetCamera_s6wt6e$(camera);
     var performance = SystemConfigure$Companion_getInstance().GetPerformance();
@@ -40579,6 +40676,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+      return;
+    }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     particleManager.SetCamera_s6wt6e$(camera);
     var performance = SystemConfigure$Companion_getInstance().GetPerformance();
@@ -41633,6 +41733,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+      return;
+    }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
     particleManager.SetCamera_s6wt6e$(camera);
     var performance = SystemConfigure$Companion_getInstance().GetPerformance();
@@ -44190,9 +44293,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var tmp$, tmp$_0;
     var width = Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE();
     var height = Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE();
-    println('Width:' + width.innerText);
-    println('Height:' + height.innerText);
-    Game(GameConfig(void 0, toDouble(width.innerText), toDouble(height.innerText), $module$Phaser.AUTO, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
+    Game(GameConfig(void 0, toDouble(width.innerText), toDouble(height.innerText), $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
   }
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});

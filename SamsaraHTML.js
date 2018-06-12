@@ -10,7 +10,10 @@ if (typeof PIXI === 'undefined') {
 if (typeof phaserKt === 'undefined') {
   throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'phaserKt' was not found. Please, check whether 'phaserKt' is loaded prior to 'SamsaraHTML'.");
 }
-var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$phaserKt) {
+if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
+  throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'SamsaraHTML'.");
+}
+var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$phaserKt, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Kind_CLASS = Kotlin.Kind.CLASS;
@@ -37,11 +40,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   var unboxChar = Kotlin.unboxChar;
   var math = Kotlin.kotlin.math;
   var kotlin_js_internal_FloatCompanionObject = Kotlin.kotlin.js.internal.FloatCompanionObject;
-  var get_indices = Kotlin.kotlin.collections.get_indices_gzk92b$;
-  var reversed_0 = Kotlin.kotlin.ranges.reversed_zf1xzc$;
   var Pair = Kotlin.kotlin.Pair;
   var equals = Kotlin.equals;
   var mutableListOf = Kotlin.kotlin.collections.mutableListOf_i5x0yv$;
+  var get_indices = Kotlin.kotlin.collections.get_indices_gzk92b$;
+  var reversed_0 = Kotlin.kotlin.ranges.reversed_zf1xzc$;
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var last = Kotlin.kotlin.collections.last_2p1efm$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
@@ -64,6 +67,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   var UninitializedPropertyAccessException = Kotlin.kotlin.UninitializedPropertyAccessException;
   var compareBy = Kotlin.kotlin.comparisons.compareBy_bvgy4j$;
   var sortedWith = Kotlin.kotlin.collections.sortedWith_iwcb0m$;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
+  var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental.launch_35c74u$;
   var indexOf = Kotlin.kotlin.text.indexOf_l5u8uk$;
   var sortedWith_0 = Kotlin.kotlin.collections.sortedWith_eknfly$;
   var toList_0 = Kotlin.kotlin.collections.toList_tmsbgo$;
@@ -4748,13 +4753,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return this.timeToLive;
   };
   Node.prototype.SetInactive = function () {
-    var tmp$;
     this.active = false;
-    tmp$ = reversed_0(get_indices(this.updateCallback)).iterator();
-    while (tmp$.hasNext()) {
-      var i = tmp$.next();
-      this.updateCallback.removeAt_za3lpa$(i);
-    }
     this.updateCallback.clear();
     if (this.messageHandler != null) {
       this.messageHandler = null;
@@ -4840,28 +4839,22 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   Node.prototype.freeObject = function () {
     var tmp$;
-    tmp$ = reversed_0(get_indices(this.objectList)).iterator();
-    while (tmp$.hasNext()) {
-      var i = tmp$.next();
-      this.objectList.removeAt_za3lpa$(i);
+    tmp$ = this.objectList;
+    for (var i = 0; i !== tmp$.size; ++i) {
+      this.objectList.set_wxm5ur$(i, null);
     }
     this.objectList.clear();
   };
   Node.prototype.removeFromParent = function () {
-    var tmp$, tmp$_0, tmp$_1;
+    var tmp$, tmp$_0;
     this.update_mx4ult$(0.0);
-    tmp$ = reversed_0(get_indices(this.updateCallback)).iterator();
-    while (tmp$.hasNext()) {
-      var i = tmp$.next();
-      this.updateCallback.removeAt_za3lpa$(i);
-    }
     this.updateCallback.clear();
     this.xMotion = null;
     this.yMotion = null;
     this.zMotion = null;
-    tmp$_0 = reversed(this.childList).iterator();
-    while (tmp$_0.hasNext()) {
-      var ch = tmp$_0.next();
+    tmp$ = reversed(this.childList).iterator();
+    while (tmp$.hasNext()) {
+      var ch = tmp$.next();
       ch.removeFromParent();
     }
     this.childList.clear();
@@ -4871,7 +4864,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.freeAdditionalResource();
     this.freeObject();
     if (this.parent != null) {
-      (tmp$_1 = this.parent) != null ? (tmp$_1.detachChild_g5h3xp$(this), Unit) : null;
+      (tmp$_0 = this.parent) != null ? (tmp$_0.detachChild_g5h3xp$(this), Unit) : null;
     }
   };
   Node.prototype.isChild_g5h3xp$ = function (node) {
@@ -6943,8 +6936,13 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     return null;
   };
-  function ParticleManager$createExplosion$lambda(obj, camera, elapsed) {
-    return false;
+  function ParticleManager$createExplosion$lambda(closure$particle) {
+    return function (obj, camera, elapsed) {
+      if (obj.age > obj.timeToLive - 1.0) {
+        closure$particle.SetOriginalAlpha_mx4ult$(1 - (obj.age - (obj.timeToLive - 1.0)));
+      }
+      return false;
+    };
   }
   ParticleManager.prototype.createExplosion_3jyyep$ = function (pos, r, num, size, time, image, color, mStart, mEnd, fixScreenZ, screenZ) {
     if (color === void 0)
@@ -6962,7 +6960,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       createPos.rotateZ_mx4ult$(startDegree + i * delta);
       var particle = this.createStar_2a19qk$(pos.x + createPos.x, pos.y + createPos.y, pos.z, size, image, color, void 0, void 0, true, fixScreenZ, screenZ);
       if (particle != null) {
-        particle.timeToLive = time + Random_getInstance().arc4random_uniform_za3lpa$(5) / 10.0;
+        particle.timeToLive = time + Random_getInstance().arc4random_uniform_za3lpa$(3) / 10.0;
         particle.SetOriginalAlpha_mx4ult$(1.0);
         createPos.normalize();
         var x = mEnd.x - mStart.x;
@@ -6981,7 +6979,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
         }
         particle.rotation.z = (Random_getInstance().arc4random_uniform_za3lpa$(20) - 10) / 10.0;
         particle.keepDirection = true;
-        particle.SetCallback_lnidq9$(ParticleManager$createExplosion$lambda);
+        particle.SetCallback_lnidq9$(ParticleManager$createExplosion$lambda(particle));
       }
     }
   };
@@ -8029,6 +8027,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.modalAlpha = 0.95;
     this.isDrawTouchMark = false;
     this.prevMarkerCreated = 0.0;
+    this.debug = null;
+    this.count = 0;
+    this.accum = 0.0;
+    this.fps = 0;
   }
   Screen.prototype.freeAdditionalResource = function () {
     var tmp$;
@@ -8039,6 +8041,51 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   Screen.prototype.removeFromParent = function () {
     Node.prototype.removeFromParent.call(this);
+  };
+  var Exception = Kotlin.kotlin.Exception;
+  Screen.prototype.update_mx4ult$ = function (elapsed) {
+    Node.prototype.update_mx4ult$.call(this, elapsed);
+    this.count = this.count + 1 | 0;
+    this.accum += elapsed;
+    if (this.accum > 1) {
+      var value = 1 / (this.accum / this.count);
+      var INT$result;
+      INT$break: do {
+        if (value == null) {
+          INT$result = 0;
+          break INT$break;
+        }
+        if (Kotlin.isNumber(value)) {
+          INT$result = numberToInt(value);
+          break INT$break;
+        }
+        if (typeof value === 'string') {
+          try {
+            var number = toInt_0(value);
+            INT$result = number;
+            break INT$break;
+          }
+           catch (e) {
+            if (Kotlin.isType(e, Exception)) {
+              INT$result = 0;
+              break INT$break;
+            }
+             else
+              throw e;
+          }
+        }
+        INT$result = 0;
+      }
+       while (false);
+      this.fps = INT$result;
+      this.count = 0;
+      this.accum = 0.0;
+      var str = this.fps.toString() + ' FPS, Node : ' + HAL$Companion_getInstance().shared().nodeUpdateCounter.toString();
+      if (this.debug != null) {
+        ensureNotNull(this.debug).SetText_61zpoe$(str);
+        ensureNotNull(this.debug).SetSize_dleff0$(-1.0, this.size.height * 0.02);
+      }
+    }
   };
   Screen.prototype.moveToBackground = function () {
     var tmp$;
@@ -9011,6 +9058,14 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     mask.SetColor_b53zri$(0, 0, 0, 0.0);
     mask.SetShow_6taknv$(true);
     $this.addChild_g5h3xp$(mask);
+    if (DataUtil$Companion_getInstance().GetInteger_rjan26$('Draw FPS', void 0, 0) === 1) {
+      $this.debug = Label_init($this.size.width * 0.5, 5.0, SceneLayer$uiModal_getInstance().value, '0');
+      ensureNotNull($this.debug).SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
+      ensureNotNull($this.debug).SetVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
+      ensureNotNull($this.debug).SetShow_6taknv$(true);
+      ensureNotNull($this.debug).SetSize_dleff0$(-1.0, $this.size.height * 0.02);
+      $this.addChild_g5h3xp$(ensureNotNull($this.debug));
+    }
     return $this;
   }
   function Sprite() {
@@ -11713,7 +11768,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var callback = listOf_0([AppController$loadDefaultResource$lambda, AppController$loadDefaultResource$lambda_0, AppController$loadDefaultResource$lambda_1, AppController$loadDefaultResource$lambda_2, AppController$loadDefaultResource$lambda_3, AppController$loadDefaultResource$lambda_4, AppController$loadDefaultResource$lambda_5, AppController$loadDefaultResource$lambda_6, AppController$loadDefaultResource$lambda_7, AppController$loadDefaultResource$lambda_8, AppController$loadDefaultResource$lambda_9, AppController$loadDefaultResource$lambda_10, AppController$loadDefaultResource$lambda_11, AppController$loadDefaultResource$lambda_12, AppController$loadDefaultResource$lambda_13, AppController$loadDefaultResource$lambda_14, AppController$loadDefaultResource$lambda_15, AppController$loadDefaultResource$lambda_16, AppController$loadDefaultResource$lambda_17, AppController$loadDefaultResource$lambda_18, AppController$loadDefaultResource$lambda_19, AppController$loadDefaultResource$lambda_20, AppController$loadDefaultResource$lambda_21, AppController$loadDefaultResource$lambda_22, AppController$loadDefaultResource$lambda_23, AppController$loadDefaultResource$lambda_24, AppController$loadDefaultResource$lambda_25, AppController$loadDefaultResource$lambda_26, AppController$loadDefaultResource$lambda_27, AppController$loadDefaultResource$lambda_28, AppController$loadDefaultResource$lambda_29, AppController$loadDefaultResource$lambda_30, AppController$loadDefaultResource$lambda_31, AppController$loadDefaultResource$lambda_32, AppController$loadDefaultResource$lambda_33, AppController$loadDefaultResource$lambda_34, AppController$loadDefaultResource$lambda_35, AppController$loadDefaultResource$lambda_36, AppController$loadDefaultResource$lambda_37, AppController$loadDefaultResource$lambda_38, AppController$loadDefaultResource$lambda_39, AppController$loadDefaultResource$lambda_40, AppController$loadDefaultResource$lambda_41, AppController$loadDefaultResource$lambda_42, AppController$loadDefaultResource$lambda_43, AppController$loadDefaultResource$lambda_44, AppController$loadDefaultResource$lambda_45, AppController$loadDefaultResource$lambda_46, AppController$loadDefaultResource$lambda_47, AppController$loadDefaultResource$lambda_48, AppController$loadDefaultResource$lambda_49, AppController$loadDefaultResource$lambda_50, AppController$loadDefaultResource$lambda_51, AppController$loadDefaultResource$lambda_52, AppController$loadDefaultResource$lambda_53, AppController$loadDefaultResource$lambda_54, AppController$loadDefaultResource$lambda_55, AppController$loadDefaultResource$lambda_56, AppController$loadDefaultResource$lambda_57, AppController$loadDefaultResource$lambda_58, AppController$loadDefaultResource$lambda_59, AppController$loadDefaultResource$lambda_60, AppController$loadDefaultResource$lambda_61, AppController$loadDefaultResource$lambda_62, AppController$loadDefaultResource$lambda_63, AppController$loadDefaultResource$lambda_64, AppController$loadDefaultResource$lambda_65, AppController$loadDefaultResource$lambda_66, AppController$loadDefaultResource$lambda_67, AppController$loadDefaultResource$lambda_68, AppController$loadDefaultResource$lambda_69, AppController$loadDefaultResource$lambda_70, AppController$loadDefaultResource$lambda_71, AppController$loadDefaultResource$lambda_72, AppController$loadDefaultResource$lambda_73, AppController$loadDefaultResource$lambda_74, AppController$loadDefaultResource$lambda_75, AppController$loadDefaultResource$lambda_76, AppController$loadDefaultResource$lambda_77, AppController$loadDefaultResource$lambda_78, AppController$loadDefaultResource$lambda_79, AppController$loadDefaultResource$lambda_80, AppController$loadDefaultResource$lambda_81, AppController$loadDefaultResource$lambda_82, AppController$loadDefaultResource$lambda_83, AppController$loadDefaultResource$lambda_84, AppController$loadDefaultResource$lambda_85, AppController$loadDefaultResource$lambda_86(sizeScale, width, height, this)]);
     return callback;
   };
-  var Exception = Kotlin.kotlin.Exception;
   AppController.prototype.generateLocalFont_dleff0$ = function (width, height) {
     var sizeScale = new Scale(320.0, 480.0, void 0, void 0, width, height);
     var fontFile = 'NanumGothicBold.ttf';
@@ -12894,11 +12948,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.h_8be2vx$ = 0.0;
     this.newW_8be2vx$ = 0.0;
     this.newH_8be2vx$ = 0.0;
-    this.debug = null;
     this.requestHandler = null;
-    this.count = 0;
-    this.accum = 0.0;
-    this.fps = 0;
   }
   Samsara.prototype.preload = function () {
     this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
@@ -12954,6 +13004,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_COMPLETE_getInstance(), void 0, 1);
     DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_3_3_COMPLETE_getInstance(), void 0, 1);
     DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_6_6_COMPLETE_getInstance(), void 0, 1);
+    DataUtil$Companion_getInstance().SetInteger_rjan26$('Draw FPS', void 0, 1);
     var scene = DeviceScene_init(this.w_8be2vx$, this.h_8be2vx$);
     var modeString = listOf_0(['Beginner', 'Beginner6x6', 'Classic']);
     tmp$ = modeString.iterator();
@@ -13006,54 +13057,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.input.mouse.capture = true;
     this.game.input.onDown.add(Samsara$create$lambda_1);
     this.game.input.onUp.add(Samsara$create$lambda_2);
-    this.debug = this.game.add.text(this.w_8be2vx$ * 0.5, this.h_8be2vx$ * 0.95, '');
-    ensureNotNull(this.debug).anchor.x = 0.5;
-    ensureNotNull(this.debug).fill = '#ffffff';
-    ensureNotNull(this.debug).fontSize = this.h_8be2vx$ / 480.0 * 10;
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
     elapsed = elapsed / 1000.0;
-    this.count = this.count + 1 | 0;
-    this.accum += elapsed;
-    if (this.accum > 1) {
-      var value = 1 / (this.accum / this.count);
-      var INT$result;
-      INT$break: do {
-        if (value == null) {
-          INT$result = 0;
-          break INT$break;
-        }
-        if (Kotlin.isNumber(value)) {
-          INT$result = numberToInt(value);
-          break INT$break;
-        }
-        if (typeof value === 'string') {
-          try {
-            var number = toInt_0(value);
-            INT$result = number;
-            break INT$break;
-          }
-           catch (e) {
-            if (Kotlin.isType(e, Exception)) {
-              INT$result = 0;
-              break INT$break;
-            }
-             else
-              throw e;
-          }
-        }
-        INT$result = 0;
-      }
-       while (false);
-      this.fps = INT$result;
-      this.count = 0;
-      this.accum = 0.0;
-      var str = this.fps.toString() + ' FPS, Node : ' + HAL$Companion_getInstance().shared().nodeUpdateCounter.toString();
-      if (this.debug != null) {
-        ensureNotNull(this.debug).setText(str);
-      }
-    }
     HAL$Companion_getInstance().shared().update_mx4ult$(elapsed);
   };
   Samsara.prototype.render = function () {
@@ -19892,6 +19899,55 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       return this.onWaitForStop_ge8lbh$_0;
     }
   });
+  function Game$checkNoMoreMatch$lambda(this$Game_0, closure$temp_0, closure$callback_0) {
+    return function ($receiver, continuation_0, suspended) {
+      var instance = new Coroutine$Game$checkNoMoreMatch$lambda(this$Game_0, closure$temp_0, closure$callback_0, $receiver, this, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$Game$checkNoMoreMatch$lambda(this$Game_0, closure$temp_0, closure$callback_0, $receiver, controller, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.$controller = controller;
+    this.exceptionState_0 = 1;
+    this.local$this$Game = this$Game_0;
+    this.local$closure$temp = closure$temp_0;
+    this.local$closure$callback = closure$callback_0;
+  }
+  Coroutine$Game$checkNoMoreMatch$lambda.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$Game$checkNoMoreMatch$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$Game$checkNoMoreMatch$lambda.prototype.constructor = Coroutine$Game$checkNoMoreMatch$lambda;
+  Coroutine$Game$checkNoMoreMatch$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.local$this$Game.boardGenerator.running = true;
+            var result = this.local$this$Game.boardGenerator.isNoMoreMatch_nq05ln$(this.local$closure$temp.v.slice());
+            this.local$closure$callback(result);
+            return this.local$this$Game.boardGenerator.running = false, Unit;
+          case 1:
+            throw this.exception_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
   Game_0.prototype.checkNoMoreMatch_y8twos$ = function (callback) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
     if (this.noMoreMatch === true) {
@@ -20073,6 +20129,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       }
     }
     this.boardGenerator.cancelFindNoMoreMatch();
+    var nonBlock = launch(void 0, void 0, void 0, void 0, Game$checkNoMoreMatch$lambda(this, temp, callback));
   };
   Game_0.prototype.isIdle = function () {
     if (this.isPaused === true || this.isPausedOnlyForLogic === true) {
@@ -31095,11 +31152,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var sprite = this.game.view.findChildByName_3m52m6$('Fever Gauge Mask');
     if (sprite != null) {
       this.createHoming_7thp2o$(count, Position_init(sprite.GetPosition().x - sprite.GetSize().width * 0.5 + this.game.gameValue.feverGage * sprite.GetSize().width / 100.0, sprite.GetPosition().y - sprite.GetSize().height * 0.5));
-      this.createExplosion_za3lpa$(count);
     }
-     else {
-      this.createExplosion_za3lpa$(count);
-    }
+    this.createExplosion_za3lpa$(count);
   };
   BlockEntity.prototype.fall_6taknv$ = function (doShake) {
     if (this.attribute === TileEntity$Attribute$disabled_getInstance()) {
@@ -33842,6 +33896,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       image = 'Particle_' + info.colorMap.get_za3lpa$(this.value);
     }
     var size = this.game.gameConfigure.tileWidth * 4;
+    if (this.game.gameConfigure.width > 3) {
+      size *= 2;
+    }
     var tmp$_0 = size;
     var value = count - 3 | 0;
     var FLOAT$result;
@@ -33887,7 +33944,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var num_0 = num;
     var color = Color$Companion_getInstance().white_mx4ult$();
     if (this.game.quality < 2) {
-      num_0 = 2;
+      num_0 = num_0 / 2 | 0;
     }
     var mStart = Position_init(this.game.gameConfigure.tileWidth / 4, this.game.gameConfigure.tileWidth / 4, -20.0);
     var mEnd = Position_init(this.game.gameConfigure.tileWidth / 2, this.game.gameConfigure.tileWidth / 2, 500.0);
@@ -44631,6 +44688,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     get: WindowProperty$Tab_getInstance
   });
   package$graphic.WindowProperty = WindowProperty;
+  $$importsForInline$$.SamsaraHTML = _;
   package$graphic.Screen_init_qgvd6v$ = Screen_init;
   package$graphic.Screen = Screen;
   package$graphic.Sprite_init_2ls20y$ = Sprite_init;
@@ -44652,7 +44710,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   Object.defineProperty(AppController, 'Companion', {
     get: AppController$Companion_getInstance
   });
-  $$importsForInline$$.SamsaraHTML = _;
   var package$samsara = package$blindcatstudio.samsara || (package$blindcatstudio.samsara = {});
   package$samsara.AppController = AppController;
   Object.defineProperty(package$samsara, 'localizationString', {
@@ -45202,4 +45259,4 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   main([]);
   Kotlin.defineModule('SamsaraHTML', _);
   return _;
-}(typeof SamsaraHTML === 'undefined' ? {} : SamsaraHTML, kotlin, Phaser, PIXI, phaserKt);
+}(typeof SamsaraHTML === 'undefined' ? {} : SamsaraHTML, kotlin, Phaser, PIXI, phaserKt, this['kotlinx-coroutines-core']);

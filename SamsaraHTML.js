@@ -4,16 +4,16 @@ if (typeof kotlin === 'undefined') {
 if (typeof Phaser === 'undefined') {
   throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'Phaser' was not found. Please, check whether 'Phaser' is loaded prior to 'SamsaraHTML'.");
 }
-if (typeof PIXI === 'undefined') {
-  throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'PIXI' was not found. Please, check whether 'PIXI' is loaded prior to 'SamsaraHTML'.");
-}
 if (typeof phaserKt === 'undefined') {
   throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'phaserKt' was not found. Please, check whether 'phaserKt' is loaded prior to 'SamsaraHTML'.");
+}
+if (typeof PIXI === 'undefined') {
+  throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'PIXI' was not found. Please, check whether 'PIXI' is loaded prior to 'SamsaraHTML'.");
 }
 if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
   throw new Error("Error loading module 'SamsaraHTML'. Its dependency 'kotlinx-coroutines-core' was not found. Please, check whether 'kotlinx-coroutines-core' is loaded prior to 'SamsaraHTML'.");
 }
-var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$phaserKt, $module$kotlinx_coroutines_core) {
+var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module$PIXI, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Kind_CLASS = Kotlin.Kind.CLASS;
@@ -55,10 +55,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   var wrapFunction = Kotlin.wrapFunction;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var ScaleManager$Companion = $module$Phaser.ScaleManager;
+  var start = $module$phaserKt.Phaser.start_ba683k$;
+  var State = $module$Phaser.State;
   var toString = Kotlin.toString;
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
+  var destroy = $module$phaserKt.Phaser.destroyKt;
   var numberToDouble = Kotlin.numberToDouble;
-  var State = $module$Phaser.State;
   var sortWith = Kotlin.kotlin.collections.sortWith_nqfjgj$;
   var blendModes$NORMAL = $module$PIXI.blendModes.NORMAL;
   var blendModes$ADD = $module$PIXI.blendModes.ADD;
@@ -133,6 +135,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   TextArea.prototype.constructor = TextArea;
   View.prototype = Object.create(BlankNode.prototype);
   View.prototype.constructor = View;
+  PhantomLoader.prototype = Object.create(State.prototype);
+  PhantomLoader.prototype.constructor = PhantomLoader;
   Samsara.prototype = Object.create(State.prototype);
   Samsara.prototype.constructor = Samsara;
   GuestGDXSprite.prototype = Object.create(GuestGDXNode.prototype);
@@ -8038,7 +8042,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     mask.SetShow_6taknv$(true);
     this.addChild_g5h3xp$(mask);
     if (DataUtil$Companion_getInstance().GetInteger_rjan26$('Draw FPS', void 0, 0) === 1) {
-      this.debug = Label_init(this.size.width * 0.5, 5.0, SceneLayer$uiModal_getInstance().value, '0');
+      this.debug = Label_init(this.size.width * 0.5, 5.0, SceneLayer$uiModal_getInstance().value, '');
       ensureNotNull(this.debug).SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
       ensureNotNull(this.debug).SetVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
       ensureNotNull(this.debug).SetShow_6taknv$(true);
@@ -12956,6 +12960,32 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     simpleName: 'UserDefaults',
     interfaces: []
   };
+  function PhantomLoader() {
+    this.requestHandler = null;
+  }
+  PhantomLoader.prototype.preload = function () {
+    this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
+    this.game.load.image('loading1', 'Resource/UI/Loading1.png');
+    this.game.load.image('loading2', 'Resource/UI/Loading2.png');
+  };
+  PhantomLoader.prototype.create = function () {
+    var w = this.game.width;
+    var h = this.game.height;
+    start(this.game.state, Samsara_init(this.requestHandler), void 0, void 0, []);
+  };
+  PhantomLoader.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'PhantomLoader',
+    interfaces: []
+  };
+  function PhantomLoader_init(userDefault, handler, $this) {
+    $this = $this || Object.create(PhantomLoader.prototype);
+    State.call($this);
+    PhantomLoader.call($this);
+    UserDefaults$Companion_getInstance().initialize_hwx2pe$(userDefault);
+    $this.requestHandler = handler;
+    return $this;
+  }
   function Samsara() {
     this.w_8be2vx$ = 0.0;
     this.h_8be2vx$ = 0.0;
@@ -12963,6 +12993,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.newH_8be2vx$ = 0.0;
     this.deviceScene_qeu8eq$_0 = this.deviceScene_qeu8eq$_0;
     this.requestHandler = null;
+    this.loading1_1qxakp$_0 = this.loading1_1qxakp$_0;
+    this.loading2_1qxaju$_0 = this.loading2_1qxaju$_0;
   }
   Object.defineProperty(Samsara.prototype, 'deviceScene', {
     get: function () {
@@ -12974,8 +13006,27 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       this.deviceScene_qeu8eq$_0 = deviceScene;
     }
   });
+  Object.defineProperty(Samsara.prototype, 'loading1', {
+    get: function () {
+      if (this.loading1_1qxakp$_0 == null)
+        return throwUPAE('loading1');
+      return this.loading1_1qxakp$_0;
+    },
+    set: function (loading1) {
+      this.loading1_1qxakp$_0 = loading1;
+    }
+  });
+  Object.defineProperty(Samsara.prototype, 'loading2', {
+    get: function () {
+      if (this.loading2_1qxaju$_0 == null)
+        return throwUPAE('loading2');
+      return this.loading2_1qxaju$_0;
+    },
+    set: function (loading2) {
+      this.loading2_1qxaju$_0 = loading2;
+    }
+  });
   Samsara.prototype.preload = function () {
-    this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
   };
   Samsara.prototype.create = function () {
     var tmp$, tmp$_0;
@@ -13022,12 +13073,18 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     ItemManager$Companion_getInstance().shared().loadAllPlayerItem();
     StoreManager$Companion_getInstance().shared().load();
     this.deviceScene = DeviceScene_init(this.w_8be2vx$, this.h_8be2vx$);
+    this.loading1 = this.game.add.image(0, this.h_8be2vx$, 'loading1');
+    this.loading1.anchor.y = 1.0;
+    this.loading2 = this.game.add.image(0, this.h_8be2vx$, 'loading2');
+    this.loading2.anchor.y = 1.0;
     this.loadResource();
   };
-  function Samsara$loadResource$lambda(progress, cacheKey, success, totalLoaded, totalFiles) {
-    println('File Complete: ' + cacheKey + ' > ' + toString(progress) + '% - ' + toString(totalLoaded) + ' out of ' + toString(totalFiles));
+  function Samsara$loadResource$lambda(closure$text) {
+    return function (progress, cacheKey, success, totalLoaded, totalFiles) {
+      closure$text.v.setText('Loading... ' + toString(progress) + '%');
+    };
   }
-  function Samsara$loadResource$lambda_0(this$Samsara) {
+  function Samsara$loadResource$lambda_0(this$Samsara, closure$text) {
     return function () {
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
       tmp$_0 = (Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : throwCCE()).atlas.iterator();
@@ -13042,6 +13099,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
           ResourceManager$Companion_getInstance().shared().addTexture_p1juio$(name, texture);
         }
       }
+      this$Samsara.loading1.destroy();
+      this$Samsara.loading2.destroy();
+      destroy(closure$text.v);
       this$Samsara.startPhantom();
       HAL$Companion_getInstance().shared().presentView_xl35ob$(new MainMenuView());
       return Unit;
@@ -13061,8 +13121,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.load.json('jsonMatch', 'Resource/Match.json');
     this.game.load.json('jsonBlock', 'Resource/Block.json');
     this.game.load.json('jsonEffect', 'Resource/Effect.json');
-    this.game.load.onFileComplete.add(Samsara$loadResource$lambda);
-    this.game.load.onLoadComplete.add(Samsara$loadResource$lambda_0(this));
+    var text = {v: this.game.add.text(this.w_8be2vx$ * 0.98, this.h_8be2vx$, '')};
+    text.v.fill = '#ffffff';
+    text.v.anchor.x = 1.0;
+    text.v.anchor.y = 1.0;
+    this.game.load.onFileComplete.add(Samsara$loadResource$lambda(text));
+    this.game.load.onLoadComplete.add(Samsara$loadResource$lambda_0(this, text));
     this.game.load.start();
   };
   function Samsara$startPhantom$lambda(touch) {
@@ -13125,11 +13189,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     simpleName: 'Samsara',
     interfaces: []
   };
-  function Samsara_init(userDefault, handler, $this) {
+  function Samsara_init(handler, $this) {
     $this = $this || Object.create(Samsara.prototype);
     State.call($this);
     Samsara.call($this);
-    UserDefaults$Companion_getInstance().initialize_hwx2pe$(userDefault);
     $this.requestHandler = handler;
     return $this;
   }
@@ -44127,7 +44190,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (document.getElementById('height') != null) {
       height = toDouble((Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
     }
-    Game(GameConfig(void 0, width, height, $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
+    Game(GameConfig(void 0, width, height, $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, PhantomLoader_init(new UserDataHTML(), new RequestHandlerDummy())));
   }
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});
@@ -44559,7 +44622,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     get: UserDefaults$Companion_getInstance
   });
   package$samsara.UserDefaults = UserDefaults;
-  package$samsara.Samsara_init_vmfg6t$ = Samsara_init;
+  package$samsara.PhantomLoader_init_vmfg6t$ = PhantomLoader_init;
+  package$samsara.PhantomLoader = PhantomLoader;
+  package$samsara.Samsara_init_hmf0yx$ = Samsara_init;
   package$samsara.Samsara = Samsara;
   Object.defineProperty(SystemConfigure, 'Companion', {
     get: SystemConfigure$Companion_getInstance
@@ -45052,4 +45117,4 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   main([]);
   Kotlin.defineModule('SamsaraHTML', _);
   return _;
-}(typeof SamsaraHTML === 'undefined' ? {} : SamsaraHTML, kotlin, Phaser, PIXI, phaserKt, this['kotlinx-coroutines-core']);
+}(typeof SamsaraHTML === 'undefined' ? {} : SamsaraHTML, kotlin, Phaser, phaserKt, PIXI, this['kotlinx-coroutines-core']);

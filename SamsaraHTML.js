@@ -219,8 +219,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   MenuItemType.prototype.constructor = MenuItemType;
   OptionView.prototype = Object.create(View.prototype);
   OptionView.prototype.constructor = OptionView;
-  SelectModeView.prototype = Object.create(View.prototype);
-  SelectModeView.prototype.constructor = SelectModeView;
   TestView.prototype = Object.create(View.prototype);
   TestView.prototype.constructor = TestView;
   TutorialView.prototype = Object.create(View.prototype);
@@ -8032,6 +8030,23 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.accum = 0.0;
     this.fps = 0;
   }
+  Screen.prototype.afterAttached = function () {
+    var mask = Sprite_init(0.0, 0.0, SceneLayer$uiModalMask_getInstance().value, 'Resource/UI/Background', this.GetSize().width, this.GetSize().height);
+    mask.SetName_61zpoe$('Fade Mask');
+    mask.SetBlendFactor_mx4ult$(1.0);
+    mask.SetColor_b53zri$(0, 0, 0, 0.0);
+    mask.SetShow_6taknv$(true);
+    this.addChild_g5h3xp$(mask);
+    if (DataUtil$Companion_getInstance().GetInteger_rjan26$('Draw FPS', void 0, 0) === 1) {
+      this.debug = Label_init(this.size.width * 0.5, 5.0, SceneLayer$uiModal_getInstance().value, '0');
+      ensureNotNull(this.debug).SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
+      ensureNotNull(this.debug).SetVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
+      ensureNotNull(this.debug).SetShow_6taknv$(true);
+      ensureNotNull(this.debug).SetSize_dleff0$(-1.0, this.size.height * 0.02);
+      this.addChild_g5h3xp$(ensureNotNull(this.debug));
+    }
+    Node.prototype.afterAttached.call(this);
+  };
   Screen.prototype.freeAdditionalResource = function () {
     var tmp$;
     (tmp$ = this.mask) != null ? (tmp$.removeFromParent(), Unit) : null;
@@ -9052,20 +9067,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     $this.SetSize_dleff0$(deviceScene.GetSize().width, deviceScene.GetSize().height);
     $this.positionScale = new Scale(320.0, 480.0, void 0, void 0, $this.GetSize().width, $this.GetSize().height);
     $this.sizeScale = new Scale(320.0, 480.0, void 0, void 0, $this.GetSize().width, $this.GetSize().height);
-    var mask = Sprite_init(0.0, 0.0, SceneLayer$uiModalMask_getInstance().value, 'Resource/UI/Background', $this.GetSize().width, $this.GetSize().height);
-    mask.SetName_61zpoe$('Fade Mask');
-    mask.SetBlendFactor_mx4ult$(1.0);
-    mask.SetColor_b53zri$(0, 0, 0, 0.0);
-    mask.SetShow_6taknv$(true);
-    $this.addChild_g5h3xp$(mask);
-    if (DataUtil$Companion_getInstance().GetInteger_rjan26$('Draw FPS', void 0, 0) === 1) {
-      $this.debug = Label_init($this.size.width * 0.5, 5.0, SceneLayer$uiModal_getInstance().value, '0');
-      ensureNotNull($this.debug).SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
-      ensureNotNull($this.debug).SetVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
-      ensureNotNull($this.debug).SetShow_6taknv$(true);
-      ensureNotNull($this.debug).SetSize_dleff0$(-1.0, $this.size.height * 0.02);
-      $this.addChild_g5h3xp$(ensureNotNull($this.debug));
-    }
     return $this;
   }
   function Sprite() {
@@ -11373,183 +11374,183 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return callback;
   };
   function AppController$loadDefaultResource$lambda() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/ParticleSquareWhite');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/Background');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_0() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/particle_circle');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/ParticleSquareWhite');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_1() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/ParticleFairy');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/particle_circle');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_2() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconTutorialMarker');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/ParticleFairy');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_3() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_tile');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconTutorialMarker');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_4() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_mask');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_tile');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_5() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_disabled_mask');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_mask');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_6() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_selected_mask');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_disabled_mask');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_7() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconOption');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/menu_selected_mask');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_8() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBeginner');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconOption');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_9() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconClassic');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBeginner');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_10() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBeginner6x6');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconClassic');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_11() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconClassic6x6');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBeginner6x6');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_12() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconInfection6x6');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconClassic6x6');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_13() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconHardcore6x6');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconInfection6x6');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_14() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconHome');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconHardcore6x6');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_15() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconShare');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconHome');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_16() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconRate');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconShare');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_17() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPlay');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconRate');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_18() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconRestart');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPlay');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_19() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBack');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconRestart');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_20() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconGameCenter');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBack');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_21() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSoundOn');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconGameCenter');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_22() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSoundOff');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSoundOn');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_23() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSFXOn');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSoundOff');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_24() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSFXOff');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSFXOn');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_25() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconCredits');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSFXOff');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_26() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconStar');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconCredits');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_27() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconLock');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconStar');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_28() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconLockDisabled');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconLock');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_29() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSync');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconLockDisabled');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_30() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconConfirm');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconSync');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_31() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconOk');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconConfirm');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_32() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconNo');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconOk');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_33() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconYes');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconNo');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_34() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconAbandon');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconYes');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_35() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconAbandonDisabled');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconAbandon');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_36() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPause');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconAbandonDisabled');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_37() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPauseDisabled');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPause');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_38() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconTutorial');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconPauseDisabled');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_39() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconMarker', 'IconMarker');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconTutorial');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_40() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconKorean');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconMarker', 'IconMarker');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_41() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconEnglish');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconKorean');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_42() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBlindcat');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconEnglish');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_43() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconFacebook');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBlindcat');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_44() {
@@ -11561,172 +11562,184 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_46() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconFinger_0');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBatteryLow');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_47() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconFinger_1');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBatteryMedium');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_48() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_0');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconBatteryHigh');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_49() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_1');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconFinger_0');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_50() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_2');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconFinger_1');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_51() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_3');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_0');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_52() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_4');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_1');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_53() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_5');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_2');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_54() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_6');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_3');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_55() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_7');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_4');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_56() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_8');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_5');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_57() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_6');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_58() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board_left');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_7');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_59() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board_right');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/board_8');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_60() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNirvanic', 'Resource/UI/FEVER');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_61() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNoMoreMatch', 'Resource/UI/NOMOREMATCH');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board_left');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_62() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Number/IconMenu');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/fever_board_right');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_63() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Dice/IconMenu');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_64() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Bird/IconMenu');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_65() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconContinue');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_66() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconContinueDisabled');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_67() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconVideo');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_68() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconVideoDisabled');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_69() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/Title', 'Resource/UI/Title');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_70() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TitleOutline', 'Resource/UI/TitleOutline');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_71() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextReady', 'Resource/UI/READY');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_72() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextStart', 'Resource/UI/START');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_73() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNoMoreMatch', 'Resource/UI/NOMOREMATCH');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_74() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextTimeOver', 'Resource/UI/GAMEOVER');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_75() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextLastChance', 'Resource/UI/LASTCHANCE');
-    return Unit;
-  }
-  function AppController$loadDefaultResource$lambda_76() {
     ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNirvanic', 'Resource/UI/FEVER');
     return Unit;
   }
+  function AppController$loadDefaultResource$lambda_64() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNoMoreMatch', 'Resource/UI/NOMOREMATCH');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_65() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Number/IconMenu');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_66() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Dice/IconMenu');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_67() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/BlockSet/Bird/IconMenu');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_68() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconContinue');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_69() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconContinueDisabled');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_70() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconVideo');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_71() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/IconVideoDisabled');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_72() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/Title', 'Resource/UI/Title');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_73() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TitleOutline', 'Resource/UI/TitleOutline');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_74() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextReady', 'Resource/UI/READY');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_75() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextStart', 'Resource/UI/START');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_76() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNoMoreMatch', 'Resource/UI/NOMOREMATCH');
+    return Unit;
+  }
   function AppController$loadDefaultResource$lambda_77() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/AppStoreBadge');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextTimeOver', 'Resource/UI/GAMEOVER');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_78() {
-    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/google-play-badge');
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextLastChance', 'Resource/UI/LASTCHANCE');
     return Unit;
   }
   function AppController$loadDefaultResource$lambda_79() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/TextNirvanic', 'Resource/UI/FEVER');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_80() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/AppStoreBadge');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_81() {
+    ResourceManager$Companion_getInstance().shared().loadTexture_jyasbz$('Resource/UI/google-play-badge');
+    return Unit;
+  }
+  function AppController$loadDefaultResource$lambda_82() {
     var gameSprite = listOf_0(['Resource/UI/timer_gage', 'Resource/UI/timer_gage_glass', 'Resource/UI/fever_gage', 'Resource/UI/fever_gage_glass', 'Resource/UI/Particle', 'Resource/UI/ParticleBar', 'Resource/UI/LightningBar']);
     TextureManager$Companion_getInstance().shared().makeAtlas_kwv3np$('gameSprite', gameSprite);
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_80() {
+  function AppController$loadDefaultResource$lambda_83() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Match');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_81() {
+  function AppController$loadDefaultResource$lambda_84() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Block');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_82() {
+  function AppController$loadDefaultResource$lambda_85() {
     TextureManager$Companion_getInstance().shared().loadAtlas_ivxn3r$('Effect');
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_83() {
+  function AppController$loadDefaultResource$lambda_86() {
     var tmp$, tmp$_0;
     var letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123=_-,.!()[]%+?=>/'";
     letter += formatted_1(4567.89);
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.createFont_basrv3$('Number/', letter, 20, 1.0), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_84() {
+  function AppController$loadDefaultResource$lambda_87() {
     var tmp$, tmp$_0;
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.createFont_basrv3$('BigScore/', '0123456789:,.CombosK+s', 40, 1.0, 'Roboto-Black.ttf'), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_85() {
+  function AppController$loadDefaultResource$lambda_88() {
     var tmp$, tmp$_0;
     (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.addFontAlias_puj7f4$('BigScore/', 'Gage/'), Unit) : null;
     return Unit;
   }
-  function AppController$loadDefaultResource$lambda_86(closure$sizeScale, closure$width, closure$height, this$AppController) {
+  function AppController$loadDefaultResource$lambda_89(closure$sizeScale, closure$width, closure$height, this$AppController) {
     return function () {
       var tmp$;
       var letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123=_-,.!()[]%+?=>/'";
@@ -11765,7 +11778,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   }
   AppController.prototype.loadDefaultResource_dleff0$ = function (width, height) {
     var sizeScale = new Scale(320.0, 480.0, void 0, void 0, width, height);
-    var callback = listOf_0([AppController$loadDefaultResource$lambda, AppController$loadDefaultResource$lambda_0, AppController$loadDefaultResource$lambda_1, AppController$loadDefaultResource$lambda_2, AppController$loadDefaultResource$lambda_3, AppController$loadDefaultResource$lambda_4, AppController$loadDefaultResource$lambda_5, AppController$loadDefaultResource$lambda_6, AppController$loadDefaultResource$lambda_7, AppController$loadDefaultResource$lambda_8, AppController$loadDefaultResource$lambda_9, AppController$loadDefaultResource$lambda_10, AppController$loadDefaultResource$lambda_11, AppController$loadDefaultResource$lambda_12, AppController$loadDefaultResource$lambda_13, AppController$loadDefaultResource$lambda_14, AppController$loadDefaultResource$lambda_15, AppController$loadDefaultResource$lambda_16, AppController$loadDefaultResource$lambda_17, AppController$loadDefaultResource$lambda_18, AppController$loadDefaultResource$lambda_19, AppController$loadDefaultResource$lambda_20, AppController$loadDefaultResource$lambda_21, AppController$loadDefaultResource$lambda_22, AppController$loadDefaultResource$lambda_23, AppController$loadDefaultResource$lambda_24, AppController$loadDefaultResource$lambda_25, AppController$loadDefaultResource$lambda_26, AppController$loadDefaultResource$lambda_27, AppController$loadDefaultResource$lambda_28, AppController$loadDefaultResource$lambda_29, AppController$loadDefaultResource$lambda_30, AppController$loadDefaultResource$lambda_31, AppController$loadDefaultResource$lambda_32, AppController$loadDefaultResource$lambda_33, AppController$loadDefaultResource$lambda_34, AppController$loadDefaultResource$lambda_35, AppController$loadDefaultResource$lambda_36, AppController$loadDefaultResource$lambda_37, AppController$loadDefaultResource$lambda_38, AppController$loadDefaultResource$lambda_39, AppController$loadDefaultResource$lambda_40, AppController$loadDefaultResource$lambda_41, AppController$loadDefaultResource$lambda_42, AppController$loadDefaultResource$lambda_43, AppController$loadDefaultResource$lambda_44, AppController$loadDefaultResource$lambda_45, AppController$loadDefaultResource$lambda_46, AppController$loadDefaultResource$lambda_47, AppController$loadDefaultResource$lambda_48, AppController$loadDefaultResource$lambda_49, AppController$loadDefaultResource$lambda_50, AppController$loadDefaultResource$lambda_51, AppController$loadDefaultResource$lambda_52, AppController$loadDefaultResource$lambda_53, AppController$loadDefaultResource$lambda_54, AppController$loadDefaultResource$lambda_55, AppController$loadDefaultResource$lambda_56, AppController$loadDefaultResource$lambda_57, AppController$loadDefaultResource$lambda_58, AppController$loadDefaultResource$lambda_59, AppController$loadDefaultResource$lambda_60, AppController$loadDefaultResource$lambda_61, AppController$loadDefaultResource$lambda_62, AppController$loadDefaultResource$lambda_63, AppController$loadDefaultResource$lambda_64, AppController$loadDefaultResource$lambda_65, AppController$loadDefaultResource$lambda_66, AppController$loadDefaultResource$lambda_67, AppController$loadDefaultResource$lambda_68, AppController$loadDefaultResource$lambda_69, AppController$loadDefaultResource$lambda_70, AppController$loadDefaultResource$lambda_71, AppController$loadDefaultResource$lambda_72, AppController$loadDefaultResource$lambda_73, AppController$loadDefaultResource$lambda_74, AppController$loadDefaultResource$lambda_75, AppController$loadDefaultResource$lambda_76, AppController$loadDefaultResource$lambda_77, AppController$loadDefaultResource$lambda_78, AppController$loadDefaultResource$lambda_79, AppController$loadDefaultResource$lambda_80, AppController$loadDefaultResource$lambda_81, AppController$loadDefaultResource$lambda_82, AppController$loadDefaultResource$lambda_83, AppController$loadDefaultResource$lambda_84, AppController$loadDefaultResource$lambda_85, AppController$loadDefaultResource$lambda_86(sizeScale, width, height, this)]);
+    var callback = listOf_0([AppController$loadDefaultResource$lambda, AppController$loadDefaultResource$lambda_0, AppController$loadDefaultResource$lambda_1, AppController$loadDefaultResource$lambda_2, AppController$loadDefaultResource$lambda_3, AppController$loadDefaultResource$lambda_4, AppController$loadDefaultResource$lambda_5, AppController$loadDefaultResource$lambda_6, AppController$loadDefaultResource$lambda_7, AppController$loadDefaultResource$lambda_8, AppController$loadDefaultResource$lambda_9, AppController$loadDefaultResource$lambda_10, AppController$loadDefaultResource$lambda_11, AppController$loadDefaultResource$lambda_12, AppController$loadDefaultResource$lambda_13, AppController$loadDefaultResource$lambda_14, AppController$loadDefaultResource$lambda_15, AppController$loadDefaultResource$lambda_16, AppController$loadDefaultResource$lambda_17, AppController$loadDefaultResource$lambda_18, AppController$loadDefaultResource$lambda_19, AppController$loadDefaultResource$lambda_20, AppController$loadDefaultResource$lambda_21, AppController$loadDefaultResource$lambda_22, AppController$loadDefaultResource$lambda_23, AppController$loadDefaultResource$lambda_24, AppController$loadDefaultResource$lambda_25, AppController$loadDefaultResource$lambda_26, AppController$loadDefaultResource$lambda_27, AppController$loadDefaultResource$lambda_28, AppController$loadDefaultResource$lambda_29, AppController$loadDefaultResource$lambda_30, AppController$loadDefaultResource$lambda_31, AppController$loadDefaultResource$lambda_32, AppController$loadDefaultResource$lambda_33, AppController$loadDefaultResource$lambda_34, AppController$loadDefaultResource$lambda_35, AppController$loadDefaultResource$lambda_36, AppController$loadDefaultResource$lambda_37, AppController$loadDefaultResource$lambda_38, AppController$loadDefaultResource$lambda_39, AppController$loadDefaultResource$lambda_40, AppController$loadDefaultResource$lambda_41, AppController$loadDefaultResource$lambda_42, AppController$loadDefaultResource$lambda_43, AppController$loadDefaultResource$lambda_44, AppController$loadDefaultResource$lambda_45, AppController$loadDefaultResource$lambda_46, AppController$loadDefaultResource$lambda_47, AppController$loadDefaultResource$lambda_48, AppController$loadDefaultResource$lambda_49, AppController$loadDefaultResource$lambda_50, AppController$loadDefaultResource$lambda_51, AppController$loadDefaultResource$lambda_52, AppController$loadDefaultResource$lambda_53, AppController$loadDefaultResource$lambda_54, AppController$loadDefaultResource$lambda_55, AppController$loadDefaultResource$lambda_56, AppController$loadDefaultResource$lambda_57, AppController$loadDefaultResource$lambda_58, AppController$loadDefaultResource$lambda_59, AppController$loadDefaultResource$lambda_60, AppController$loadDefaultResource$lambda_61, AppController$loadDefaultResource$lambda_62, AppController$loadDefaultResource$lambda_63, AppController$loadDefaultResource$lambda_64, AppController$loadDefaultResource$lambda_65, AppController$loadDefaultResource$lambda_66, AppController$loadDefaultResource$lambda_67, AppController$loadDefaultResource$lambda_68, AppController$loadDefaultResource$lambda_69, AppController$loadDefaultResource$lambda_70, AppController$loadDefaultResource$lambda_71, AppController$loadDefaultResource$lambda_72, AppController$loadDefaultResource$lambda_73, AppController$loadDefaultResource$lambda_74, AppController$loadDefaultResource$lambda_75, AppController$loadDefaultResource$lambda_76, AppController$loadDefaultResource$lambda_77, AppController$loadDefaultResource$lambda_78, AppController$loadDefaultResource$lambda_79, AppController$loadDefaultResource$lambda_80, AppController$loadDefaultResource$lambda_81, AppController$loadDefaultResource$lambda_82, AppController$loadDefaultResource$lambda_83, AppController$loadDefaultResource$lambda_84, AppController$loadDefaultResource$lambda_85, AppController$loadDefaultResource$lambda_86, AppController$loadDefaultResource$lambda_87, AppController$loadDefaultResource$lambda_88, AppController$loadDefaultResource$lambda_89(sizeScale, width, height, this)]);
     return callback;
   };
   AppController.prototype.generateLocalFont_dleff0$ = function (width, height) {
@@ -12948,41 +12961,22 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.h_8be2vx$ = 0.0;
     this.newW_8be2vx$ = 0.0;
     this.newH_8be2vx$ = 0.0;
+    this.deviceScene_qeu8eq$_0 = this.deviceScene_qeu8eq$_0;
     this.requestHandler = null;
   }
+  Object.defineProperty(Samsara.prototype, 'deviceScene', {
+    get: function () {
+      if (this.deviceScene_qeu8eq$_0 == null)
+        return throwUPAE('deviceScene');
+      return this.deviceScene_qeu8eq$_0;
+    },
+    set: function (deviceScene) {
+      this.deviceScene_qeu8eq$_0 = deviceScene;
+    }
+  });
   Samsara.prototype.preload = function () {
     this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
   };
-  function Samsara$create$lambda(progress, cacheKey, success, totalLoaded, totalFiles) {
-    println('File Complete: ' + cacheKey + ' > ' + toString(progress) + '% - ' + toString(totalLoaded) + ' out of ' + toString(totalFiles));
-  }
-  function Samsara$create$lambda_0(this$Samsara) {
-    return function () {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$_0 = (Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : throwCCE()).atlas.iterator();
-      while (tmp$_0.hasNext()) {
-        var atlas = tmp$_0.next();
-        var frameData = this$Samsara.game.cache.getFrameData(atlas);
-        tmp$_1 = frameData.getFrames();
-        for (tmp$_2 = 0; tmp$_2 !== tmp$_1.length; ++tmp$_2) {
-          var frame = tmp$_1[tmp$_2];
-          var name = substringBefore(frame.name, '.png');
-          var texture = GuestGDXTexture_init_0(name, frame.name, atlas);
-          ResourceManager$Companion_getInstance().shared().addTexture_p1juio$(name, texture);
-        }
-      }
-      HAL$Companion_getInstance().shared().presentView_xl35ob$(new MainMenuView());
-      return Unit;
-    };
-  }
-  function Samsara$create$lambda_1(touch) {
-    var pos = HAL$Companion_getInstance().shared().convertCoordinate_dleff0$(touch.x, touch.y);
-    HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$began_getInstance());
-  }
-  function Samsara$create$lambda_2(touch) {
-    var pos = HAL$Companion_getInstance().shared().convertCoordinate_dleff0$(touch.x, touch.y);
-    HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$ended_getInstance());
-  }
   Samsara.prototype.create = function () {
     var tmp$, tmp$_0;
     this.w_8be2vx$ = this.game.width;
@@ -13005,7 +12999,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_3_3_COMPLETE_getInstance(), void 0, 1);
     DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_6_6_COMPLETE_getInstance(), void 0, 1);
     DataUtil$Companion_getInstance().SetInteger_rjan26$('Draw FPS', void 0, 1);
-    var scene = DeviceScene_init(this.w_8be2vx$, this.h_8be2vx$);
     var modeString = listOf_0(['Beginner', 'Beginner6x6', 'Classic']);
     tmp$ = modeString.iterator();
     while (tmp$.hasNext()) {
@@ -13019,25 +13012,42 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     PlayerRecordManager$Companion_getInstance().shared().SetPlayerAchievement_79oy9z$(AndroidPlayerAchievement_init(''));
     PlayerRecordManager$Companion_getInstance().shared().loadAchievement();
-    var quality = toInt_0((Kotlin.isType(tmp$_0 = document.getElementById('quality'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
-    println(quality);
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, quality);
+    var quality = 1;
+    var q = document.getElementById('quality');
+    if (q != null) {
+      quality = toInt_0((Kotlin.isType(tmp$_0 = q, HTMLElement) ? tmp$_0 : throwCCE()).innerText);
+    }
+    DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, quality);
     ItemManager$Companion_getInstance().shared().initializeItemTable();
     ItemManager$Companion_getInstance().shared().loadAllPlayerItem();
     StoreManager$Companion_getInstance().shared().load();
-    equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('Memory Test'), 'false');
-    AppController$Companion_getInstance().shared().initialize_hmf0yx$(this.requestHandler);
-    HAL$Companion_getInstance().shared().initialize();
-    SoundManager$Companion_getInstance().shared().initialize();
-    var master = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$MASTER_VOLUME_getInstance(), void 0, 100);
-    SoundManager$Companion_getInstance().shared().SetMasterVolume_mx4ult$(master);
-    var bgm = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BGM_VOLUME_getInstance(), void 0, 100);
-    SoundManager$Companion_getInstance().shared().SetBGMVolume_mx4ult$(bgm);
-    if (bgm === 0) {
-      AppController$Companion_getInstance().shared().setAdsMute_6taknv$(true);
-    }
-    var effect = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$EFFECT_VOLUME_getInstance(), void 0, 100);
-    SoundManager$Companion_getInstance().shared().SetEffectVolume_mx4ult$(effect);
+    this.deviceScene = DeviceScene_init(this.w_8be2vx$, this.h_8be2vx$);
+    this.loadResource();
+  };
+  function Samsara$loadResource$lambda(progress, cacheKey, success, totalLoaded, totalFiles) {
+    println('File Complete: ' + cacheKey + ' > ' + toString(progress) + '% - ' + toString(totalLoaded) + ' out of ' + toString(totalFiles));
+  }
+  function Samsara$loadResource$lambda_0(this$Samsara) {
+    return function () {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      tmp$_0 = (Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : throwCCE()).atlas.iterator();
+      while (tmp$_0.hasNext()) {
+        var atlas = tmp$_0.next();
+        var frameData = this$Samsara.game.cache.getFrameData(atlas);
+        tmp$_1 = frameData.getFrames();
+        for (tmp$_2 = 0; tmp$_2 !== tmp$_1.length; ++tmp$_2) {
+          var frame = tmp$_1[tmp$_2];
+          var name = substringBefore(frame.name, '.png');
+          var texture = GuestGDXTexture_init_0(name, frame.name, atlas);
+          ResourceManager$Companion_getInstance().shared().addTexture_p1juio$(name, texture);
+        }
+      }
+      this$Samsara.startPhantom();
+      HAL$Companion_getInstance().shared().presentView_xl35ob$(new MainMenuView());
+      return Unit;
+    };
+  }
+  Samsara.prototype.loadResource = function () {
     var loadingAction = ArrayList_init();
     loadingAction.addAll_brywnq$(AppController$Companion_getInstance().shared().loadDefaultResource_dleff0$(this.w_8be2vx$, this.h_8be2vx$));
     loadingAction.addAll_brywnq$(AppController$Companion_getInstance().shared().loadSoundResource());
@@ -13051,12 +13061,36 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.game.load.json('jsonMatch', 'Resource/Match.json');
     this.game.load.json('jsonBlock', 'Resource/Block.json');
     this.game.load.json('jsonEffect', 'Resource/Effect.json');
-    this.game.load.onFileComplete.add(Samsara$create$lambda);
-    this.game.load.onLoadComplete.add(Samsara$create$lambda_0(this));
+    this.game.load.onFileComplete.add(Samsara$loadResource$lambda);
+    this.game.load.onLoadComplete.add(Samsara$loadResource$lambda_0(this));
     this.game.load.start();
+  };
+  function Samsara$startPhantom$lambda(touch) {
+    var pos = HAL$Companion_getInstance().shared().convertCoordinate_dleff0$(touch.x, touch.y);
+    HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$began_getInstance());
+  }
+  function Samsara$startPhantom$lambda_0(touch) {
+    var pos = HAL$Companion_getInstance().shared().convertCoordinate_dleff0$(touch.x, touch.y);
+    HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$ended_getInstance());
+  }
+  Samsara.prototype.startPhantom = function () {
+    equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('Memory Test'), 'false');
+    this.deviceScene.initialize();
+    AppController$Companion_getInstance().shared().initialize_hmf0yx$(this.requestHandler);
+    HAL$Companion_getInstance().shared().initialize();
+    SoundManager$Companion_getInstance().shared().initialize();
+    var master = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$MASTER_VOLUME_getInstance(), void 0, 100);
+    SoundManager$Companion_getInstance().shared().SetMasterVolume_mx4ult$(master);
+    var bgm = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BGM_VOLUME_getInstance(), void 0, 100);
+    SoundManager$Companion_getInstance().shared().SetBGMVolume_mx4ult$(bgm);
+    if (bgm === 0) {
+      AppController$Companion_getInstance().shared().setAdsMute_6taknv$(true);
+    }
+    var effect = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$EFFECT_VOLUME_getInstance(), void 0, 100);
+    SoundManager$Companion_getInstance().shared().SetEffectVolume_mx4ult$(effect);
     this.game.input.mouse.capture = true;
-    this.game.input.onDown.add(Samsara$create$lambda_1);
-    this.game.input.onUp.add(Samsara$create$lambda_2);
+    this.game.input.onDown.add(Samsara$startPhantom$lambda);
+    this.game.input.onUp.add(Samsara$startPhantom$lambda_0);
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
@@ -14169,6 +14203,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     this.screen = null;
     this.atlas = ArrayList_init();
   }
+  DeviceScene.prototype.initialize = function () {
+    var tmp$;
+    (tmp$ = this.screen) != null ? (tmp$.afterAttached(), Unit) : null;
+  };
   DeviceScene.prototype.shutdown = function () {
   };
   DeviceScene.prototype.GetObject = function () {
@@ -31903,7 +31941,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
     var x = this.GetRealScreenX();
     var y = this.GetRealScreenY();
-    var num = 6;
+    var num = 3;
     var color = Color$Companion_getInstance().white_mx4ult$();
     var image;
     if (this.game.quality < 2) {
@@ -33294,7 +33332,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   function ObstacleEntity$explodeEffect$lambda(this$ObstacleEntity, closure$count, closure$delay) {
     return function () {
       var tmp$;
-      this$ObstacleEntity.createExplosion_vl24u5$(closure$count, 9, 'Resource/UI/Particle', this$ObstacleEntity.game.gameConfigure.tileWidth * 8);
+      this$ObstacleEntity._createExplosion_vl24u5$(closure$count, 9, 'Resource/UI/Particle', this$ObstacleEntity.game.gameConfigure.tileWidth * 8);
       (tmp$ = this$ObstacleEntity.game.view.screen) != null ? (tmp$.actionDelay_ab0iom$(closure$delay, void 0, ObstacleEntity$explodeEffect$lambda$lambda(this$ObstacleEntity)), Unit) : null;
       return Unit;
     };
@@ -33880,7 +33918,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     callback$default ? callback$default(count, delay, delay2) : this.explode_nhq4am$$default(count, delay, delay2);
   };
   TileEntity.prototype.explodeEffect_24o109$ = function (count, delay) {
-    this.createExplosion_vl24u5$(count, 9, 'Resource/UI/Particle', this.game.gameConfigure.tileWidth * 8);
+    this._createExplosion_vl24u5$(count, 6, 'Resource/UI/Particle', this.game.gameConfigure.tileWidth * 8);
   };
   TileEntity.prototype.createExplosion_za3lpa$ = function (count) {
     var tmp$;
@@ -33933,9 +33971,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (size > this.game.gameConfigure.tileWidth * 8) {
       size = this.game.gameConfigure.tileWidth * 8;
     }
-    this.createExplosion_vl24u5$(count, 6, image, size);
+    this._createExplosion_vl24u5$(count, 6, image, size);
   };
-  TileEntity.prototype.createExplosion_vl24u5$ = function (count, num, image, size) {
+  TileEntity.prototype._createExplosion_vl24u5$ = function (count, num, image, size) {
     if (this.game.quality < 1) {
       return;
     }
@@ -36862,7 +36900,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
-    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    if (quality < 1) {
       return;
     }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
@@ -36900,7 +36939,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     particleManager.SetMaxParticle_za3lpa$(INT$result);
     camera.projection = 1;
     particleManager.SetCamera_s6wt6e$(camera);
-    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, 0.1, void 0, BlockTypeView$createBackgroundEffect$lambda(particleManager, max, rect, this));
+    var interval = 0.1;
+    if (quality < 2) {
+      interval = 0.2;
+    }
+    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, interval, void 0, BlockTypeView$createBackgroundEffect$lambda(particleManager, max, rect, this));
     (tmp$ = this.screen) != null ? (tmp$.addTouchListener_dal58m$(new TouchListener('Touch For Fairy', 0.0, 0.0, this.GetSize().width, this.GetSize().height, void 0, BlockTypeView$createBackgroundEffect$lambda_0(particleManager, this))), Unit) : null;
   };
   function BlockTypeView$menuBackCallback$lambda(this$BlockTypeView) {
@@ -38304,7 +38347,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   }
   GameOverView.prototype.createBackgroundEffect = function () {
     var tmp$, tmp$_0, tmp$_1;
-    if (this.game.quality < 2) {
+    if (this.game.quality < 1) {
       return;
     }
     if (this.background == null) {
@@ -40716,7 +40759,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
-    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    if (quality < 1) {
       return;
     }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
@@ -40725,7 +40769,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     particleManager.SetMaxParticle_za3lpa$(numberToInt(200 * performance));
     camera.projection = 1;
     particleManager.SetCamera_s6wt6e$(camera);
-    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, 0.1, void 0, MainMenuView$createBackgroundEffect$lambda(particleManager, max, rect, this));
+    var interval = 0.1;
+    if (quality < 2) {
+      interval = 0.2;
+    }
+    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, interval, void 0, MainMenuView$createBackgroundEffect$lambda(particleManager, max, rect, this));
     (tmp$ = this.screen) != null ? (tmp$.addTouchListener_dal58m$(new TouchListener('Touch For Fairy', 0.0, 0.0, this.GetSize().width, this.GetSize().height, void 0, MainMenuView$createBackgroundEffect$lambda_0(particleManager, this))), Unit) : null;
   };
   function MainMenuView$createStarOld$lambda(obj, camera, elapsed) {
@@ -41528,7 +41576,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     };
   }
   OptionView.prototype.drawScreen = function () {
-    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5;
+    var tmp$, tmp$_0;
     View.prototype.afterAttached.call(this);
     HAL$Companion_getInstance().shared().SetBackgroundColor_qt1dr2$(28, 28, 28);
     (tmp$ = this.screen) != null ? (tmp$.isDrawTouchMark = true) : null;
@@ -41564,50 +41612,67 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     }
      while (false);
     this.createSprite_591x4d$(160.0, 240.0, FLOAT$result, 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, false);
-    var Items = [null, null, null, null, null, null, null, null, null];
+    var Items = ArrayList_init();
     var bgm = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BGM_VOLUME_getInstance(), void 0, 100);
-    Items[0] = MenuItem_init_0(['Resource/UI/IconSoundOn', 'Resource/UI/IconSoundOff'], void 0, [local('MENU_1'), local('MENU_2')], MenuItemType$SWITCH_getInstance(), void 0, void 0, this.menuCallback);
+    var item = MenuItem_init_0(['Resource/UI/IconSoundOn', 'Resource/UI/IconSoundOff'], void 0, [local('MENU_1'), local('MENU_2')], MenuItemType$SWITCH_getInstance(), void 0, void 0, this.menuCallback);
     if (bgm === 0) {
-      (tmp$_0 = Items[0]) != null ? (tmp$_0.onOff = SwitchState$off_getInstance()) : null;
+      item.onOff = SwitchState$off_getInstance();
     }
      else {
-      (tmp$_1 = Items[0]) != null ? (tmp$_1.onOff = SwitchState$on_getInstance()) : null;
+      item.onOff = SwitchState$on_getInstance();
     }
+    Items.add_11rb$(item);
     var effect = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$EFFECT_VOLUME_getInstance(), void 0, 100);
-    Items[1] = MenuItem_init_0(['Resource/UI/IconSFXOn', 'Resource/UI/IconSFXOff'], void 0, [local('MENU_3'), local('MENU_4')], MenuItemType$SWITCH_getInstance(), void 0, void 0, this.menuCallback);
+    item = MenuItem_init_0(['Resource/UI/IconSFXOn', 'Resource/UI/IconSFXOff'], void 0, [local('MENU_3'), local('MENU_4')], MenuItemType$SWITCH_getInstance(), void 0, void 0, this.menuCallback);
     if (effect === 0) {
-      (tmp$_2 = Items[1]) != null ? (tmp$_2.onOff = SwitchState$off_getInstance()) : null;
+      item.onOff = SwitchState$off_getInstance();
     }
      else {
-      (tmp$_3 = Items[1]) != null ? (tmp$_3.onOff = SwitchState$on_getInstance()) : null;
+      item.onOff = SwitchState$on_getInstance();
     }
-    Items[2] = MenuItem_init('Resource/UI/IconKorean', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback);
-    Items[3] = MenuItem_init('Resource/UI/IconEnglish', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback);
-    Items[4] = MenuItem_init('Resource/UI/IconColorNormal', void 0, void 0, MenuItemType$RADIO_getInstance(), 1, void 0, this.menuCallback);
-    Items[5] = MenuItem_init('Resource/UI/IconColorBlind', void 0, void 0, MenuItemType$RADIO_getInstance(), 1, void 0, this.menuCallback);
-    var itemHeight = 3.0;
-    Items[6] = MenuItem_init('Resource/UI/IconTutorial', void 0, void 0, void 0, void 0, void 0, this.menuCallback);
+    Items.add_11rb$(item);
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconColorNormal', void 0, void 0, MenuItemType$RADIO_getInstance(), 1, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconColorBlind', void 0, void 0, MenuItemType$RADIO_getInstance(), 1, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconKorean', void 0, void 0, MenuItemType$RADIO_getInstance(), 0, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconEnglish', void 0, void 0, MenuItemType$RADIO_getInstance(), 0, void 0, this.menuCallback));
+    item = MenuItem_init('Resource/UI/IconTutorial', void 0, void 0, void 0, void 0, void 0, this.menuCallback);
     if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$TUTORIAL_COMPLETE_getInstance(), void 0, 0) === 0) {
-      (tmp$_4 = Items[6]) != null ? (tmp$_4.enable = false) : null;
+      item.enable = false;
     }
-    Items[7] = MenuItem_init('Resource/UI/IconBlindcat', void 0, void 0, void 0, void 0, void 0, this.menuCallback);
-    itemHeight = 4.0;
+    Items.add_11rb$(item);
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconBlindcat', void 0, void 0, void 0, void 0, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconBatteryLow', 'Low', void 0, MenuItemType$RADIO_getInstance(), 2, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconBatteryMedium', 'Medium', void 0, MenuItemType$RADIO_getInstance(), 2, void 0, this.menuCallback));
+    Items.add_11rb$(MenuItem_init('Resource/UI/IconBatteryHigh', 'High', void 0, MenuItemType$RADIO_getInstance(), 2, void 0, this.menuCallback));
+    Items.add_11rb$(null);
     var tileSize = 50.0;
     var yMargin = 0.0;
-    this.menu = Menu_init(this, this.GetSize(), Size_init(2.0, itemHeight), tileSize, void 0, Items, local('MENU_5'));
+    this.menu = Menu_init(this, this.GetSize(), Size_init(4.0, 3.0), tileSize, void 0, copyToArray(Items), local('MENU_5'));
     this.menu.prepare_1isvtk$(yMargin, 20.0, 20.0);
-    var current = GetLocale();
-    if (equals(current, 'kr'))
-      this.menu.SetCurrent_za3lpa$(2);
-    else
-      this.menu.SetCurrent_za3lpa$(3);
     var color = DataUtil$Companion_getInstance().GetString_sv46oe$(DataKey$COLOR_MODE_getInstance(), void 0, 'Normal');
     switch (color) {
       case 'Normal':
-        this.menu.SetCurrent_za3lpa$(4);
+        this.menu.SetCurrent_za3lpa$(2);
         break;
       case 'Blind':
-        this.menu.SetCurrent_za3lpa$(5);
+        this.menu.SetCurrent_za3lpa$(3);
+        break;
+    }
+    var current = GetLocale();
+    if (equals(current, 'kr'))
+      this.menu.SetCurrent_za3lpa$(4);
+    else
+      this.menu.SetCurrent_za3lpa$(5);
+    var battery = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
+    switch (battery) {
+      case 0:
+        this.menu.SetCurrent_za3lpa$(8);
+        break;
+      case 1:
+        this.menu.SetCurrent_za3lpa$(9);
+        break;
+      case 2:
+        this.menu.SetCurrent_za3lpa$(10);
         break;
     }
     var version = AppController$Companion_getInstance().shared().getVersionName();
@@ -41664,7 +41729,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     var menu2 = Menu_init(this, this.GetSize(), Size_init(2.0, 1.0), 40.0, void 0, [MenuItem_init('Resource/UI/IconBack', void 0, void 0, void 0, void 0, void 0, this.menuBackCallback), null]);
     menu2.prepare_1isvtk$(200.0, 150.0);
     this.createBackgroundEffect_v32r7z$(this.particleManagerForFairy, Rect_init(0.0, 0.0, 320.0, 480.0));
-    (tmp$_5 = this.screen) != null ? (tmp$_5.addKeydownListener_5ol7k9$('Back Key', OptionView$drawScreen$lambda(this)), Unit) : null;
+    (tmp$_0 = this.screen) != null ? (tmp$_0.addKeydownListener_5ol7k9$('Back Key', OptionView$drawScreen$lambda(this)), Unit) : null;
   };
   OptionView.prototype.beforeDetached = function () {
     this.particleManagerForFairy.clearParticlePool();
@@ -41773,7 +41838,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     if (max === void 0)
       max = 30;
     var tmp$;
-    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) < 2) {
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    if (quality < 1) {
       return;
     }
     var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
@@ -41782,7 +41848,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
     particleManager.SetMaxParticle_za3lpa$(numberToInt(200 * performance));
     camera.projection = 1;
     particleManager.SetCamera_s6wt6e$(camera);
-    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, 0.1, void 0, OptionView$createBackgroundEffect$lambda(particleManager, max, rect, this));
+    var interval = 0.1;
+    if (quality < 2) {
+      interval = 0.2;
+    }
+    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, interval, void 0, OptionView$createBackgroundEffect$lambda(particleManager, max, rect, this));
     (tmp$ = this.screen) != null ? (tmp$.addTouchListener_dal58m$(new TouchListener('Touch For Fairy', 0.0, 0.0, this.GetSize().width, this.GetSize().height, void 0, OptionView$createBackgroundEffect$lambda_0(particleManager, this))), Unit) : null;
   };
   function OptionView$menuBackCallback$lambda(this$OptionView) {
@@ -41844,9 +41914,30 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
       }
     };
   }
+  function OptionView$menuCallback$lambda$lambda_2(this$OptionView) {
+    return function () {
+      var tmp$;
+      (tmp$ = this$OptionView.screen) != null ? (tmp$.presentView_xl35ob$(new OptionView()), Unit) : null;
+      return Unit;
+    };
+  }
+  function OptionView$menuCallback$lambda$lambda_3(this$OptionView) {
+    return function () {
+      var tmp$;
+      (tmp$ = this$OptionView.screen) != null ? (tmp$.presentView_xl35ob$(new OptionView()), Unit) : null;
+      return Unit;
+    };
+  }
+  function OptionView$menuCallback$lambda$lambda_4(this$OptionView) {
+    return function () {
+      var tmp$;
+      (tmp$ = this$OptionView.screen) != null ? (tmp$.presentView_xl35ob$(new OptionView()), Unit) : null;
+      return Unit;
+    };
+  }
   function OptionView$menuCallback$lambda(this$OptionView) {
     return function (index, enable, name) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6, tmp$_7, tmp$_8, tmp$_9;
       if (enable === false) {
         return null;
       }
@@ -41876,39 +41967,52 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
 
           break;
         case 2:
-          SetLocale('kr');
-          DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$CURRENT_LOCALE_getInstance(), void 0, 'kr');
-          (tmp$_0 = Kotlin.isType(tmp$ = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$ : null) != null ? (tmp$_0.hideAllLabel_1zqrcg$(), Unit) : null;
-          (tmp$_1 = this$OptionView.screen) != null ? (tmp$_1.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda(this$OptionView)), Unit) : null;
-          break;
-        case 3:
-          SetLocale('en');
-          DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$CURRENT_LOCALE_getInstance(), void 0, 'en');
-          (tmp$_3 = Kotlin.isType(tmp$_2 = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$_2 : null) != null ? (tmp$_3.hideAllLabel_1zqrcg$(), Unit) : null;
-          (tmp$_4 = this$OptionView.screen) != null ? (tmp$_4.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_0(this$OptionView)), Unit) : null;
-          break;
-        case 4:
           DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$COLOR_MODE_getInstance(), void 0, 'Normal');
-          tmp$_5 = ItemManager$Companion_getInstance().shared().GetItemListByCategory_lssvdg$(ItemType$block_getInstance()).iterator();
-          while (tmp$_5.hasNext()) {
-            var blockInfo = tmp$_5.next();
+          tmp$ = ItemManager$Companion_getInstance().shared().GetItemListByCategory_lssvdg$(ItemType$block_getInstance()).iterator();
+          while (tmp$.hasNext()) {
+            var blockInfo = tmp$.next();
             TextureManager$Companion_getInstance().shared().addAlias_puj7f4$(blockInfo.resource + 'inactive_mask', blockInfo.resource + 'inactive_mask');
           }
 
           break;
-        case 5:
+        case 3:
           DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$COLOR_MODE_getInstance(), void 0, 'Blind');
-          tmp$_6 = ItemManager$Companion_getInstance().shared().GetItemListByCategory_lssvdg$(ItemType$block_getInstance()).iterator();
-          while (tmp$_6.hasNext()) {
-            var blockInfo_0 = tmp$_6.next();
+          tmp$_0 = ItemManager$Companion_getInstance().shared().GetItemListByCategory_lssvdg$(ItemType$block_getInstance()).iterator();
+          while (tmp$_0.hasNext()) {
+            var blockInfo_0 = tmp$_0.next();
             TextureManager$Companion_getInstance().shared().addAlias_puj7f4$(blockInfo_0.resource + 'inactive_mask_CB', blockInfo_0.resource + 'inactive_mask');
           }
 
+          break;
+        case 4:
+          SetLocale('kr');
+          DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$CURRENT_LOCALE_getInstance(), void 0, 'kr');
+          (tmp$_2 = Kotlin.isType(tmp$_1 = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$_1 : null) != null ? (tmp$_2.hideAllLabel_1zqrcg$(), Unit) : null;
+          (tmp$_3 = this$OptionView.screen) != null ? (tmp$_3.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda(this$OptionView)), Unit) : null;
+          break;
+        case 5:
+          SetLocale('en');
+          DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$CURRENT_LOCALE_getInstance(), void 0, 'en');
+          (tmp$_5 = Kotlin.isType(tmp$_4 = HAL$Companion_getInstance().shared().GetGuestScreen(), DeviceScene) ? tmp$_4 : null) != null ? (tmp$_5.hideAllLabel_1zqrcg$(), Unit) : null;
+          (tmp$_6 = this$OptionView.screen) != null ? (tmp$_6.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_0(this$OptionView)), Unit) : null;
           break;
         case 6:
           Util$Companion_getInstance().showNotice_sprpts$(this$OptionView, local('MENU_54'), void 0, void 0, void 0, OptionView$menuCallback$lambda$lambda_1(this$OptionView));
           return null;
         case 7:
+          window.open('https://www.blindcatstudio.com', '_blank');
+          break;
+        case 8:
+          DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+          (tmp$_7 = this$OptionView.screen) != null ? (tmp$_7.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_2(this$OptionView)), Unit) : null;
+          break;
+        case 9:
+          DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
+          (tmp$_8 = this$OptionView.screen) != null ? (tmp$_8.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_3(this$OptionView)), Unit) : null;
+          break;
+        case 10:
+          DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 2);
+          (tmp$_9 = this$OptionView.screen) != null ? (tmp$_9.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_4(this$OptionView)), Unit) : null;
           break;
       }
       return null;
@@ -41917,322 +42021,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   OptionView.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'OptionView',
-    interfaces: [View]
-  };
-  function SelectModeView() {
-    View_init(void 0, void 0, void 0, this);
-    this.menu = null;
-    this.menu2 = null;
-    this.needStar = ArrayList_init();
-    this.particleManagerForFairy = null;
-    this.menuBackCallback = SelectModeView$menuBackCallback$lambda(this);
-    this.menuCallback = SelectModeView$menuCallback$lambda(this);
-  }
-  SelectModeView.prototype.afterAttached = function () {
-    var tmp$, tmp$_0;
-    View.prototype.afterAttached.call(this);
-    HAL$Companion_getInstance().shared().SetBackgroundColor_qt1dr2$(28, 28, 28);
-    (tmp$ = this.screen) != null ? (tmp$.isDrawTouchMark = true) : null;
-    if (equals((tmp$_0 = this.screen) != null ? tmp$_0.prevViewName : null, 'GameView')) {
-      SoundManager$Companion_getInstance().shared().BGMFadeIn_o5txl1$(ensureNotNull(this.screen), 'MenuBGM', 100.0, 1.0);
-    }
-    if (SystemConfigure$Companion_getInstance().isWatchOS() !== true) {
-      this.showMenu();
-    }
-    this.SetPlayButton();
-    this.particleManagerForFairy = ParticleManager_init(this);
-    this.createBackgroundEffect_v32r7z$(ensureNotNull(this.particleManagerForFairy), Rect_init(0.0, 0.0, 320.0, 480.0));
-  };
-  SelectModeView.prototype.showMenu = function () {
-    this.SetChildVerticalAlign_qn2em6$(VerticalAlign$center_getInstance());
-    this.SetChildHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
-    this.createSprite_591x4d$(160.0, 240.0, SceneLayer$spaceDeep_getInstance().value, 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, false);
-    this.needStar.add_11rb$(InfiniteConfigureForiOS_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    this.needStar.add_11rb$(ClassicConfigureForAndroid_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    this.needStar.add_11rb$(TimelessConfigureForiOS_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    this.needStar.add_11rb$(InfiniteConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    this.needStar.add_11rb$(ClassicConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    this.needStar.add_11rb$(TimelessConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, 0.0, 0.0)).needStar);
-    var tileSize = 60.0;
-    var tileSize2 = 60.0;
-    var yMargin = 40.0;
-    var linefeed = '\n\n';
-    var menuHeight = 2.0;
-    var items = [MenuItem_init('Resource/UI/IconBeginner', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback), MenuItem_init('Resource/UI/IconClassic', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback), MenuItem_init('Resource/UI/IconInfection', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback), MenuItem_init('Resource/UI/IconBeginner6x6', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback), MenuItem_init('Resource/UI/IconClassic6x6', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback), MenuItem_init('Resource/UI/IconInfection6x6', void 0, void 0, MenuItemType$RADIO_getInstance(), void 0, void 0, this.menuCallback)];
-    for (var i = 0; i !== items.length; ++i) {
-      var item = items[i];
-      if (item != null) {
-        if (this.needStar.get_za3lpa$(i) > 0) {
-          item.title = '[font Number/][Image Resource/UI/IconStar 12] [Scale 0.5]X[Scale 0.8] ' + this.needStar.get_za3lpa$(i).toString();
-        }
-      }
-    }
-    this.menu = Menu_init(this, this.GetSize(), Size_init(3.0, menuHeight), tileSize, void 0, items, '[Color yellow][FONT Menu_Mode/]' + local('MENU_19') + '[Color]', local('MENU_19'));
-    ensureNotNull(this.menu).prepare_1isvtk$(yMargin, 10.0, 40.0, void 0, 20.0);
-    var text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_45') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Beginner')) + '[COLOR]';
-    ensureNotNull(this.menu).SetDescription_xobbru$(0, [text, '']);
-    text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_20') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Classic'));
-    ensureNotNull(this.menu).SetDescription_xobbru$(1, [text, '']);
-    text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_14') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Timeless'));
-    ensureNotNull(this.menu).SetDescription_xobbru$(2, [text, '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_14') + linefeed + '[Scale 0.8]' + local('MENU_15')]);
-    if (PlayerRecordManager$Companion_getInstance().shared().GetPercentComplete_chhr4e$(DataKey$TIMELESS_MODE_OPEN_getInstance()) !== 100.0) {
-      ensureNotNull(this.menu).SetEnable_fzusl$(2, false);
-    }
-    text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_47') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Beginner6x6'));
-    ensureNotNull(this.menu).SetDescription_xobbru$(3, [text, '']);
-    text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_48') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Classic6x6'));
-    ensureNotNull(this.menu).SetDescription_xobbru$(4, [text, '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_48') + linefeed + '[Scale 0.8]' + local('MENU_50')]);
-    if (PlayerRecordManager$Companion_getInstance().shared().GetPercentComplete_chhr4e$(DataKey$CLASSIC6x6_MODE_OPEN_getInstance()) !== 100.0) {
-      ensureNotNull(this.menu).SetEnable_fzusl$(4, false);
-    }
-    text = '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_49') + '[FONT][SCALE][COLOR]\n\n[COLOR yellow]' + local('MENU_18') + ' ' + formatted(PlayerRecordManager$Companion_getInstance().shared().GetHighScore_61zpoe$('Timeless6x6'));
-    ensureNotNull(this.menu).SetDescription_xobbru$(5, [text, '[COLOR][SCALE 1.5][FONT Menu_Mode/]' + local('MENU_49') + linefeed + '[Scale 0.8]' + local('MENU_51')]);
-    if (PlayerRecordManager$Companion_getInstance().shared().GetPercentComplete_chhr4e$(DataKey$TIMELESS6x6_MODE_OPEN_getInstance()) !== 100.0) {
-      ensureNotNull(this.menu).SetEnable_fzusl$(5, false);
-    }
-    var current = DataUtil$Companion_getInstance().GetString_sv46oe$(DataKey$LAST_PLAYED_MODE_getInstance(), void 0, 'Beginner');
-    switch (current) {
-      case 'Beginner':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(0);
-        break;
-      case 'Classic':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(1);
-        break;
-      case 'Timeless':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(2);
-        break;
-      case 'Beginner6x6':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(3);
-        break;
-      case 'Classic6x6':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(4);
-        break;
-      case 'Timeless6x6':
-        ensureNotNull(this.menu).SetCurrent_za3lpa$(5);
-        break;
-      default:ensureNotNull(this.menu).SetCurrent_za3lpa$(0);
-        break;
-    }
-    var width = 20.0;
-    var width2 = 30.0;
-    var fontSize = 24.0;
-    this.SetFontName_61zpoe$('Number/');
-    this.SetFontSize_mx4ult$(fontSize);
-    this.SetChildVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
-    this.SetChildHorizontalAlign_jdpdm8$(HorizontalAlign$right_getInstance());
-    var star = this.createTextArea_pvsv9g$(310.0, 5.0, void 0, 320.0, 0.0, 0.0, 0.5, 1.0);
-    star.SetTextHorizontalAlign_jdpdm8$(HorizontalAlign$right_getInstance());
-    star.SetTextVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
-    star.addText_r4v59z$('[image Resource/UI/IconStar ' + width.toString() + '] ' + formatted(StoreManager$Companion_getInstance().shared().GetStarAmount()));
-    this.SetChildVerticalAlign_qn2em6$(VerticalAlign$top_getInstance());
-    this.SetChildHorizontalAlign_jdpdm8$(HorizontalAlign$left_getInstance());
-    var stone = this.createSprite_9wuqyc$(5.0, 5.0, void 0, AppController$Companion_getInstance().shared().GetCurrentBlockSetResource() + 'IconMenu', width2);
-    stone.SetAlpha_8ca0d4$(0.8);
-    this.menu2 = Menu_init(this, this.GetSize(), Size_init(2.0, 1.0), tileSize2, void 0, [MenuItem_init('Resource/UI/IconBack', void 0, void 0, void 0, void 0, void 0, this.menuBackCallback), MenuItem_init('Resource/UI/IconPlay', void 0, void 0, MenuItemType$NORMAL_getInstance(), void 0, void 0, this.menuBackCallback)]);
-    ensureNotNull(this.menu2).prepare_1isvtk$(200.0, 150.0);
-  };
-  SelectModeView.prototype.beforeDetached = function () {
-    var tmp$;
-    this.menu = null;
-    (tmp$ = this.particleManagerForFairy) != null ? (tmp$.clearParticlePool(), Unit) : null;
-    this.particleManagerForFairy = null;
-  };
-  SelectModeView.prototype.update_mx4ult$ = function (elapsed) {
-    var tmp$, tmp$_0;
-    if (this.particleManagerForFairy != null) {
-      (tmp$ = this.particleManagerForFairy) != null ? (tmp$.updateObject_mx4ult$(elapsed), Unit) : null;
-      (tmp$_0 = this.particleManagerForFairy) != null ? (tmp$_0.projection_1s1xds$(this.size, Position_init(0.0, 0 * this.sizeScale.yRatio, 1000.0)), Unit) : null;
-    }
-    View.prototype.update_mx4ult$.call(this, elapsed);
-  };
-  SelectModeView.prototype.SetPlayButton = function () {
-    if (StoreManager$Companion_getInstance().shared().GetStarAmount() < this.needStar.get_za3lpa$(ensureNotNull(this.menu).GetCurrent()) || ensureNotNull(this.menu).GetEnable_za3lpa$(ensureNotNull(this.menu).GetCurrent()) === false) {
-      ensureNotNull(this.menu2).SetEnable_fzusl$(1, false);
-    }
-     else {
-      ensureNotNull(this.menu2).SetEnable_fzusl$(1, true);
-    }
-  };
-  function SelectModeView$createBackgroundEffect$lambda(closure$particleManager, closure$max, closure$rect, this$SelectModeView) {
-    return function (info) {
-      if (closure$particleManager.GetCurrentParticleCount() > closure$max) {
-        return true;
-      }
-      var xxx = closure$rect.x + Random_getInstance().arc4random_uniform_za3lpa$(numberToInt(closure$rect.width));
-      var yyy = closure$rect.y + Random_getInstance().arc4random_uniform_za3lpa$(numberToInt(closure$rect.height));
-      var position = this$SelectModeView.positionUniversalToDevice_xpb3zu$(xxx, yyy);
-      position.z = 100.0;
-      var fixScreenZ = false;
-      var blink = true;
-      var alpha = 1.0;
-      var color = Color$Companion_getInstance().white_mx4ult$(alpha);
-      var colorPick = Random_getInstance().arc4random_uniform_za3lpa$(100);
-      if (colorPick < 70) {
-        fixScreenZ = true;
-      }
-      if (colorPick < 5) {
-        color = Color$Companion_getInstance().puzzleYellow_mx4ult$(alpha);
-      }
-       else if (colorPick < 6) {
-        color = Color$Companion_getInstance().puzzleBlue_mx4ult$(alpha);
-      }
-       else if (colorPick < 7) {
-        color = Color$Companion_getInstance().puzzleRed_mx4ult$(alpha);
-      }
-       else if (colorPick < 8) {
-        color = Color$Companion_getInstance().puzzlePurple_mx4ult$(alpha);
-      }
-       else if (colorPick < 10) {
-        color = Color$Companion_getInstance().puzzleOrange_mx4ult$(alpha);
-      }
-      closure$particleManager.createFairy2_emwd81$(position, 5 * this$SelectModeView.sizeScale.xRatio, (100 * 2 | 0) * this$SelectModeView.sizeScale.xRatio, 3.0 + Random_getInstance().arc4random_uniform_za3lpa$(100) / 100.0, 'Resource/UI/ParticleFairy', color, Position_init(5.0, 5.0, -50.0), Position_init(40 * this$SelectModeView.sizeScale.xRatio, 40 * this$SelectModeView.sizeScale.xRatio, 50.0), 200 * this$SelectModeView.sizeScale.xRatio, blink, fixScreenZ, SceneLayer$background_getInstance().value, this$SelectModeView);
-      return true;
-    };
-  }
-  function SelectModeView$createBackgroundEffect$lambda_0(closure$particleManager, this$SelectModeView) {
-    return function (pos, delta, speed, state, elapsed) {
-      var tmp$, tmp$_0;
-      switch (state.name) {
-        case 'began':
-          tmp$ = closure$particleManager.GetObjectList().iterator();
-          while (tmp$.hasNext()) {
-            var particle = tmp$.next();
-            var unit = Position_init(particle.screenPosition.x - pos.x, particle.screenPosition.y - pos.y);
-            var distance = unit.length2D();
-            if (distance < 100 * this$SelectModeView.sizeScale.xRatio) {
-              var power = 1000 * this$SelectModeView.sizeScale.xRatio - 2 * distance;
-              unit.normalize();
-              var tmp$_1 = particle.movement;
-              var x = particle.movement.x;
-              tmp$_1.x = Math_0.abs(x) * unit.normalX;
-              var tmp$_2 = particle.movement;
-              var x_0 = particle.movement.y;
-              tmp$_2.y = Math_0.abs(x_0) * unit.normalY;
-              particle.accel.x = power * unit.normalX;
-              particle.accel.y = power * unit.normalY;
-              particle.accelRetain.x = 0.1;
-              particle.accelRetain.y = 0.1;
-              particle.drag.x = 50 * this$SelectModeView.sizeScale.xRatio;
-              particle.drag.y = 50 * this$SelectModeView.sizeScale.xRatio;
-            }
-          }
-
-          break;
-        case 'moved':
-          tmp$_0 = closure$particleManager.GetObjectList().iterator();
-          while (tmp$_0.hasNext()) {
-            var particle_0 = tmp$_0.next();
-            var unit_0 = Position_init(particle_0.screenPosition.x - pos.x, particle_0.screenPosition.y - pos.y);
-            var distance_0 = unit_0.length2D();
-            if (distance_0 < 100 * this$SelectModeView.sizeScale.xRatio) {
-              var power_0 = 1000 * this$SelectModeView.sizeScale.xRatio - 2 * distance_0;
-              unit_0.normalize();
-              var tmp$_3 = particle_0.movement;
-              var x_1 = particle_0.movement.x;
-              tmp$_3.x = Math_0.abs(x_1) * unit_0.normalX;
-              var tmp$_4 = particle_0.movement;
-              var x_2 = particle_0.movement.y;
-              tmp$_4.y = Math_0.abs(x_2) * unit_0.normalY;
-              particle_0.accel.x = power_0 * unit_0.normalX;
-              particle_0.accel.y = power_0 * unit_0.normalY;
-              particle_0.accelRetain.x = 0.1;
-              particle_0.accelRetain.y = 0.1;
-              particle_0.drag.x = 50 * this$SelectModeView.sizeScale.xRatio;
-              particle_0.drag.y = 50 * this$SelectModeView.sizeScale.xRatio;
-            }
-          }
-
-          break;
-        case 'ended':
-          break;
-        default:break;
-      }
-    };
-  }
-  SelectModeView.prototype.createBackgroundEffect_v32r7z$ = function (particleManager, rect, max) {
-    if (max === void 0)
-      max = 30;
-    var camera = Camera_init_0(20.0, Position_init(0.0, 0.0, -100.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 50.0);
-    particleManager.SetCamera_s6wt6e$(camera);
-    var performance = SystemConfigure$Companion_getInstance().GetPerformance();
-    particleManager.SetMaxParticle_za3lpa$(numberToInt(200 * performance));
-    camera.projection = 1;
-    particleManager.SetCamera_s6wt6e$(camera);
-    this.createAction_xcdeti$('Background Effect', true, false, true, void 0, 0.1, void 0, SelectModeView$createBackgroundEffect$lambda(particleManager, max, rect, this));
-    ensureNotNull(this.screen).addTouchListener_dal58m$(new TouchListener('Touch For Fairy', 0.0, 0.0, this.GetSize().width, this.GetSize().height, void 0, SelectModeView$createBackgroundEffect$lambda_0(particleManager, this)));
-  };
-  function SelectModeView$menuBackCallback$lambda(this$SelectModeView) {
-    return function (index, enable, name) {
-      var view = null;
-      if (index === 0) {
-        ensureNotNull(this$SelectModeView.menu).drop();
-        return new MainMenuView();
-      }
-      if (index === 1) {
-        if (enable === false) {
-          return null;
-        }
-        var configure = null;
-        switch (ensureNotNull(this$SelectModeView.menu).GetCurrent()) {
-          case 0:
-            if (SystemConfigure$Companion_getInstance().isWatchOS() === true) {
-              configure = InfiniteConfigureForWatch_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-             else {
-              configure = InfiniteConfigureForiOS_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-
-            break;
-          case 1:
-            if (SystemConfigure$Companion_getInstance().isWatchOS() === true) {
-              configure = ClassicConfigureForWatch_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-             else {
-              configure = ClassicConfigureForAndroid_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-
-            break;
-          case 2:
-            if (SystemConfigure$Companion_getInstance().isWatchOS() === true) {
-              configure = TimelessConfigureForWatch_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-             else {
-              configure = TimelessConfigureForiOS_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            }
-
-            break;
-          case 3:
-            configure = InfiniteConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            break;
-          case 4:
-            configure = ClassicConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            break;
-          case 5:
-            configure = TimelessConfigure6x6ForiOS_init(Rect_init(0.0, 0.0, this$SelectModeView.size.width, this$SelectModeView.size.height));
-            break;
-          default:return null;
-        }
-        ensureNotNull(configure).adjustTileSize();
-        var game = Game_init(configure);
-        view = GameView_init(game);
-        DataUtil$Companion_getInstance().SetString_sv46oe$(DataKey$LAST_PLAYED_MODE_getInstance(), void 0, ensureNotNull(configure).modeString);
-        if (!equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('Demo'), 'true')) {
-          StoreManager$Companion_getInstance().shared().decreaseStar_za3lpa$(this$SelectModeView.needStar.get_za3lpa$(ensureNotNull(this$SelectModeView.menu).GetCurrent()));
-        }
-        SoundManager$Companion_getInstance().shared().BGMFadeOut_o5txl1$(ensureNotNull(this$SelectModeView.screen), 'MenuBGM', 0.0, 0.5);
-      }
-      return view;
-    };
-  }
-  function SelectModeView$menuCallback$lambda(this$SelectModeView) {
-    return function (index, enable, name) {
-      this$SelectModeView.SetPlayButton();
-      return null;
-    };
-  }
-  SelectModeView.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'SelectModeView',
     interfaces: [View]
   };
   function TestView() {
@@ -44331,9 +44119,15 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   };
   function main(args) {
     var tmp$, tmp$_0;
-    var width = Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE();
-    var height = Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE();
-    Game(GameConfig(void 0, toDouble(width.innerText), toDouble(height.innerText), $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
+    var width = 640.0;
+    var height = 960.0;
+    if (document.getElementById('width') != null) {
+      width = toDouble((Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE()).innerText);
+    }
+    if (document.getElementById('height') != null) {
+      height = toDouble((Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
+    }
+    Game(GameConfig(void 0, width, height, $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, Samsara_init(new UserDataHTML(), new RequestHandlerDummy())));
   }
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});
@@ -45228,7 +45022,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$PIXI, $module$pha
   package$view.Menu_init_yj8n83$ = Menu_init;
   package$view.Menu = Menu;
   package$view.OptionView = OptionView;
-  package$view.SelectModeView = SelectModeView;
   package$view.TestView = TestView;
   package$view.ScriptInfo = ScriptInfo;
   package$view.TutorialView_init_za3lpa$ = TutorialView_init;

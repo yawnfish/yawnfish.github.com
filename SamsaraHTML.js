@@ -16039,7 +16039,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
           case 1:
             throw this.exception_0;
           case 2:
-            if (this.local$depth <= 2) {
+            if (this.local$depth <= 3) {
               this.state_0 = 3;
               this.result_0 = delay(1, this);
               if (this.result_0 === COROUTINE_SUSPENDED)

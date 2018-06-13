@@ -16039,29 +16039,39 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
           case 1:
             throw this.exception_0;
           case 2:
-            this.state_0 = 3;
-            this.result_0 = delay(0, this);
-            if (this.result_0 === COROUTINE_SUSPENDED)
-              return COROUTINE_SUSPENDED;
-            continue;
+            if (this.local$depth <= 2) {
+              this.state_0 = 3;
+              this.result_0 = delay(1, this);
+              if (this.result_0 === COROUTINE_SUSPENDED)
+                return COROUTINE_SUSPENDED;
+              continue;
+            }
+             else {
+              this.state_0 = 4;
+              continue;
+            }
+
           case 3:
-            this.local$tmp$ = this.$this.height - 1 | 0;
-            this.local$y = 0;
             this.state_0 = 4;
             continue;
           case 4:
+            this.local$tmp$ = this.$this.height - 1 | 0;
+            this.local$y = 0;
+            this.state_0 = 5;
+            continue;
+          case 5:
             if (this.local$y > this.local$tmp$) {
-              this.state_0 = 15;
+              this.state_0 = 16;
               continue;
             }
 
             this.local$tmp$_0 = this.$this.width - 1 | 0;
             this.local$x = 0;
-            this.state_0 = 5;
+            this.state_0 = 6;
             continue;
-          case 5:
+          case 6:
             if (this.local$x > this.local$tmp$_0) {
-              this.state_0 = 13;
+              this.state_0 = 14;
               continue;
             }
 
@@ -16069,11 +16079,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
               return false;
             }
              else {
-              this.state_0 = 6;
+              this.state_0 = 7;
               continue;
             }
 
-          case 6:
+          case 7:
             var array = Array_0(this.local$temp.length);
             var tmp$_1;
             tmp$_1 = array.length - 1 | 0;
@@ -16103,23 +16113,23 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
                   return false;
                 }
                  else {
-                  this.state_0 = 7;
+                  this.state_0 = 8;
                   continue;
                 }
               }
                else {
-                this.state_0 = 8;
+                this.state_0 = 9;
                 continue;
               }
             }
              else {
-              this.state_0 = 11;
+              this.state_0 = 12;
               continue;
             }
 
-          case 7:
-            return true;
           case 8:
+            return true;
+          case 9:
             var tmp$_3 = this.local$test.slice();
             var tmp$_4 = this.local$depth + 1 | 0;
             var STRING$result;
@@ -16165,38 +16175,38 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
               STRING$result_0 = '';
             }
              while (false);
-            this.state_0 = 9;
+            this.state_0 = 10;
             this.result_0 = this.$this.isNoMoreMatch_nq05ln$(tmp$_3, tmp$_4, tmp$_5 + STRING$result_0 + ' ', this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
-          case 9:
+          case 10:
             if (this.result_0 === false) {
               return false;
             }
              else {
-              this.state_0 = 10;
+              this.state_0 = 11;
               continue;
             }
 
-          case 10:
-            this.state_0 = 11;
-            continue;
           case 11:
             this.state_0 = 12;
             continue;
           case 12:
-            this.local$x++;
-            this.state_0 = 5;
+            this.state_0 = 13;
             continue;
           case 13:
-            this.state_0 = 14;
+            this.local$x++;
+            this.state_0 = 6;
             continue;
           case 14:
-            this.local$y++;
-            this.state_0 = 4;
+            this.state_0 = 15;
             continue;
           case 15:
+            this.local$y++;
+            this.state_0 = 5;
+            continue;
+          case 16:
             return true;
         }
       }

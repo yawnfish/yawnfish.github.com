@@ -66,10 +66,13 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   var blendModes$ADD = $module$PIXI.blendModes.ADD;
   var TextStyle = $module$phaserKt.Phaser.TextStyle_5jhq38$;
   var reverse = Kotlin.kotlin.collections.reverse_vvxzk3$;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
+  var delay = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental.delay_za3lpa$;
   var UninitializedPropertyAccessException = Kotlin.kotlin.UninitializedPropertyAccessException;
   var compareBy = Kotlin.kotlin.comparisons.compareBy_bvgy4j$;
   var sortedWith = Kotlin.kotlin.collections.sortedWith_iwcb0m$;
-  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
+  var experimental = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental;
   var launch = $module$kotlinx_coroutines_core.kotlinx.coroutines.experimental.launch_35c74u$;
   var indexOf = Kotlin.kotlin.text.indexOf_l5u8uk$;
   var sortedWith_0 = Kotlin.kotlin.collections.sortedWith_eknfly$;
@@ -15988,102 +15991,226 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     }
     return BoardGenerator$Companion_instance;
   }
-  BoardGenerator.prototype.isNoMoreMatch_nq05ln$ = function (temp, depth, click) {
-    if (depth === void 0)
-      depth = 0;
-    if (click === void 0)
-      click = '';
-    var tmp$, tmp$_0, tmp$_1, tmp$_2;
-    if (depth > 9) {
-      return false;
-    }
-    tmp$ = this.height - 1 | 0;
-    for (var y = 0; y <= tmp$; y++) {
-      tmp$_0 = this.width - 1 | 0;
-      for (var x = 0; x <= tmp$_0; x++) {
-        if (this.cancelFind === true) {
-          return false;
-        }
-        var array = Array_0(temp.length);
-        var tmp$_3;
-        tmp$_3 = array.length - 1 | 0;
-        for (var i = 0; i <= tmp$_3; i++) {
-          var array_0 = Array_0(temp[0].length);
-          var tmp$_4;
-          tmp$_4 = array_0.length - 1 | 0;
-          for (var i_0 = 0; i_0 <= tmp$_4; i_0++) {
-            array_0[i_0] = new Pair(-1, -1);
-          }
-          array[i] = array_0;
-        }
-        var test = array;
-        tmp$_1 = this.height - 1 | 0;
-        for (var y_0 = 0; y_0 <= tmp$_1; y_0++) {
-          tmp$_2 = this.width - 1 | 0;
-          for (var x_0 = 0; x_0 <= tmp$_2; x_0++) {
-            test[x_0][y_0] = temp[x_0][y_0].copy_xwzc9p$();
-          }
-        }
-        if (test[x][y].second === 0) {
-          this.increaseChainedTile_aatw4l$(test, x, y);
-          if (this.isNoMoreTouch_9kzzq3$(test) === true) {
-            if (this.checkComplete_9kzzq3$(test) === true) {
+  BoardGenerator.prototype.isNoMoreMatch_nq05ln$ = function (temp_0, depth_0, click_0, continuation_0, suspended) {
+    var instance = new Coroutine$isNoMoreMatch_nq05ln$(this, temp_0, depth_0, click_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
+  };
+  function Coroutine$isNoMoreMatch_nq05ln$($this, temp_0, depth_0, click_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.$this = $this;
+    this.local$tmp$ = void 0;
+    this.local$tmp$_0 = void 0;
+    this.local$y = void 0;
+    this.local$x = void 0;
+    this.local$test = void 0;
+    this.local$temp = temp_0;
+    this.local$depth = depth_0;
+    this.local$click = click_0;
+  }
+  Coroutine$isNoMoreMatch_nq05ln$.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$isNoMoreMatch_nq05ln$.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$isNoMoreMatch_nq05ln$.prototype.constructor = Coroutine$isNoMoreMatch_nq05ln$;
+  Coroutine$isNoMoreMatch_nq05ln$.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            if (this.local$depth === void 0)
+              this.local$depth = 0;
+            if (this.local$click === void 0)
+              this.local$click = '';
+            var tmp$, tmp$_0;
+            if (this.local$depth > 9) {
               return false;
             }
+             else {
+              this.state_0 = 2;
+              continue;
+            }
+
+          case 1:
+            throw this.exception_0;
+          case 2:
+            this.state_0 = 3;
+            this.result_0 = delay(0, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 3:
+            this.local$tmp$ = this.$this.height - 1 | 0;
+            this.local$y = 0;
+            this.state_0 = 4;
+            continue;
+          case 4:
+            if (this.local$y > this.local$tmp$) {
+              this.state_0 = 15;
+              continue;
+            }
+
+            this.local$tmp$_0 = this.$this.width - 1 | 0;
+            this.local$x = 0;
+            this.state_0 = 5;
+            continue;
+          case 5:
+            if (this.local$x > this.local$tmp$_0) {
+              this.state_0 = 13;
+              continue;
+            }
+
+            if (this.$this.cancelFind === true) {
+              return false;
+            }
+             else {
+              this.state_0 = 6;
+              continue;
+            }
+
+          case 6:
+            var array = Array_0(this.local$temp.length);
+            var tmp$_1;
+            tmp$_1 = array.length - 1 | 0;
+            for (var i = 0; i <= tmp$_1; i++) {
+              var array_0 = Array_0(this.local$temp[0].length);
+              var tmp$_2;
+              tmp$_2 = array_0.length - 1 | 0;
+              for (var i_0 = 0; i_0 <= tmp$_2; i_0++) {
+                array_0[i_0] = new Pair(-1, -1);
+              }
+              array[i] = array_0;
+            }
+
+            this.local$test = array;
+            tmp$ = this.$this.height - 1 | 0;
+            for (var y = 0; y <= tmp$; y++) {
+              tmp$_0 = this.$this.width - 1 | 0;
+              for (var x = 0; x <= tmp$_0; x++) {
+                this.local$test[x][y] = this.local$temp[x][y].copy_xwzc9p$();
+              }
+            }
+
+            if (this.local$test[this.local$x][this.local$y].second === 0) {
+              this.$this.increaseChainedTile_aatw4l$(this.local$test, this.local$x, this.local$y);
+              if (this.$this.isNoMoreTouch_9kzzq3$(this.local$test) === true) {
+                if (this.$this.checkComplete_9kzzq3$(this.local$test) === true) {
+                  return false;
+                }
+                 else {
+                  this.state_0 = 7;
+                  continue;
+                }
+              }
+               else {
+                this.state_0 = 8;
+                continue;
+              }
+            }
+             else {
+              this.state_0 = 11;
+              continue;
+            }
+
+          case 7:
             return true;
-          }
-          var tmp$_5 = test.slice();
-          var tmp$_6 = depth + 1 | 0;
-          var STRING$result;
-          STRING$break: do {
-            if (Kotlin.isNumber(x)) {
-              STRING$result = x.toString();
-              break STRING$break;
+          case 8:
+            var tmp$_3 = this.local$test.slice();
+            var tmp$_4 = this.local$depth + 1 | 0;
+            var STRING$result;
+            STRING$break: do {
+              if (Kotlin.isNumber(this.local$x)) {
+                STRING$result = this.local$x.toString();
+                break STRING$break;
+              }
+               else if (typeof this.local$x === 'string') {
+                STRING$result = this.local$x;
+                break STRING$break;
+              }
+               else if (typeof this.local$x === 'boolean') {
+                STRING$result = this.local$x.toString();
+                break STRING$break;
+              }
+               else if (Kotlin.isChar(this.local$x)) {
+                STRING$result = this.local$x.toString();
+                break STRING$break;
+              }
+              STRING$result = '';
             }
-             else if (typeof x === 'string') {
-              STRING$result = x;
-              break STRING$break;
+             while (false);
+            var tmp$_5 = this.local$click + STRING$result + ',';
+            var STRING$result_0;
+            STRING$break: do {
+              if (Kotlin.isNumber(this.local$y)) {
+                STRING$result_0 = this.local$y.toString();
+                break STRING$break;
+              }
+               else if (typeof this.local$y === 'string') {
+                STRING$result_0 = this.local$y;
+                break STRING$break;
+              }
+               else if (typeof this.local$y === 'boolean') {
+                STRING$result_0 = this.local$y.toString();
+                break STRING$break;
+              }
+               else if (Kotlin.isChar(this.local$y)) {
+                STRING$result_0 = this.local$y.toString();
+                break STRING$break;
+              }
+              STRING$result_0 = '';
             }
-             else if (typeof x === 'boolean') {
-              STRING$result = x.toString();
-              break STRING$break;
+             while (false);
+            this.state_0 = 9;
+            this.result_0 = this.$this.isNoMoreMatch_nq05ln$(tmp$_3, tmp$_4, tmp$_5 + STRING$result_0 + ' ', this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 9:
+            if (this.result_0 === false) {
+              return false;
             }
-             else if (Kotlin.isChar(x)) {
-              STRING$result = x.toString();
-              break STRING$break;
+             else {
+              this.state_0 = 10;
+              continue;
             }
-            STRING$result = '';
-          }
-           while (false);
-          var tmp$_7 = click + STRING$result + ',';
-          var STRING$result_0;
-          STRING$break: do {
-            if (Kotlin.isNumber(y)) {
-              STRING$result_0 = y.toString();
-              break STRING$break;
-            }
-             else if (typeof y === 'string') {
-              STRING$result_0 = y;
-              break STRING$break;
-            }
-             else if (typeof y === 'boolean') {
-              STRING$result_0 = y.toString();
-              break STRING$break;
-            }
-             else if (Kotlin.isChar(y)) {
-              STRING$result_0 = y.toString();
-              break STRING$break;
-            }
-            STRING$result_0 = '';
-          }
-           while (false);
-          if (this.isNoMoreMatch_nq05ln$(tmp$_5, tmp$_6, tmp$_7 + STRING$result_0 + ' ') === false) {
-            return false;
-          }
+
+          case 10:
+            this.state_0 = 11;
+            continue;
+          case 11:
+            this.state_0 = 12;
+            continue;
+          case 12:
+            this.local$x++;
+            this.state_0 = 5;
+            continue;
+          case 13:
+            this.state_0 = 14;
+            continue;
+          case 14:
+            this.local$y++;
+            this.state_0 = 4;
+            continue;
+          case 15:
+            return true;
         }
       }
-    }
-    return true;
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
   };
   BoardGenerator.prototype.countKindOf_9kzzq3$ = function (temp) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
@@ -20029,12 +20156,21 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       try {
         switch (this.state_0) {
           case 0:
+            println('NO MORE MATCH THREAD: Start');
             this.local$this$Game.boardGenerator.running = true;
-            var result = this.local$this$Game.boardGenerator.isNoMoreMatch_nq05ln$(this.local$closure$temp.v.slice());
-            this.local$closure$callback(result);
-            return this.local$this$Game.boardGenerator.running = false, Unit;
+            this.state_0 = 2;
+            this.result_0 = this.local$this$Game.boardGenerator.isNoMoreMatch_nq05ln$(this.local$closure$temp.v.slice(), void 0, void 0, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
           case 1:
             throw this.exception_0;
+          case 2:
+            var result = this.result_0;
+            println('NO MORE MATCH THREAD: ' + toString(result));
+            println('checkComplete Count: ' + BoardGenerator$Companion_getInstance().checkCompleteCount.toString());
+            this.local$closure$callback(result);
+            return this.local$this$Game.boardGenerator.running = false, Unit;
         }
       }
        catch (e) {
@@ -20230,7 +20366,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       }
     }
     this.boardGenerator.cancelFindNoMoreMatch();
-    var nonBlock = launch(void 0, void 0, void 0, void 0, Game$checkNoMoreMatch$lambda(this, temp, callback));
+    var nonBlock = launch(experimental.Unconfined, void 0, void 0, void 0, Game$checkNoMoreMatch$lambda(this, temp, callback));
   };
   Game_0.prototype.isIdle = function () {
     if (this.isPaused === true || this.isPausedOnlyForLogic === true) {
@@ -32903,7 +33039,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     var tmp$;
     $this.subValue = subValue;
     $this.SetImage();
-    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) >= 2) {
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1) >= 2) {
       var yMotion = Wave_init(1.0);
       yMotion.SetScale_mx4ult$(game.gameConfigure.tileHeight * 0.05);
       (tmp$ = $this.sprite) != null ? (tmp$.SetYMotion_vn0wwp$(yMotion, true), Unit) : null;
@@ -33671,7 +33807,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     (tmp$_0 = $this.sprite) != null ? (tmp$_0.SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance()), Unit) : null;
     (tmp$_1 = $this.sprite) != null ? (tmp$_1.SetVerticalAlign_qn2em6$(VerticalAlign$center_getInstance()), Unit) : null;
     game.view.GetMask().addChild_g5h3xp$(ensureNotNull($this.sprite));
-    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0) >= 2) {
+    if (DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1) >= 2) {
       (tmp$_2 = game.view.screen) != null ? (tmp$_2.actionFadeLoop_xukj3e$('blink', 0.6, 0.6, 1.0, $this.sprite, ObstacleEntity_init$lambda($this)), Unit) : null;
     }
     return $this;
@@ -36963,7 +37099,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     if (max === void 0)
       max = 30;
     var tmp$;
-    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
     if (quality < 1) {
       return;
     }
@@ -39305,7 +39441,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     this.SetChildHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
     this.createSprite_591x4d$(160.0, 240.0, SceneLayer$spaceDeep_getInstance().value, 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, false);
     SoundManager$Companion_getInstance().shared().BGMFadeIn_o5txl1$(ensureNotNull(this.screen), 'MainBGM', 100.0, 0.3);
-    this.game.quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 2);
+    this.game.quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
     println('Game Quality : ' + this.game.quality.toString());
     switch (this.game.quality) {
       case 0:
@@ -40822,7 +40958,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     if (max === void 0)
       max = 30;
     var tmp$;
-    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
     if (quality < 1) {
       return;
     }
@@ -41901,7 +42037,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     if (max === void 0)
       max = 30;
     var tmp$;
-    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 0);
+    var quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
     if (quality < 1) {
       return;
     }
@@ -43342,7 +43478,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       this$TutorialView.game = Tutorial_init(configure);
       this$TutorialView.game.SetBoardIndex_3oypbd$(closure$map, closure$block, void 0, closure$reuseBlock, closure$reuseWhenNoMoreMove, closure$resetClearBlockCount);
       this$TutorialView.game.item = toMutableList(closure$item);
-      this$TutorialView.game.quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 2);
+      this$TutorialView.game.quality = DataUtil$Companion_getInstance().GetInteger_hh7mhe$(DataKey$BATTERY_USAGE_MODE_getInstance(), void 0, 1);
       this$TutorialView.gameView = View_init();
       this$TutorialView.gameView.positionScale = Scale$Companion_getInstance().copy_3fer1j$(this$TutorialView.positionScale);
       this$TutorialView.gameView.sizeScale = Scale$Companion_getInstance().copy_3fer1j$(this$TutorialView.sizeScale);

@@ -15003,8 +15003,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     return function (info) {
       if (info.count === 1) {
         closure$sound.SetMixerVolume_mx4ult$(this$SoundManager.bgmVolume);
+        this$SoundManager.addToPlayingQueue_k8wy15$(closure$sound, -1);
       }
-      this$SoundManager.addToPlayingQueue_k8wy15$(closure$sound, -1);
       var newVolume = closure$sound.GetCurrentVolume() * VOLUME_MAX + closure$delta * info.elapsed;
       if (newVolume > closure$volume) {
         newVolume = closure$volume;
@@ -37473,14 +37473,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     if (equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('Demo'), 'true')) {
       this.bannerOffset = 0.0;
     }
-     else {
-      if (!equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('AppLovin'), 'true')) {
-        if (AppController$Companion_getInstance().shared().isBannerReady() === true) {
-          AppController$Companion_getInstance().shared().showAds_6taknv$(true);
-          this.bannerOffset = AppController$Companion_getInstance().shared().getAdsHeight() / this.sizeScale.yRatio;
-        }
-      }
-    }
     HAL$Companion_getInstance().shared().SetTitle_61zpoe$('');
     HAL$Companion_getInstance().shared().changeFPS_za3lpa$(30);
     HAL$Companion_getInstance().shared().SetBackgroundColor_qt1dr2$(28, 28, 28);
@@ -38543,7 +38535,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       }
       (tmp$_2 = this$GameOverView.background) != null ? (tmp$_2.SetColor_vnjrmz$(closure$currentColor.v), Unit) : null;
       if (this$GameOverView.newRecord === false && this$GameOverView.perfectPlay === false) {
-        if (info.age > closure$prevCreateTime.v + 0.25 && this$GameOverView.particleManager.GetTotalParticleCount() < 60) {
+        var interval = 0.25;
+        if (this$GameOverView.game.quality < 2) {
+          interval = 0.5;
+        }
+        if (info.age > closure$prevCreateTime.v + interval && this$GameOverView.particleManager.GetTotalParticleCount() < 60) {
           this$GameOverView.createStar();
           closure$prevCreateTime.v = info.age;
         }
@@ -39177,7 +39173,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   }
   GameOverView.prototype.fireworkEffect = function () {
     var tmp$;
-    if (this.game.quality < 2) {
+    if (this.game.quality < 1) {
       return;
     }
     var cameraInitial = Camera_init_0(20.0, Position_init(0.0, 0.0, -300.0), Position_init(0.0, 0.0, 0.0), Position_init(0.0, 0.0, 0.0), 90.0, 1600.0, 200.0, 100.0);

@@ -40863,6 +40863,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   MainMenuView.prototype.beforeDetached = function () {
     var tmp$, tmp$_0;
     this.screenToggle.destroy();
+    $module$PIXI.game.scale.onFullScreenChange.removeAll(this);
     this.removeAction_sbe383$('Title Effect');
     (tmp$ = this.particleManager) != null ? (tmp$.clearParticlePool(), Unit) : null;
     this.particleManager = null;

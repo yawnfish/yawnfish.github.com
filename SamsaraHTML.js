@@ -40773,26 +40773,43 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     this.particleManagerForFairy = ParticleManager_init(this);
     this.createBackgroundEffect_v32r7z$(ensureNotNull(this.particleManagerForFairy), Rect_init(0.0, 160.0, 320.0, 320.0));
     (tmp$_2 = this.screen) != null ? (tmp$_2.addKeydownListener_5ol7k9$('Back Key', MainMenuView$afterAttached$lambda(this, menu)), Unit) : null;
-    this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
-      return $receiver.screenToggleButton(), Unit;
-    }.bind(null, this)), this, 0, 0, 0);
+    if ($module$PIXI.game.scale.isFullScreen) {
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'window', getCallableRef('screenToggleButton', function ($receiver) {
+        return $receiver.screenToggleButton(), Unit;
+      }.bind(null, this)), this, 0, 0, 0);
+    }
+     else {
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
+        return $receiver.screenToggleButton(), Unit;
+      }.bind(null, this)), this, 0, 0, 0);
+    }
     this.screenToggle.width = 60.0;
     this.screenToggle.height = 60.0;
+    $module$PIXI.game.scale.onFullScreenChange.add(getCallableRef('onChangeFullScreen', function ($receiver, scale) {
+      return $receiver.onChangeFullScreen_nwh8sm$(scale), Unit;
+    }.bind(null, this)), this);
   };
   MainMenuView.prototype.screenToggleButton = function () {
     if ($module$PIXI.game.scale.isFullScreen) {
       $module$PIXI.game.scale.stopFullScreen();
+    }
+     else {
+      $module$PIXI.game.scale.startFullScreen();
+    }
+  };
+  MainMenuView.prototype.onChangeFullScreen_nwh8sm$ = function (scale) {
+    if ($module$PIXI.game.scale.isFullScreen) {
+      $module$PIXI.game.scale.startFullScreen();
       this.screenToggle.destroy();
-      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'window', getCallableRef('screenToggleButton', function ($receiver) {
         return $receiver.screenToggleButton(), Unit;
       }.bind(null, this)), this, 0, 0, 0);
       this.screenToggle.width = 60.0;
       this.screenToggle.height = 60.0;
     }
      else {
-      $module$PIXI.game.scale.startFullScreen();
       this.screenToggle.destroy();
-      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'window', getCallableRef('screenToggleButton', function ($receiver) {
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
         return $receiver.screenToggleButton(), Unit;
       }.bind(null, this)), this, 0, 0, 0);
       this.screenToggle.width = 60.0;

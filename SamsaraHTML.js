@@ -60,6 +60,8 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   var toString = Kotlin.toString;
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
   var destroy = $module$phaserKt.Phaser.destroyKt;
+  var getCallableRef = Kotlin.getCallableRef;
+  var KeyCode$Companion = $module$Phaser.KeyCode;
   var numberToDouble = Kotlin.numberToDouble;
   var sortWith = Kotlin.kotlin.collections.sortWith_nqfjgj$;
   var blendModes$NORMAL = $module$PIXI.blendModes.NORMAL;
@@ -12968,8 +12970,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   }
   BootLoader.prototype.preload = function () {
     this.game.scale.scaleMode = ScaleManager$Companion.SHOW_ALL;
+    this.game.scale.fullScreenScaleMode = ScaleManager$Companion.SHOW_ALL;
     this.game.load.image('loading1', 'Resource/UI/Loading1.png');
     this.game.load.image('loading2', 'Resource/UI/Loading2.png');
+    this.game.load.image('fullscreen', 'Resource/UI/IconFullscreen.png');
+    this.game.load.image('window', 'Resource/UI/IconWindow.png');
   };
   BootLoader.prototype.create = function () {
     var w = this.game.width;
@@ -13140,6 +13145,12 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     var pos = HAL$Companion_getInstance().shared().convertCoordinate_dleff0$(touch.x, touch.y);
     HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(pos.x, pos.y, TouchListener$State$ended_getInstance());
   }
+  function Samsara$startPhantom$lambda_1(it) {
+    return Unit;
+  }
+  function Samsara$startPhantom$lambda_2(it) {
+    return Unit;
+  }
   Samsara.prototype.startPhantom = function () {
     equals(SystemConfigure$Companion_getInstance().GetConfigure_jyasbz$('Memory Test'), 'false');
     this.deviceScene.initialize();
@@ -13158,6 +13169,60 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     this.game.input.mouse.capture = true;
     this.game.input.onDown.add(Samsara$startPhantom$lambda);
     this.game.input.onUp.add(Samsara$startPhantom$lambda_0);
+    this.game.input.keyboard.addCallbacks(this, Samsara$startPhantom$lambda_1, Samsara$startPhantom$lambda_2, getCallableRef('keyPress', function ($receiver, char) {
+      return $receiver.keyPress_s8itvh$(unboxChar(char)), Unit;
+    }.bind(null, this)));
+  };
+  Samsara.prototype.keyPress_s8itvh$ = function (char) {
+    var tmp$;
+    var code = 0;
+    tmp$ = this.game.input.keyboard.lastKey.keyCode;
+    if (equals(tmp$, KeyCode$Companion.U))
+      code = TouchListener$Code_getInstance().U;
+    else if (equals(tmp$, KeyCode$Companion.I))
+      code = TouchListener$Code_getInstance().I;
+    else if (equals(tmp$, KeyCode$Companion.O))
+      code = TouchListener$Code_getInstance().O;
+    else if (equals(tmp$, KeyCode$Companion.J))
+      code = TouchListener$Code_getInstance().J;
+    else if (equals(tmp$, KeyCode$Companion.K))
+      code = TouchListener$Code_getInstance().K;
+    else if (equals(tmp$, KeyCode$Companion.L))
+      code = TouchListener$Code_getInstance().L;
+    else if (equals(tmp$, KeyCode$Companion.M))
+      code = TouchListener$Code_getInstance().M;
+    else if (equals(tmp$, KeyCode$Companion.COMMA))
+      code = TouchListener$Code_getInstance().COMMA;
+    else if (equals(tmp$, KeyCode$Companion.PERIOD))
+      code = TouchListener$Code_getInstance().PERIOD;
+    else if (equals(tmp$, KeyCode$Companion.ONE))
+      code = TouchListener$Code_getInstance().NUMPAD_1;
+    else if (equals(tmp$, KeyCode$Companion.TWO))
+      code = TouchListener$Code_getInstance().NUMPAD_2;
+    else if (equals(tmp$, KeyCode$Companion.THREE))
+      code = TouchListener$Code_getInstance().NUMPAD_3;
+    else if (equals(tmp$, KeyCode$Companion.FOUR))
+      code = TouchListener$Code_getInstance().NUMPAD_4;
+    else if (equals(tmp$, KeyCode$Companion.FIVE))
+      code = TouchListener$Code_getInstance().NUMPAD_5;
+    else if (equals(tmp$, KeyCode$Companion.SIX))
+      code = TouchListener$Code_getInstance().NUMPAD_6;
+    else if (equals(tmp$, KeyCode$Companion.SEVEN))
+      code = TouchListener$Code_getInstance().NUMPAD_7;
+    else if (equals(tmp$, KeyCode$Companion.EIGHT))
+      code = TouchListener$Code_getInstance().NUMPAD_8;
+    else if (equals(tmp$, KeyCode$Companion.NINE))
+      code = TouchListener$Code_getInstance().NUMPAD_9;
+    else if (equals(tmp$, KeyCode$Companion.ENTER))
+      code = TouchListener$Code_getInstance().ENTER;
+    else if (equals(tmp$, KeyCode$Companion.X))
+      code = TouchListener$Code_getInstance().ESCAPE;
+    if (code !== 0) {
+      HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(0.0, 0.0, TouchListener$State$keydown_getInstance(), code);
+    }
+    if (equals(this.game.input.keyboard.lastChar, 'f')) {
+      this.game.scale.startFullScreen();
+    }
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
@@ -40587,6 +40652,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     this.bg = null;
     this.notice = null;
     this.music_e6wunb$_0 = this.music_e6wunb$_0;
+    this.screenToggle_6i50om$_0 = this.screenToggle_6i50om$_0;
     this.bottomMenuItem = MainMenuView$bottomMenuItem$lambda(this);
     this.menuCallback = MainMenuView$menuCallback$lambda(this);
   }
@@ -40600,8 +40666,44 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       this.music_e6wunb$_0 = music;
     }
   });
+  Object.defineProperty(MainMenuView.prototype, 'screenToggle', {
+    get: function () {
+      if (this.screenToggle_6i50om$_0 == null)
+        return throwUPAE('screenToggle');
+      return this.screenToggle_6i50om$_0;
+    },
+    set: function (screenToggle) {
+      this.screenToggle_6i50om$_0 = screenToggle;
+    }
+  });
+  function MainMenuView$afterAttached$lambda$lambda$lambda() {
+    AppController$Companion_getInstance().shared().Shutdown();
+    return Unit;
+  }
+  function MainMenuView$afterAttached$lambda$lambda(this$MainMenuView) {
+    return function (button) {
+      var tmp$;
+      Util$Companion_getInstance().closeNotice();
+      if (equals(button, 'ok')) {
+        (tmp$ = this$MainMenuView.screen) != null ? (tmp$.actionDelay_ab0iom$(0.5, void 0, MainMenuView$afterAttached$lambda$lambda$lambda), Unit) : null;
+      }
+    };
+  }
+  function MainMenuView$afterAttached$lambda(this$MainMenuView, closure$menu) {
+    return function (code) {
+      if (code === TouchListener$Code_getInstance().ESCAPE || code === TouchListener$Code_getInstance().BACK) {
+        Util$Companion_getInstance().showNotice_sprpts$(this$MainMenuView, local('MENU_52') + '\n\n\n[Button Resource/UI/IconYes 50 ok]           [Button Resource/UI/IconNo 50 no]', void 0, void 0, void 0, MainMenuView$afterAttached$lambda$lambda(this$MainMenuView));
+        return true;
+      }
+       else if (code === TouchListener$Code_getInstance().ENTER) {
+        closure$menu.click_za3lpa$(0);
+        return true;
+      }
+      return false;
+    };
+  }
   MainMenuView.prototype.afterAttached = function () {
-    var tmp$, tmp$_0, tmp$_1;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
     HAL$Companion_getInstance().shared().SetBackgroundColor_qt1dr2$(28, 28, 28);
     (tmp$ = this.screen) != null ? (tmp$.isDrawTouchMark = true) : null;
     this.SetChildVerticalAlign_qn2em6$(VerticalAlign$center_getInstance());
@@ -40670,6 +40772,32 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     this.showBottomMenu();
     this.particleManagerForFairy = ParticleManager_init(this);
     this.createBackgroundEffect_v32r7z$(ensureNotNull(this.particleManagerForFairy), Rect_init(0.0, 160.0, 320.0, 320.0));
+    (tmp$_2 = this.screen) != null ? (tmp$_2.addKeydownListener_5ol7k9$('Back Key', MainMenuView$afterAttached$lambda(this, menu)), Unit) : null;
+    this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
+      return $receiver.screenToggleButton(), Unit;
+    }.bind(null, this)), this, 0, 0, 0);
+    this.screenToggle.width = 60.0;
+    this.screenToggle.height = 60.0;
+  };
+  MainMenuView.prototype.screenToggleButton = function () {
+    if ($module$PIXI.game.scale.isFullScreen) {
+      $module$PIXI.game.scale.stopFullScreen();
+      this.screenToggle.destroy();
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'fullscreen', getCallableRef('screenToggleButton', function ($receiver) {
+        return $receiver.screenToggleButton(), Unit;
+      }.bind(null, this)), this, 0, 0, 0);
+      this.screenToggle.width = 60.0;
+      this.screenToggle.height = 60.0;
+    }
+     else {
+      $module$PIXI.game.scale.startFullScreen();
+      this.screenToggle.destroy();
+      this.screenToggle = $module$PIXI.game.add.button(10, 10, 'window', getCallableRef('screenToggleButton', function ($receiver) {
+        return $receiver.screenToggleButton(), Unit;
+      }.bind(null, this)), this, 0, 0, 0);
+      this.screenToggle.width = 60.0;
+      this.screenToggle.height = 60.0;
+    }
   };
   MainMenuView.prototype.showBlockMenU = function () {
     var tileSize = 40.0;
@@ -40717,6 +40845,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   };
   MainMenuView.prototype.beforeDetached = function () {
     var tmp$, tmp$_0;
+    this.screenToggle.destroy();
     this.removeAction_sbe383$('Title Effect');
     (tmp$ = this.particleManager) != null ? (tmp$.clearParticlePool(), Unit) : null;
     this.particleManager = null;
@@ -41021,7 +41150,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
         return new BlockTypeView();
       }
        else if (index === 2) {
-        return new OptionView();
+        $module$PIXI.game.scale.startFullScreen();
       }
       return null;
     };
@@ -44279,10 +44408,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   RequestHandlerDummy.prototype.submitScore_ds2soj$ = function (leaderboard, score, tag) {
   };
   RequestHandlerDummy.prototype.getVersionName = function () {
-    return '1.6.0';
+    return '1.6.1';
   };
   RequestHandlerDummy.prototype.getVersionCode = function () {
-    return 50;
+    return 51;
   };
   RequestHandlerDummy.prototype.getFile_61zpoe$ = function (file) {
     return '';

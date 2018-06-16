@@ -41168,7 +41168,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
         return new BlockTypeView();
       }
        else if (index === 2) {
-        $module$PIXI.game.scale.startFullScreen();
+        return new OptionView();
       }
       return null;
     };

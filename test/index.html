@@ -14,7 +14,16 @@
 </head>
 <body style="background: #2D2535;">
 <div id="container" style="height: 100%; text-align:center; background: #2D2535;">
-    <div id="gameDiv" style="width: 100%; max-width: 480px; padding-top: 12.5%; padding-bottom: 87.5%; max-height: 720px; display: inline-block;"></div>
+    <!--div id="gameDiv" style="width: 100%; max-width: 480px; padding-top: 12.5%; padding-bottom: 87.5%; max-height: 720px; display: inline-block;"></div-->
+    <div id="gameDiv" style="width: 100%; max-width: 480px; max-height: 720px; display: inline-block;">
+    </div>
+    <div>
+        <h1 style="color:white;">HOW TO PLAY</h1>
+        <p style="color:white;">Touch and Cycle tiles.<br>
+            0 -> 1 -> 2 -> 3 -> 0 ...<br></p>
+        <p style="color:white;">You can only touch once to change a tile. Linked tiles change together!<br>
+            3 consecutive tiles with the same number will explode!</p>
+    </div>
 </div>
 <script src="phaser.min.js"></script>
 <script src="lib/kotlin.js"></script>
@@ -23,7 +32,4 @@
 <script src="lib/kotlinx-coroutines-core.js"></script>
 <script src="SamsaraHTML.js"></script>
 </body>
-<footer>
-    <div><p>Samsara - Stones of Eterntiy</p></div>
-</footer>
 </html>

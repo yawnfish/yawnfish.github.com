@@ -13298,9 +13298,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     if (code !== 0) {
       HAL$Companion_getInstance().shared().addInputQueue_o3bepn$(0.0, 0.0, TouchListener$State$keydown_getInstance(), code);
     }
-    if (equals(this.game.input.keyboard.lastChar, 'f')) {
-      this.game.scale.startFullScreen();
-    }
   };
   Samsara.prototype.update = function () {
     var elapsed = numberToDouble(this.game.time.elapsedMS);
@@ -40878,16 +40875,17 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     }.bind(null, this)), this);
   };
   MainMenuView.prototype.screenToggleButton = function () {
+    var tmp$;
     if ($module$PIXI.game.scale.isFullScreen) {
       $module$PIXI.game.scale.stopFullScreen();
     }
      else {
       $module$PIXI.game.scale.startFullScreen();
+      (Kotlin.isType(tmp$ = $module$PIXI.game.canvas.parentElement, HTMLElement) ? tmp$ : throwCCE()).style.backgroundColor = '#2D2535';
     }
   };
   MainMenuView.prototype.onChangeFullScreen_nwh8sm$ = function (scale) {
     if ($module$PIXI.game.scale.isFullScreen) {
-      $module$PIXI.game.scale.startFullScreen();
       this.screenToggle.destroy();
       this.screenToggle = $module$PIXI.game.add.button(10, 10, 'window', getCallableRef('screenToggleButton', function ($receiver) {
         return $receiver.screenToggleButton(), Unit;

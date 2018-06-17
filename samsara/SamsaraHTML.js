@@ -16,18 +16,21 @@ if (typeof this['kotlinx-coroutines-core'] === 'undefined') {
 var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module$PIXI, $module$kotlinx_coroutines_core) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
+  var Unit = Kotlin.kotlin.Unit;
   var Kind_CLASS = Kotlin.Kind.CLASS;
+  var throwCCE = Kotlin.throwCCE;
+  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
+  var GameConfig = $module$phaserKt.Phaser.GameConfig_a28mr1$;
+  var Game = $module$phaserKt.Phaser.Game_lcgo3e$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var ensureNotNull = Kotlin.ensureNotNull;
-  var Unit = Kotlin.kotlin.Unit;
   var withIndex = Kotlin.kotlin.collections.withIndex_7wnvza$;
   var reversed = Kotlin.kotlin.collections.reversed_7wnvza$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var numberToInt = Kotlin.numberToInt;
   var Any = Object;
-  var throwCCE = Kotlin.throwCCE;
   var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
   var IntRange = Kotlin.kotlin.ranges.IntRange;
   var slice = Kotlin.kotlin.text.slice_fc3b62$;
@@ -53,7 +56,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   var toInt_0 = Kotlin.kotlin.text.toInt_pdl1vz$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
-  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var ScaleManager$Companion = $module$Phaser.ScaleManager;
   var start = $module$phaserKt.Phaser.start_ba683k$;
   var State = $module$Phaser.State;
@@ -82,8 +84,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   var toMutableList = Kotlin.kotlin.collections.toMutableList_tmsbgo$;
   var toMutableMap = Kotlin.kotlin.collections.toMutableMap_abgq59$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
-  var GameConfig = $module$phaserKt.Phaser.GameConfig_a28mr1$;
-  var Game = $module$phaserKt.Phaser.Game_lcgo3e$;
   SoundCategory.prototype = Object.create(Enum.prototype);
   SoundCategory.prototype.constructor = SoundCategory;
   TimerState.prototype = Object.create(Enum.prototype);
@@ -232,6 +232,87 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   TestView.prototype.constructor = TestView;
   TutorialView.prototype = Object.create(View.prototype);
   TutorialView.prototype.constructor = TutorialView;
+  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  function UserDataHTML() {
+    this.data = LinkedHashMap_init();
+  }
+  UserDataHTML.prototype.SetPref_za3rmp$ = function (pref) {
+  };
+  UserDataHTML.prototype.Get_61zpoe$ = function (forKey) {
+    return localStorage.getItem(forKey);
+  };
+  UserDataHTML.prototype.Set_puj7f4$ = function (value, forKey) {
+    localStorage.setItem(forKey, value);
+  };
+  UserDataHTML.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'UserDataHTML',
+    interfaces: [UserLocalData]
+  };
+  function RequestHandlerDummy() {
+  }
+  RequestHandlerDummy.prototype.isLogin = function () {
+    return false;
+  };
+  RequestHandlerDummy.prototype.loginIntent = function () {
+  };
+  RequestHandlerDummy.prototype.showLeaderboard = function () {
+  };
+  RequestHandlerDummy.prototype.submitScore_ds2soj$ = function (leaderboard, score, tag) {
+  };
+  RequestHandlerDummy.prototype.getVersionName = function () {
+    return '1.6.2';
+  };
+  RequestHandlerDummy.prototype.getVersionCode = function () {
+    return 52;
+  };
+  RequestHandlerDummy.prototype.getFile_61zpoe$ = function (file) {
+    return '';
+  };
+  RequestHandlerDummy.prototype.isGrantedExternal = function () {
+    return false;
+  };
+  RequestHandlerDummy.prototype.getGrantExternal_6zcd6v$ = function (callback) {
+  };
+  RequestHandlerDummy.prototype.shareSocial_61zpoe$ = function (path) {
+    return false;
+  };
+  RequestHandlerDummy.prototype.isBannerReady = function () {
+    return false;
+  };
+  RequestHandlerDummy.prototype.showAds_6taknv$ = function (show) {
+  };
+  RequestHandlerDummy.prototype.getHeight = function () {
+    return 0;
+  };
+  RequestHandlerDummy.prototype.showInterstitial_6zcd6v$ = function (callabck) {
+    return false;
+  };
+  RequestHandlerDummy.prototype.isRewardReady = function () {
+    return false;
+  };
+  RequestHandlerDummy.prototype.playRewarded_6zcd6v$ = function (callabck) {
+    return false;
+  };
+  RequestHandlerDummy.prototype.setAdsMute_6taknv$ = function (mute) {
+  };
+  RequestHandlerDummy.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'RequestHandlerDummy',
+    interfaces: [IActivityRequestHandler]
+  };
+  function main(args) {
+    var tmp$, tmp$_0;
+    var width = 640.0;
+    var height = 960.0;
+    if (document.getElementById('width') != null) {
+      width = toDouble((Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE()).innerText);
+    }
+    if (document.getElementById('height') != null) {
+      height = toDouble((Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
+    }
+    Game(GameConfig(void 0, width, height, $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, BootLoader_init(new UserDataHTML(), new RequestHandlerDummy())));
+  }
   function TouchInfo(x, y, event, code) {
     this.x = x;
     this.y = y;
@@ -754,7 +835,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     simpleName: 'ResourceManager',
     interfaces: []
   };
-  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
   function TextureManager() {
     TextureManager$Companion_getInstance();
     this.dictionary = LinkedHashMap_init();
@@ -11080,7 +11160,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     $this.SetName_61zpoe$('View');
     $this.modalMask = Sprite_init(0.0, 0.0, SceneLayer$uiModalMask_getInstance().value, 'Resource/UI/Background', $this.GetSize().width, $this.GetSize().height);
     ensureNotNull($this.modalMask).SetName_61zpoe$('Modal Mask');
-    ensureNotNull($this.modalMask).SetBlendFactor_mx4ult$(1.0);
     ensureNotNull($this.modalMask).SetAlpha_8ca0d4$(0.0);
     ensureNotNull($this.modalMask).SetShow_6taknv$(true);
     $this.addChild_g5h3xp$(ensureNotNull($this.modalMask));
@@ -13056,9 +13135,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_3_3_COMPLETE_getInstance(), void 0, 0);
       DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_6_6_COMPLETE_getInstance(), void 0, 0);
     }
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_COMPLETE_getInstance(), void 0, 1);
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_3_3_COMPLETE_getInstance(), void 0, 1);
-    DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_6_6_COMPLETE_getInstance(), void 0, 1);
     DataUtil$Companion_getInstance().SetInteger_rjan26$('Draw FPS', void 0, 1);
     var modeString = listOf_0(['Beginner', 'Beginner6x6', 'Classic']);
     tmp$ = modeString.iterator();
@@ -15189,7 +15265,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       return false;
     };
   }
-  Util$Companion.prototype.showNotice_sprpts$ = function (parent, message, font, cancel, ok, handler) {
+  Util$Companion.prototype.showNotice_5m2ezf$ = function (parent, message, font, cancel, ok, handler) {
     if (message === void 0)
       message = '';
     if (font === void 0)
@@ -15272,10 +15348,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     }
     return false;
   };
-  function Util$Companion$clickButton$lambda(this$Util$, closure$name) {
+  function Util$Companion$clickButton$lambda(this$Util$, closure$button) {
     return function () {
       var tmp$;
-      (tmp$ = this$Util$.handler) != null ? tmp$(closure$name) : null;
+      (tmp$ = this$Util$.handler) != null ? tmp$(closure$button) : null;
       return Unit;
     };
   }
@@ -15287,7 +15363,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       SoundManager$Companion_getInstance().shared().playEffect_bm4lxs$('click');
       var screen = Kotlin.isType(tmp$_2 = (tmp$_1 = this.notice) != null ? tmp$_1.GetRoot() : null, Screen) ? tmp$_2 : null;
       if (screen != null) {
-        screen.actionDelay_ab0iom$(0.0, void 0, Util$Companion$clickButton$lambda(this, name));
+        screen.actionDelay_ab0iom$(0.0, void 0, Util$Companion$clickButton$lambda(this, button));
       }
     }
   };
@@ -27574,7 +27650,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       this$Game.view.SetChildHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
       this$Game.view.SetChildVerticalAlign_qn2em6$(VerticalAlign$center_getInstance());
       var mask = this$Game.view.createSprite_9wuqyc$(160.0, 240.0, SceneLayer$uiTop_getInstance(), 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, void 0, false);
-      mask.SetColor_b53zri$(0, 0, 0, 0.0);
+      mask.SetAlpha_8ca0d4$(0.0);
       mask.SetShow_6taknv$(true);
       var gameLabel = this$Game.view.createSprite_591x4d$(160.0, -40.0, SceneLayer$uiTop_getInstance().value + 1.0, 'Resource/UI/NOMOREMATCH', 240.0);
       gameLabel.SetHorizontalAlign_jdpdm8$(HorizontalAlign$center_getInstance());
@@ -27638,7 +27714,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
         var mask = null;
         if (this$Game.gameConfigure.regenNoMoreMove !== false || this$Game.gameConfigure.limitGameTime !== false) {
           mask = this$Game.view.createSprite_9wuqyc$(160.0, 240.0, SceneLayer$uiTop_getInstance(), 'Resource/UI/Background', 320.0, 480.0, void 0, void 0, void 0, false);
-          mask.SetColor_b53zri$(0, 0, 0, 0.0);
+          mask.SetAlpha_8ca0d4$(0.0);
           mask.SetShow_6taknv$(true);
           (tmp$_3 = this$Game.view.screen) != null ? (tmp$_3.actionFadeIn_hkbjms$(mask, void 0, 0.8, void 0, 0.3), Unit) : null;
         }
@@ -27674,16 +27750,23 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       return Unit;
     };
   }
-  function Game$onConfirmContinue$lambda$lambda$lambda_0(this$Game) {
+  function Game$onConfirmContinue$lambda$lambda$lambda_0(this$Game, closure$button) {
     return function (it) {
-      this$Game.continueGame();
+      if (it === true) {
+        Util$Companion_getInstance().closeNotice();
+        this$Game.continueByVideo = this$Game.continueByVideo + 1 | 0;
+        this$Game.continueGame();
+      }
+       else {
+        closure$button.SetEnable_6taknv$(false);
+      }
       return Unit;
     };
   }
   function Game$onConfirmContinue$lambda$lambda(this$Game, closure$needStar) {
     return function (button) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-      if (equals(button, 'star')) {
+      if (equals(button.GetName(), 'star')) {
         this$Game.continueByStar = this$Game.continueByStar + 1 | 0;
         StoreManager$Companion_getInstance().shared().decreaseStar_za3lpa$(closure$needStar.v);
         var starText = Kotlin.isType(tmp$ = this$Game.view.findChildByName_3m52m6$('Star Amount'), TextArea) ? tmp$ : null;
@@ -27693,12 +27776,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
         Util$Companion_getInstance().closeNotice();
         this$Game.continueGame();
       }
-       else if (equals(button, 'video')) {
-        Util$Companion_getInstance().closeNotice();
-        this$Game.continueByVideo = this$Game.continueByVideo + 1 | 0;
-        var result = AppController$Companion_getInstance().shared().playRewarded_y8twos$(Game$onConfirmContinue$lambda$lambda$lambda_0(this$Game));
+       else if (equals(button.GetName(), 'video')) {
+        var result = AppController$Companion_getInstance().shared().playRewarded_y8twos$(Game$onConfirmContinue$lambda$lambda$lambda_0(this$Game, button));
         if (result === false) {
-          this$Game.continueGame();
+          button.SetEnable_6taknv$(false);
         }
       }
        else {
@@ -27799,7 +27880,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
           ok = 'video';
         }
       }
-      Util$Companion_getInstance().showNotice_sprpts$(this$Game.view, local('MENU_16') + '\n\n\n' + star + or + video + '\n\n\n[Button Resource/UI/IconAbandon 50 no]', void 0, void 0, ok, Game$onConfirmContinue$lambda$lambda(this$Game, needStar));
+      Util$Companion_getInstance().showNotice_5m2ezf$(this$Game.view, local('MENU_16') + '\n\n\n' + star + or + video + '\n\n\n[Button Resource/UI/IconAbandon 50 no]', void 0, void 0, ok, Game$onConfirmContinue$lambda$lambda(this$Game, needStar));
     };
   }
   function Game$onConfirmContinueForTimeAttack$lambda$lambda$lambda(closure$starText) {
@@ -27808,16 +27889,23 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       return Unit;
     };
   }
-  function Game$onConfirmContinueForTimeAttack$lambda$lambda$lambda_0(this$Game) {
+  function Game$onConfirmContinueForTimeAttack$lambda$lambda$lambda_0(this$Game, closure$button) {
     return function (it) {
-      this$Game.continueGame();
+      if (it === true) {
+        Util$Companion_getInstance().closeNotice();
+        this$Game.continueByVideo = this$Game.continueByVideo + 1 | 0;
+        this$Game.continueGame();
+      }
+       else {
+        closure$button.SetEnable_6taknv$(false);
+      }
       return Unit;
     };
   }
   function Game$onConfirmContinueForTimeAttack$lambda$lambda(this$Game, closure$needStar) {
     return function (button) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-      if (equals(button, 'star')) {
+      if (equals(button.GetName(), 'star')) {
         this$Game.continueByStar = this$Game.continueByStar + 1 | 0;
         StoreManager$Companion_getInstance().shared().decreaseStar_za3lpa$(closure$needStar.v);
         var starText = Kotlin.isType(tmp$ = this$Game.view.findChildByName_3m52m6$('Star Amount'), TextArea) ? tmp$ : null;
@@ -27827,12 +27915,10 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
         Util$Companion_getInstance().closeNotice();
         this$Game.continueGame();
       }
-       else if (equals(button, 'video')) {
-        Util$Companion_getInstance().closeNotice();
-        this$Game.continueByVideo = this$Game.continueByVideo + 1 | 0;
-        var result = AppController$Companion_getInstance().shared().playRewarded_y8twos$(Game$onConfirmContinueForTimeAttack$lambda$lambda$lambda_0(this$Game));
+       else if (equals(button.GetName(), 'video')) {
+        var result = AppController$Companion_getInstance().shared().playRewarded_y8twos$(Game$onConfirmContinueForTimeAttack$lambda$lambda$lambda_0(this$Game, button));
         if (result === false) {
-          this$Game.continueGame();
+          button.SetEnable_6taknv$(false);
         }
       }
        else {
@@ -27933,7 +28019,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
           ok = 'video';
         }
       }
-      Util$Companion_getInstance().showNotice_sprpts$(this$Game.view, local('MENU_21') + '\n\n\n' + star + or + video + '\n\n\n[Button Resource/UI/IconAbandon 50 no]', void 0, void 0, ok, Game$onConfirmContinueForTimeAttack$lambda$lambda(this$Game, needStar));
+      Util$Companion_getInstance().showNotice_5m2ezf$(this$Game.view, local('MENU_21') + '\n\n\n' + star + or + video + '\n\n\n[Button Resource/UI/IconAbandon 50 no]', void 0, void 0, ok, Game$onConfirmContinueForTimeAttack$lambda$lambda(this$Game, needStar));
     };
   }
   function Game$onWaitForStop$lambda(this$Game) {
@@ -40686,7 +40772,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     return function (button) {
       var tmp$;
       Util$Companion_getInstance().closeNotice();
-      if (equals(button, 'ok')) {
+      if (equals(button.GetName(), 'ok')) {
         (tmp$ = this$MainMenuView.screen) != null ? (tmp$.actionDelay_ab0iom$(0.5, void 0, MainMenuView$afterAttached$lambda$lambda$lambda), Unit) : null;
       }
     };
@@ -40694,7 +40780,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   function MainMenuView$afterAttached$lambda(this$MainMenuView, closure$menu) {
     return function (code) {
       if (code === TouchListener$Code_getInstance().ESCAPE || code === TouchListener$Code_getInstance().BACK) {
-        Util$Companion_getInstance().showNotice_sprpts$(this$MainMenuView, local('MENU_52') + '\n\n\n[Button Resource/UI/IconYes 50 ok]           [Button Resource/UI/IconNo 50 no]', void 0, void 0, void 0, MainMenuView$afterAttached$lambda$lambda(this$MainMenuView));
+        Util$Companion_getInstance().showNotice_5m2ezf$(this$MainMenuView, local('MENU_52') + '\n\n\n[Button Resource/UI/IconYes 50 ok]           [Button Resource/UI/IconNo 50 no]', void 0, void 0, void 0, MainMenuView$afterAttached$lambda$lambda(this$MainMenuView));
         return true;
       }
        else if (code === TouchListener$Code_getInstance().ENTER) {
@@ -42255,11 +42341,11 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   function OptionView$menuCallback$lambda$lambda_1(this$OptionView) {
     return function (button) {
       var tmp$, tmp$_0;
-      if (equals(button, '3x3')) {
+      if (equals(button.GetName(), '3x3')) {
         SoundManager$Companion_getInstance().shared().BGMFadeOut_o5txl1$(ensureNotNull(this$OptionView.screen), 'MenuBGM', 0.0, 0.3);
         (tmp$ = this$OptionView.screen) != null ? (tmp$.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda$lambda(this$OptionView)), Unit) : null;
       }
-       else if (equals(button, '6x6')) {
+       else if (equals(button.GetName(), '6x6')) {
         SoundManager$Companion_getInstance().shared().BGMFadeOut_o5txl1$(ensureNotNull(this$OptionView.screen), 'MenuBGM', 0.0, 0.3);
         (tmp$_0 = this$OptionView.screen) != null ? (tmp$_0.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda$lambda_0(this$OptionView)), Unit) : null;
       }
@@ -42348,7 +42434,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
           (tmp$_6 = this$OptionView.screen) != null ? (tmp$_6.actionDelay_ab0iom$(0.0, void 0, OptionView$menuCallback$lambda$lambda_0(this$OptionView)), Unit) : null;
           break;
         case 6:
-          Util$Companion_getInstance().showNotice_sprpts$(this$OptionView, local('MENU_54'), void 0, void 0, void 0, OptionView$menuCallback$lambda$lambda_1(this$OptionView));
+          Util$Companion_getInstance().showNotice_5m2ezf$(this$OptionView, local('MENU_54'), void 0, void 0, void 0, OptionView$menuCallback$lambda$lambda_1(this$OptionView));
           return null;
         case 7:
           window.open('https://www.blindcatstudio.com', '_blank');
@@ -44400,86 +44486,9 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
     $this.SetName_61zpoe$('TutorialView');
     return $this;
   }
-  function UserDataHTML() {
-    this.data = LinkedHashMap_init();
-  }
-  UserDataHTML.prototype.SetPref_za3rmp$ = function (pref) {
-  };
-  UserDataHTML.prototype.Get_61zpoe$ = function (forKey) {
-    return localStorage.getItem(forKey);
-  };
-  UserDataHTML.prototype.Set_puj7f4$ = function (value, forKey) {
-    localStorage.setItem(forKey, value);
-  };
-  UserDataHTML.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'UserDataHTML',
-    interfaces: [UserLocalData]
-  };
-  function RequestHandlerDummy() {
-  }
-  RequestHandlerDummy.prototype.isLogin = function () {
-    return false;
-  };
-  RequestHandlerDummy.prototype.loginIntent = function () {
-  };
-  RequestHandlerDummy.prototype.showLeaderboard = function () {
-  };
-  RequestHandlerDummy.prototype.submitScore_ds2soj$ = function (leaderboard, score, tag) {
-  };
-  RequestHandlerDummy.prototype.getVersionName = function () {
-    return '1.6.1';
-  };
-  RequestHandlerDummy.prototype.getVersionCode = function () {
-    return 51;
-  };
-  RequestHandlerDummy.prototype.getFile_61zpoe$ = function (file) {
-    return '';
-  };
-  RequestHandlerDummy.prototype.isGrantedExternal = function () {
-    return false;
-  };
-  RequestHandlerDummy.prototype.getGrantExternal_6zcd6v$ = function (callback) {
-  };
-  RequestHandlerDummy.prototype.shareSocial_61zpoe$ = function (path) {
-    return false;
-  };
-  RequestHandlerDummy.prototype.isBannerReady = function () {
-    return false;
-  };
-  RequestHandlerDummy.prototype.showAds_6taknv$ = function (show) {
-  };
-  RequestHandlerDummy.prototype.getHeight = function () {
-    return 0;
-  };
-  RequestHandlerDummy.prototype.showInterstitial_6zcd6v$ = function (callabck) {
-    return false;
-  };
-  RequestHandlerDummy.prototype.isRewardReady = function () {
-    return false;
-  };
-  RequestHandlerDummy.prototype.playRewarded_6zcd6v$ = function (callabck) {
-    return false;
-  };
-  RequestHandlerDummy.prototype.setAdsMute_6taknv$ = function (mute) {
-  };
-  RequestHandlerDummy.$metadata$ = {
-    kind: Kind_CLASS,
-    simpleName: 'RequestHandlerDummy',
-    interfaces: [IActivityRequestHandler]
-  };
-  function main(args) {
-    var tmp$, tmp$_0;
-    var width = 640.0;
-    var height = 960.0;
-    if (document.getElementById('width') != null) {
-      width = toDouble((Kotlin.isType(tmp$ = document.getElementById('width'), HTMLElement) ? tmp$ : throwCCE()).innerText);
-    }
-    if (document.getElementById('height') != null) {
-      height = toDouble((Kotlin.isType(tmp$_0 = document.getElementById('height'), HTMLElement) ? tmp$_0 : throwCCE()).innerText);
-    }
-    Game(GameConfig(void 0, width, height, $module$Phaser.CANVAS, 'gameDiv', void 0, void 0, void 0, void 0, BootLoader_init(new UserDataHTML(), new RequestHandlerDummy())));
-  }
+  _.UserDataHTML = UserDataHTML;
+  _.RequestHandlerDummy = RequestHandlerDummy;
+  _.main_kand9s$ = main;
   var package$com = _.com || (_.com = {});
   var package$blindcatstudio = package$com.blindcatstudio || (package$com.blindcatstudio = {});
   var package$phantom = package$blindcatstudio.phantom || (package$blindcatstudio.phantom = {});
@@ -45379,9 +45388,6 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
   package$view.ScriptInfo = ScriptInfo;
   package$view.TutorialView_init_za3lpa$ = TutorialView_init;
   package$view.TutorialView = TutorialView;
-  _.UserDataHTML = UserDataHTML;
-  _.RequestHandlerDummy = RequestHandlerDummy;
-  _.main_kand9s$ = main;
   AndroidPlayerAchievement.prototype.AddAchievement_ze4fts$ = PlayerAchievement.prototype.AddAchievement_ze4fts$;
   AndroidPlayerAchievement.prototype.AddAchievementString_io5o9c$ = PlayerAchievement.prototype.AddAchievementString_io5o9c$;
   AndroidPlayerAchievement.prototype.SetPercentComplete_gspc9z$ = PlayerAchievement.prototype.SetPercentComplete_gspc9z$;

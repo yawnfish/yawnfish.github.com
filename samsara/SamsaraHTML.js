@@ -13135,7 +13135,7 @@ var SamsaraHTML = function (_, Kotlin, $module$Phaser, $module$phaserKt, $module
       DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_3_3_COMPLETE_getInstance(), void 0, 0);
       DataUtil$Companion_getInstance().SetInteger_hh7mhe$(DataKey$TUTORIAL_6_6_COMPLETE_getInstance(), void 0, 0);
     }
-    DataUtil$Companion_getInstance().SetInteger_rjan26$('Draw FPS', void 0, 1);
+    DataUtil$Companion_getInstance().SetInteger_rjan26$('Draw FPS', void 0, 0);
     var modeString = listOf_0(['Beginner', 'Beginner6x6', 'Classic']);
     tmp$ = modeString.iterator();
     while (tmp$.hasNext()) {

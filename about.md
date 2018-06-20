@@ -4,15 +4,10 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+BlindCat Studio is an independent game developer in South Korea.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I'm making brand-new puzzle game named SAMSARA – Stones of Eternity for mobile and wearable device. I'm going to show you fantastic mechanic that has never been before. I'm sure all fans of puzzle genre in the world will love my game!
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Thank you.
 
-
-[jekyll-organization]: https://github.com/jekyll
+Journey Kim

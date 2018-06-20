@@ -4,6 +4,8 @@ title:  "Samsara for HTML5 is ready!"
 categories: jekyll update
 ---
 
+[Samsara - Stones of Eternity HTML5](https://yawnfish.github.io/samsara)
+
 Thanks to [Phaser][phaser], [Kotlin][kotlin] and [kotlin-phaser][kotlin-phaser], I could finish hard work porting Samsara for HTML5. Kotlin's crosspiling is an awesome feature you should experience!
 
 As I've been developing Samsara using libGDX that can publish a project for Android, iOS, Desktop, and HTML5, I thought to port for HTML5 is a piece of cake. When I started the work, I realized libGDX doesn't support Kotlin for HTML5! Only support JAVA project.

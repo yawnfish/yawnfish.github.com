@@ -12,7 +12,7 @@ dl, dd, ol, ul, figure {
  */
 body {
   font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #fdfdfd;
+  color: #D0D3D6;
   background-color: #2D2535;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
@@ -81,7 +81,7 @@ a {
   a:visited {
     color: #57c1eb; }
   a:hover {
-    color: #fdfdfd;
+    color: #D0D3D6;
     text-decoration: underline; }
   .social-media-list a:hover {
     text-decoration: none; }
@@ -209,7 +209,7 @@ table {
   .site-nav .menu-icon {
     display: none; }
   .site-nav .page-link {
-    color: #fdfdfd;
+    color: #D0D3D6;
     line-height: 1.5; }
     .site-nav .page-link:not(:last-child) {
       margin-right: 20px; }

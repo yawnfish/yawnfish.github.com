@@ -10,7 +10,7 @@
 },
 "Lightning01_green.png":
 {
-	"frame": {"x":49,"y":1,"w":46,"h":120},
+	"frame": {"x":1,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -18,7 +18,7 @@
 },
 "Lightning01_pink.png":
 {
-	"frame": {"x":97,"y":1,"w":46,"h":120},
+	"frame": {"x":49,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -26,7 +26,7 @@
 },
 "Lightning01_purple.png":
 {
-	"frame": {"x":145,"y":1,"w":46,"h":120},
+	"frame": {"x":1,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -34,7 +34,7 @@
 },
 "Lightning01_red.png":
 {
-	"frame": {"x":193,"y":1,"w":46,"h":120},
+	"frame": {"x":49,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -42,7 +42,7 @@
 },
 "Lightning01_yellow.png":
 {
-	"frame": {"x":241,"y":1,"w":46,"h":120},
+	"frame": {"x":97,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -50,7 +50,7 @@
 },
 "Lightning02_blue.png":
 {
-	"frame": {"x":289,"y":1,"w":46,"h":120},
+	"frame": {"x":49,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -58,7 +58,7 @@
 },
 "Lightning02_green.png":
 {
-	"frame": {"x":337,"y":1,"w":46,"h":120},
+	"frame": {"x":97,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -66,7 +66,7 @@
 },
 "Lightning02_pink.png":
 {
-	"frame": {"x":385,"y":1,"w":46,"h":120},
+	"frame": {"x":145,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -74,7 +74,7 @@
 },
 "Lightning02_purple.png":
 {
-	"frame": {"x":433,"y":1,"w":46,"h":120},
+	"frame": {"x":97,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -82,7 +82,7 @@
 },
 "Lightning02_red.png":
 {
-	"frame": {"x":481,"y":1,"w":46,"h":120},
+	"frame": {"x":145,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -90,7 +90,7 @@
 },
 "Lightning02_yellow.png":
 {
-	"frame": {"x":529,"y":1,"w":46,"h":120},
+	"frame": {"x":193,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -98,7 +98,7 @@
 },
 "Lightning03_blue.png":
 {
-	"frame": {"x":577,"y":1,"w":46,"h":120},
+	"frame": {"x":145,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -106,7 +106,7 @@
 },
 "Lightning03_green.png":
 {
-	"frame": {"x":625,"y":1,"w":46,"h":120},
+	"frame": {"x":193,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -114,7 +114,7 @@
 },
 "Lightning03_pink.png":
 {
-	"frame": {"x":673,"y":1,"w":46,"h":120},
+	"frame": {"x":241,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -122,7 +122,7 @@
 },
 "Lightning03_purple.png":
 {
-	"frame": {"x":721,"y":1,"w":46,"h":120},
+	"frame": {"x":193,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -130,7 +130,7 @@
 },
 "Lightning03_red.png":
 {
-	"frame": {"x":769,"y":1,"w":46,"h":120},
+	"frame": {"x":241,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -138,7 +138,7 @@
 },
 "Lightning03_yellow.png":
 {
-	"frame": {"x":817,"y":1,"w":46,"h":120},
+	"frame": {"x":289,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -146,7 +146,7 @@
 },
 "LineFlash01.png":
 {
-	"frame": {"x":865,"y":1,"w":46,"h":120},
+	"frame": {"x":241,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -154,7 +154,7 @@
 },
 "LineFlash01_red.png":
 {
-	"frame": {"x":913,"y":1,"w":46,"h":120},
+	"frame": {"x":289,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -162,7 +162,7 @@
 },
 "LineFlash02.png":
 {
-	"frame": {"x":961,"y":1,"w":46,"h":120},
+	"frame": {"x":337,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -170,7 +170,7 @@
 },
 "LineFlash02_red.png":
 {
-	"frame": {"x":1009,"y":1,"w":46,"h":120},
+	"frame": {"x":289,"y":245,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -178,7 +178,7 @@
 },
 "LineFlash03.png":
 {
-	"frame": {"x":1057,"y":1,"w":46,"h":120},
+	"frame": {"x":337,"y":123,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -186,7 +186,7 @@
 },
 "LineFlash03_red.png":
 {
-	"frame": {"x":1105,"y":1,"w":46,"h":120},
+	"frame": {"x":385,"y":1,"w":46,"h":120},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":120},
@@ -194,7 +194,7 @@
 },
 "Particle_blue.png":
 {
-	"frame": {"x":1153,"y":1,"w":60,"h":60},
+	"frame": {"x":433,"y":1,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -202,7 +202,7 @@
 },
 "Particle_green.png":
 {
-	"frame": {"x":1153,"y":63,"w":60,"h":60},
+	"frame": {"x":433,"y":63,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -210,7 +210,7 @@
 },
 "Particle_purple.png":
 {
-	"frame": {"x":1215,"y":1,"w":60,"h":60},
+	"frame": {"x":337,"y":245,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -218,7 +218,7 @@
 },
 "Particle_red.png":
 {
-	"frame": {"x":1215,"y":63,"w":60,"h":60},
+	"frame": {"x":385,"y":125,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -226,7 +226,7 @@
 },
 "Particle_white.png":
 {
-	"frame": {"x":1277,"y":1,"w":60,"h":60},
+	"frame": {"x":399,"y":187,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -234,7 +234,7 @@
 },
 "Particle_yellow.png":
 {
-	"frame": {"x":1277,"y":63,"w":60,"h":60},
+	"frame": {"x":399,"y":249,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -245,8 +245,8 @@
 	"version": "1.0",
 	"image": "Effect.png",
 	"format": "RGBA8888",
-	"size": {"w":1338,"h":124},
+	"size": {"w":494,"h":366},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a3ebb3947f1c52b22d996109965c8573:74e489b342772a0eeb5b30cd5bc7967a:66caba1c92b26e8669dfb5ea099ebdf2$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1095eb58d3b530e702437e584e13a935:74e489b342772a0eeb5b30cd5bc7967a:66caba1c92b26e8669dfb5ea099ebdf2$"
 }
 }

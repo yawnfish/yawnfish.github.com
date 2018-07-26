@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Samsara Extension is featured on Twitch!!!
+title:  Samsara is featured on Twitch!!!
 categories: jekyll update
 ---
 
